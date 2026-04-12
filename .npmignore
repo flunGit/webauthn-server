@@ -1,6 +1,7 @@
 # 忽略版本控制
 .git/
 .gitignore
+package-lock.json
 publish.ps1
 
 # 忽略IDE文件
