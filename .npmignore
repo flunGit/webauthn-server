@@ -1,0 +1,10 @@
+# 忽略版本控制
+.git/
+.gitignore
+publish.ps1
+
+# 忽略IDE文件
+.vscode/
+# 排除 GitHub 相关目录
+.github/
+维护.md
