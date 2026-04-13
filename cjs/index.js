@@ -1,5 +1,6 @@
 'use strict';
 
+require('reflect-metadata');
 Object.assign(
     exports,
     require('./registration/generateRegistrationOptions.js'),

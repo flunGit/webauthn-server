@@ -1,3 +1,5 @@
+import 'reflect-metadata';
+
 export * from './registration/generateRegistrationOptions.js';
 export * from './registration/verifyRegistrationResponse.js';
 export * from './authentication/generateAuthenticationOptions.js';
