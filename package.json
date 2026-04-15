@@ -16,10 +16,21 @@
     "npm": ">=10.0.0"
   },
   "main": "index.js",
+  "module": "./index.js",
+  "exports": {
+    ".": "./index.js",
+    "./helpers": "./helpers/index.js"
+  },
   "files": [
-    "esm",
-    "cjs",
-    "LICENSE",
+    "index.js",
+    "index.d.ts",
+    "helpers/",
+    "authentication/",
+    "registration/",
+    "services/",
+    "types/",
+    "metadata/",
+    "LICENSE.md",
     "README.md",
     "CHANGELOG.md"
   ],
@@ -33,21 +44,6 @@
     "url": "https://github.com/flunGit/flun-webauthn-server/issues"
   },
   "license": "ISC",
-  "module": "./index.js",
-  "exports": {
-    ".": "./index.js",
-    "./helpers": "./helpers/index.js"
-  },
-  "typesVersions": {
-    "*": {
-      ".": [
-        "index.d.ts"
-      ],
-      "helpers": [
-        "./helpers/index.d.ts"
-      ]
-    }
-  },
   "dependencies": {
     "@hexagon/base64": "^2.0.4",
     "@levischuck/tiny-cbor": "^0.3.2",
@@ -61,7 +57,5 @@
   },
   "devDependencies": {
     "@types/node": "^20.9.0"
-  },
-  "_generatedBy": "dnt@dev",
-  "readmeFilename": "README.md"
+  }
 }

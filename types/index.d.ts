@@ -1,7 +1,7 @@
 /**
  * 请勿修改这些文件！
  *
- * 这些文件是从 **types** 包中复制的。要更新此文件，请修改对应源文件，
+ * 这些文件是从 **types** 包中复制的,要更新此文件,请修改对应源文件,
  * 然后从 monorepo 根目录运行以下命令：
  *
  * deno task codegen:types
@@ -159,7 +159,7 @@ export type WebAuthnCredential = {
 };
 
 /**
- * 表示这不只是一个普通字符串，而是一个 Base64URL 编码的字符串
+ * 表示这不只是一个普通字符串,而是一个 Base64URL 编码的字符串
  */
 export type Base64URLString = string;
 
