@@ -2,7 +2,7 @@
  * 一套运行时无关的 Base64URL 编码处理工具集
  * @module
  */
-import base64 from '@hexagon/base64';
+import { base64 } from '@hexagon/base64';
 
 /**
  * 将 Base64URL 编码的字符串解码为 ArrayBuffer。最适合用于将凭证 ID 从 JSON 字符串转换为 ArrayBuffer，
