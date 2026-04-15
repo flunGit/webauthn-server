@@ -2,7 +2,7 @@
  * 一组与运行时无关的 CBOR 编解码方法
  * @module
  */
-import * as tinyCbor from '@levischuck/tiny-cbor';
+import { decodePartialCBOR, encodeCBOR } from '@levischuck/tiny-cbor';
 
 /**
  * 无论使用何种 CBOR 编码器，当数据重新编码时,都应保持 CBOR 数据的长度不变
@@ -20,17 +20,17 @@ import * as tinyCbor from '@levischuck/tiny-cbor';
  * @param input 要解码的 CBOR 数据
  * @param asObject （可选）是否将任何 CBOR Map 转换为 JavaScript 对象,默认为 `false`
  */
-function decodeFirst(input) {
+const decodeFirst = input => {
     // 复制一份,避免修改原始数据
-    const _input = new Uint8Array(input), decoded = tinyCbor.decodePartialCBOR(_input, 0), [first] = decoded;
+    const _input = new Uint8Array(input), decoded = decodePartialCBOR(_input, 0), [first] = decoded;
     return first;
-}
+},
 
-/**
- * 将数据编码为 CBOR
- */
-function encode(input) {
-    return tinyCbor.encodeCBOR(input);
-}
+    /**
+     * 将数据编码为 CBOR
+     */
+    encode = input => {
+        return encodeCBOR(input);
+    };
 
 export { decodeFirst, encode };

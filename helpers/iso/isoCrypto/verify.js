@@ -7,7 +7,7 @@ import { unwrapEC2Signature } from './unwrapEC2Signature.js';
 /**
  * 使用公钥验证签名,支持 EC2 和 RSA 公钥;
  */
-function verify(opts) {
+const verify = opts => {
     const { cosePublicKey, signature, data, shaHashOverride } = opts;
 
     if (isCOSEPublicKeyEC2(cosePublicKey)) {
@@ -22,6 +22,6 @@ function verify(opts) {
 
     const kty = cosePublicKey.get(COSEKEYS.kty);
     throw new Error(`此方法不支持使用 kty 为 ${kty} 的公钥进行签名验证`);
-}
+};
 
 export { verify };

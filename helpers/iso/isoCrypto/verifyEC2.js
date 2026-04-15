@@ -7,7 +7,7 @@ import { getWebCrypto } from './getWebCrypto.js';
 /**
  * 使用 EC2 公钥验证签名
  */
-async function verifyEC2(opts) {
+const verifyEC2 = async opts => {
     const { cosePublicKey, signature, data, shaHashOverride } = opts, WebCrypto = await getWebCrypto(),
         // 导入公钥
         alg = cosePublicKey.get(COSEKEYS.alg), crv = cosePublicKey.get(COSEKEYS.crv),

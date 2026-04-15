@@ -11,9 +11,9 @@
  * log('hello'); // flunWebauthn:mds hello +0ms
  * ```
  */
-function getLogger(_name) {
+const getLogger = _name => {
     // 目前这是一个空操作,我正在寻找更好的 debug 日志记录技术
     return (_message, ..._rest) => { };
-}
+};
 
 export { getLogger };

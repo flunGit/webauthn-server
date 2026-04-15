@@ -11,10 +11,6 @@
   ],
   "type": "module",
   "types": "index.d.ts",
-  "engines": {
-    "node": ">=22.12.0",
-    "npm": ">=10.0.0"
-  },
   "main": "index.js",
   "module": "./index.js",
   "exports": {
@@ -54,6 +50,10 @@
     "@peculiar/asn1-x509": "^2.6.1",
     "@peculiar/x509": "^2.0.0",
     "reflect-metadata": "^0.2.2"
+  },
+  "engines": {
+    "node": ">=22.12.0",
+    "npm": ">=10.0.0"
   },
   "devDependencies": {
     "@types/node": "^20.9.0"

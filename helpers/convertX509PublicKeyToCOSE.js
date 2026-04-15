@@ -5,7 +5,7 @@ import { id_rsaEncryption, RSAPublicKey } from '@peculiar/asn1-rsa';
 import { COSECRV, COSEKEYS, COSEKTY } from './cose.js';
 import { mapX509SignatureAlgToCOSEAlg } from './mapX509SignatureAlgToCOSEAlg.js';
 
-function convertX509PublicKeyToCOSE(x509Certificate) {
+const convertX509PublicKeyToCOSE = x509Certificate => {
     let cosePublicKey = new Map();
 
     /**

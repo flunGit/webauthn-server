@@ -8,7 +8,7 @@ import { mapCoseAlgToWebCryptoKeyAlgName } from './mapCoseAlgToWebCryptoKeyAlgNa
 /**
  * 使用 RSA 公钥验证签名
  */
-async function verifyRSA(opts) {
+const verifyRSA = async opts => {
     const { cosePublicKey, signature, data, shaHashOverride } = opts, WebCrypto = await getWebCrypto(),
         alg = cosePublicKey.get(COSEKEYS.alg), n = cosePublicKey.get(COSEKEYS.n), e = cosePublicKey.get(COSEKEYS.e);
 

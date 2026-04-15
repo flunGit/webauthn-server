@@ -5,7 +5,7 @@ import { getWebCrypto } from './getWebCrypto.js';
  *
  * @returns 返回传入的同一个字节数组
  */
-async function getRandomValues(array) {
+const getRandomValues = async array => {
     const WebCrypto = await getWebCrypto();
     WebCrypto.getRandomValues(array);
     return array;

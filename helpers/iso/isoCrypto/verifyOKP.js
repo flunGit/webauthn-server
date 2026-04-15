@@ -6,7 +6,7 @@ import { getWebCrypto } from './getWebCrypto.js';
 /**
  * 验证 OKP（Octet Key Pair）类型的 COSE 签名
  */
-async function verifyOKP(opts) {
+const verifyOKP = async opts => {
     const { cosePublicKey, signature, data } = opts, WebCrypto = await getWebCrypto(),
         alg = cosePublicKey.get(COSEKEYS.alg), crv = cosePublicKey.get(COSEKEYS.crv), x = cosePublicKey.get(COSEKEYS.x);
 

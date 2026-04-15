@@ -41,50 +41,50 @@ const COSEKEYS = {
         ES256K: -47, '-47': 'ES256K',
         RS256: -257, '-257': 'RS256', RS384: -258, '-258': 'RS384', RS512: -259, '-259': 'RS512',
         RS1: -65535, '-65535': 'RS1'
+    },
+
+    /**
+     * 判断给定的 COSE 公钥是否为 OKP 密钥对（类型守卫）
+     */
+    isCOSEPublicKeyOKP = cosePublicKey => {
+        const kty = cosePublicKey.get(COSEKEYS.kty);
+        return isCOSEKty(kty) && kty === COSEKTY.OKP;
+    },
+
+    /**
+     * 判断给定的 COSE 公钥是否为 EC2 密钥对（类型守卫）
+     */
+    isCOSEPublicKeyEC2 = cosePublicKey => {
+        const kty = cosePublicKey.get(COSEKEYS.kty);
+        return isCOSEKty(kty) && kty === COSEKTY.EC2;
+    },
+
+    /**
+     * 判断给定的 COSE 公钥是否为 RSA 密钥对（类型守卫）
+     */
+    isCOSEPublicKeyRSA = cosePublicKey => {
+        const kty = cosePublicKey.get(COSEKEYS.kty);
+        return isCOSEKty(kty) && kty === COSEKTY.RSA;
+    },
+    /**
+     * 检查给定值是否为有效的 COSE 密钥类型（kty）
+     */
+    isCOSEKty = kty => {
+        return Object.values(COSEKTY).indexOf(kty) >= 0;
+    },
+    /**
+     * 检查给定值是否为有效的 COSE 曲线（crv）
+     */
+    isCOSECrv = crv => {
+        return Object.values(COSECRV).indexOf(crv) >= 0;
+    },
+
+    /**
+     * 检查给定值是否为有效的 COSE 算法（alg）
+     */
+    isCOSEAlg = alg => {
+        return Object.values(COSEALG).indexOf(alg) >= 0;
     };
-
-/**
- * 判断给定的 COSE 公钥是否为 OKP 密钥对（类型守卫）
- */
-function isCOSEPublicKeyOKP(cosePublicKey) {
-    const kty = cosePublicKey.get(COSEKEYS.kty);
-    return isCOSEKty(kty) && kty === COSEKTY.OKP;
-}
-
-/**
- * 判断给定的 COSE 公钥是否为 EC2 密钥对（类型守卫）
- */
-function isCOSEPublicKeyEC2(cosePublicKey) {
-    const kty = cosePublicKey.get(COSEKEYS.kty);
-    return isCOSEKty(kty) && kty === COSEKTY.EC2;
-}
-
-/**
- * 判断给定的 COSE 公钥是否为 RSA 密钥对（类型守卫）
- */
-function isCOSEPublicKeyRSA(cosePublicKey) {
-    const kty = cosePublicKey.get(COSEKEYS.kty);
-    return isCOSEKty(kty) && kty === COSEKTY.RSA;
-}
-/**
- * 检查给定值是否为有效的 COSE 密钥类型（kty）
- */
-function isCOSEKty(kty) {
-    return Object.values(COSEKTY).indexOf(kty) >= 0;
-}
-/**
- * 检查给定值是否为有效的 COSE 曲线（crv）
- */
-function isCOSECrv(crv) {
-    return Object.values(COSECRV).indexOf(crv) >= 0;
-}
-
-/**
- * 检查给定值是否为有效的 COSE 算法（alg）
- */
-function isCOSEAlg(alg) {
-    return Object.values(COSEALG).indexOf(alg) >= 0;
-}
 
 export {
     COSEKEYS, COSEKTY, COSECRV, COSEALG,

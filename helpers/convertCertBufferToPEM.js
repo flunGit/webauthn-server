@@ -3,7 +3,7 @@ import { isBase64URL, toBase64, isBase64, fromBuffer } from './iso/isoBase64URL.
 /**
  * 将证书缓冲区转换为 OpenSSL 兼容的 PEM 文本格式;
  */
-function convertCertBufferToPEM(certBuffer) {
+const convertCertBufferToPEM = certBuffer => {
     let b64cert;
     /**
      * 获取证书缓冲区的 Base64 表示形式
@@ -22,6 +22,6 @@ function convertCertBufferToPEM(certBuffer) {
     }
     PEMKey = `-----BEGIN CERTIFICATE-----\n${PEMKey}-----END CERTIFICATE-----\n`;
     return PEMKey;
-}
+};
 
 export { convertCertBufferToPEM };
