@@ -1,7 +1,7 @@
 {
   "name": "flun-webauthn-server",
   "version": "1.0.4",
-  "description": "这是一个专为 Node.js 环境设计的 WebAuthn（含 Passkeys）服务端工具库,提供简洁的 TypeScript 实现,支持双模块格式（ESM/CJS），并内置对证书、密钥及 CBOR 编码的完整处理能力,适用于构建 FIDO2/Passkey 身份验证后端",
+  "description": "这是一个专为 Node.js 环境设计的 WebAuthn（含 Passkeys）服务端工具库,提供简洁的 TypeScript 实现,并内置对证书、密钥及 CBOR 编码的完整处理能力,适用于构建 FIDO2/Passkey 身份验证后端",
   "keywords": [
     "typescript",
     "webauthn",
@@ -9,6 +9,13 @@
     "fido",
     "node"
   ],
+  "type": "module",
+  "types": "index.d.ts",
+  "engines": {
+    "node": ">=22.12.0",
+    "npm": ">=10.0.0"
+  },
+  "main": "index.js",
   "files": [
     "esm",
     "cjs",
@@ -26,28 +33,18 @@
     "url": "https://github.com/flunGit/flun-webauthn-server/issues"
   },
   "license": "ISC",
-  "main": "./cjs/index.js",
-  "module": "./esm/index.js",
+  "module": "./index.js",
   "exports": {
-    ".": {
-      "import": "./esm/index.js",
-      "require": "./cjs/index.js"
-    },
-    "./helpers": {
-      "import": "./esm/helpers/index.js",
-      "require": "./cjs/helpers/index.js"
-    }
-  },
-  "engines": {
-    "node": ">=20.0.0"
+    ".": "./index.js",
+    "./helpers": "./helpers/index.js"
   },
   "typesVersions": {
     "*": {
       ".": [
-        "esm/index.d.ts"
+        "index.d.ts"
       ],
       "helpers": [
-        "esm/helpers/index.d.ts"
+        "./helpers/index.d.ts"
       ]
     }
   },
