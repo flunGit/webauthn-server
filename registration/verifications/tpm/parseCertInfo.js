@@ -4,7 +4,7 @@ import { toDataView } from '../../../helpers/iso/isoUint8Array.js';
 /**
  * 将 TPM 认证信息（certInfo）解析为可读的结构化数据
  */
-function parseCertInfo(certInfo) {
+const parseCertInfo = certInfo => {
     let pointer = 0;
     // 获取魔数常量
     const dataView = toDataView(certInfo), magic = dataView.getUint32(pointer);
@@ -43,6 +43,6 @@ function parseCertInfo(certInfo) {
         };
 
     return { magic, type, qualifiedSigner, extraData, clockInfo, firmwareVersion, attested };
-}
+};
 
 export { parseCertInfo };

@@ -7,7 +7,7 @@ import { toDataView, concat } from '../../../helpers/iso/isoUint8Array.js';
  * 参考规范 12.2.4 TPMT_PUBLIC：
  * https://trustedcomputinggroup.org/wp-content/uploads/TPM-Rev-2.0-Part-2-Structures-00.96-130315.pdf
  */
-function parsePubArea(pubArea) {
+const parsePubArea = pubArea => {
     let pointer = 0;
     const dataView = toDataView(pubArea), type = TPM_ALG[dataView.getUint16(pointer)];
     pointer += 2;
@@ -85,6 +85,6 @@ function parsePubArea(pubArea) {
     }
 
     return { type, nameAlg, objectAttributes, authPolicy, parameters, unique };
-}
+};
 
 export { parsePubArea };

@@ -8,7 +8,7 @@ import { verifyAttestationWithMetadata } from '../../metadata/verifyAttestationW
 /**
  * 验证格式为 'packed' 的 attestation 响应
  */
-async function verifyAttestationPacked(options) {
+const verifyAttestationPacked = async options => {
     const { attStmt, clientDataHash, authData, credentialPublicKey, aaguid, rootCertificates, } = options,
         sig = attStmt.get('sig'), x5c = attStmt.get('x5c'), alg = attStmt.get('alg');
 
@@ -67,6 +67,6 @@ async function verifyAttestationPacked(options) {
     else verified = await verifySignature({ signature: sig, data: signatureBase, credentialPublicKey, hashAlgorithm: alg });
 
     return verified;
-}
+};
 
 export { verifyAttestationPacked };

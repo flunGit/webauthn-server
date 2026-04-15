@@ -22,5 +22,4 @@ kDOOyyGeMlhLxS67ttVb9+E7gUJTb0o2HLO0JQZR7rkpeDMdmztcpHWD9f
 -----END CERTIFICATE-----
 `;
 
-// 统一导出
 export { GlobalSign_Root_CA_R3 };

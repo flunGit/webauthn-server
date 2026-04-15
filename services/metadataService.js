@@ -203,5 +203,4 @@ class BaseMetadataService {
  */
 const MetadataService = new BaseMetadataService();
 
-// 统一导出
 export { BaseMetadataService, MetadataService };

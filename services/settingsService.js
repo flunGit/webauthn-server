@@ -72,5 +72,4 @@ SettingsService.setRootCertificates({
     identifier: 'mds', certificates: [GlobalSign_Root_CA_R3]
 });
 
-// 统一导出
 export { BaseSettingsService, SettingsService };

@@ -11,7 +11,7 @@ import { SettingsService } from '../services/settingsService.js';
  *
  * @param blob - 从 MDS 服务器下载的 JWT（例如 https://mds3.fidoalliance.org）
  */
-async function verifyMDSBlob(blob) {
+const verifyMDSBlob = async blob => {
     // 解析 JWT
     const parsedJWT = parseJWT(blob), header = parsedJWT[0], payload = parsedJWT[1],
         headerCertsPEM = header.x5c.map(convertCertBufferToPEM);
@@ -41,6 +41,6 @@ async function verifyMDSBlob(blob) {
         parsedNextUpdate = new Date(parseInt(year, 10), parseInt(month, 10) - 1, parseInt(day, 10));
 
     return { statements, parsedNextUpdate, payload };
-}
+};
 
 export { verifyMDSBlob };

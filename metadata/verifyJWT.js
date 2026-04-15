@@ -13,7 +13,7 @@ import { verifyRSA } from '../helpers/iso/isoCrypto/verifyRSA.js';
  *
  * （摘自 https://www.rfc-editor.org/rfc/rfc7515#section-4.1.1）
  */
-function verifyJWT(jwt, leafCert) {
+const verifyJWT = (jwt, leafCert) => {
     const [header, payload, signature] = jwt.split('.'), certCOSE = convertX509PublicKeyToCOSE(leafCert),
         data = isoUint8Array.fromUTF8String(`${header}.${payload}`), signatureBytes = isoBase64URL.toBuffer(signature);
 
@@ -23,6 +23,6 @@ function verifyJWT(jwt, leafCert) {
 
     const kty = certCOSE.get(COSEKEYS.kty);
     throw new Error(`此方法不支持使用 kty 为 ${kty} 的公钥进行 JWT 验证`);
-}
+};
 
 export { verifyJWT };
