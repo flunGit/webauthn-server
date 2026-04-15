@@ -1,4 +1,3 @@
-// index.d.ts
 /**
  * WebAuthn认证模块 主要功能：
  * ```js
