@@ -196,7 +196,7 @@ class BaseMetadataService {
 }
 
 /**
- * 用于协调与 FIDO 元数据服务交互的基础服务;
+ * 用于协调与 FIDO 元数据交互的基础服务;
  * 包括 BLOB 下载与解析,以及按需请求和缓存各个元数据声明;
  *
  * https://fidoalliance.org/metadata/

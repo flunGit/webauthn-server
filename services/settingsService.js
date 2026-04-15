@@ -38,7 +38,7 @@ class BaseSettingsService {
 }
 
 /**
- * 一个基础服务,用于指定所有支持的 attestation 语句格式所接受的根证书;
+ * 一个基础服务,用于指定所有支持 attestation 语句格式接受的根证书;
  *
  * 此外,默认包含以下语句格式的根证书：
  *
