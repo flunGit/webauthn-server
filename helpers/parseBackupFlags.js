@@ -1,3 +1,6 @@
+/**
+ * 当解析备份标志（be/bs）时遇到无效组合（如单设备凭证却标记为已备份）抛出的错误;
+ */
 class InvalidBackupFlags extends Error {
     constructor(message) {
         super(message), this.name = 'InvalidBackupFlags';

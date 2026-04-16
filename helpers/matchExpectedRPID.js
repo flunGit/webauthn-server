@@ -1,6 +1,9 @@
 import { toHash } from './toHash.js';
 import { fromASCIIString, areEqual } from './iso/isoUint8Array.js';
 
+/**
+ * 当响应中的 RP ID 哈希值与所有预期的 RP ID 均不匹配时抛出的错误;
+ */
 class UnexpectedRPIDHash extends Error {
     constructor() {
         const message = '意外的 RP ID 哈希值';
@@ -26,9 +29,8 @@ const matchExpectedRPID = async (rpIDHash, expectedRPIDs) => {
         return matchedRPID;
     }
     catch (err) {
-        const _err = err;
         // 表示没有找到任何匹配项
-        if (_err.name === 'AggregateError') throw new UnexpectedRPIDHash();
+        if (err.name === 'AggregateError') throw new UnexpectedRPIDHash();
         throw err; // 发生了意外错误,重新抛出
     }
 }

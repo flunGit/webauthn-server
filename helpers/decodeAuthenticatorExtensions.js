@@ -25,8 +25,7 @@ const convertMapToObjectDeep = input => {
             toCBOR = decodeFirst(extensionData);
         }
         catch (err) {
-            const _err = err;
-            throw new Error(`解码身份验证器扩展时出错：${_err.message}`);
+            throw new Error(`解码身份验证器扩展时出错：${err.message}`);
         }
         return convertMapToObjectDeep(toCBOR);
     };

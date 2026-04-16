@@ -2,7 +2,9 @@ import { X509Certificate } from '@peculiar/x509';
 import { isCertRevoked } from './isCertRevoked.js';
 import { getWebCrypto } from './iso/isoCrypto/getWebCrypto.js';
 
-// 用于传递特定错误的自定义错误类
+/**
+ * 当证书链中某一证书的颁发者无法为下一证书签名,或根证书不自签名时抛出的内部错误;
+ */
 class InvalidSubjectAndIssuer extends Error {
     constructor() {
         const message = '证书主体与颁发者不匹配';
@@ -61,8 +63,7 @@ const assertCertNotRevoked = async certificate => {
             try {
                 return new X509Certificate(certPEM);
             } catch (err) {
-                const _err = err;
-                throw new Error(`无法解析信任锚证书:\n${certPEM}`, { cause: _err });
+                throw new Error(`无法解析信任锚证书:\n${certPEM}`, { cause: err });
             }
         }), validTrustAnchors = [];
 

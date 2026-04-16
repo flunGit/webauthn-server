@@ -6,9 +6,13 @@ import { type X509Certificate } from '@peculiar/x509';
 
 // ================================= convertAAGUIDToString.js =================================
 /**
+ * ```js
+ * // 文件导出内容:
+ * convertAAGUIDToString(); // 将 authData 中的 aaguid 缓冲区转换为 UUID 字符串
+ * ```
+ * ---
  * @module convertAAGUIDToString.js
- * @description 将 authData 中的 aaguid 缓冲区转换为 UUID 字符串
- * - 定义链接:@see {@link convertAAGUIDToString}
+ * - 查看定义:@see {@link convertAAGUIDToString}
  */
 declare module './convertAAGUIDToString.js' {
     /**
@@ -19,9 +23,13 @@ declare module './convertAAGUIDToString.js' {
 
 // ================================= convertCertBufferToPEM.js =================================
 /**
+ * ```js
+ * // 文件导出内容:
+ * convertCertBufferToPEM(); // 将缓冲区转换为 OpenSSL 兼容的 PEM 文本格式
+ * ```
+ * ---
  * @module convertCertBufferToPEM.js
- * @description 将缓冲区转换为 OpenSSL 兼容的 PEM 文本格式
- * - 定义链接:@see {@link convertCertBufferToPEM}
+ * - 查看定义:@see {@link convertCertBufferToPEM}
  */
 declare module './convertCertBufferToPEM.js' {
     /**
@@ -32,9 +40,13 @@ declare module './convertCertBufferToPEM.js' {
 
 // ================================= convertCOSEtoPKCS.js =================================
 /**
+ * ```js
+ * // 文件导出内容:
+ * convertCOSEtoPKCS(); // 接收 COSE 编码的公钥，并将其转换为 PKCS 密钥
+ * ```
+ * ---
  * @module convertCOSEtoPKCS.js
- * @description 接收 COSE 编码的公钥，并将其转换为 PKCS 密钥
- * - 定义链接:@see {@link convertCOSEtoPKCS}
+ * - 查看定义:@see {@link convertCOSEtoPKCS}
  */
 declare module './convertCOSEtoPKCS.js' {
     /**
@@ -45,9 +57,13 @@ declare module './convertCOSEtoPKCS.js' {
 
 // ================================= convertPEMToBytes.js =================================
 /**
+ * ```js
+ * // 文件导出内容:
+ * convertPEMToBytes(); // 将 PEM 格式的证书转换为字节数组
+ * ```
+ * ---
  * @module convertPEMToBytes.js
- * @description 将 PEM 格式的证书转换为字节数组
- * - 定义链接:@see {@link convertPEMToBytes}
+ * - 查看定义:@see {@link convertPEMToBytes}
  */
 declare module './convertPEMToBytes.js' {
     /**
@@ -58,9 +74,13 @@ declare module './convertPEMToBytes.js' {
 
 // ================================= convertX509PublicKeyToCOSE.js =================================
 /**
+ * ```js
+ * // 文件导出内容:
+ * convertX509PublicKeyToCOSE(); // 从 X.509 证书（DER 格式）中提取公钥，并将其转换为 COSE 公钥结构
+ * ```
+ * ---
  * @module convertX509PublicKeyToCOSE.js
- * @description 从 X.509 证书（DER 格式）中提取公钥，并将其转换为 COSE 公钥结构
- * - 定义链接:@see {@link convertX509PublicKeyToCOSE}
+ * - 查看定义:@see {@link convertX509PublicKeyToCOSE}
  */
 declare module './convertX509PublicKeyToCOSE.js' {
     /**
@@ -69,16 +89,22 @@ declare module './convertX509PublicKeyToCOSE.js' {
      * @param x509Certificate - DER 编码的 X.509 证书缓冲区
      * @returns 解析出的 COSE 公钥 Map 对象，可根据密钥类型（OKP/EC2/RSA）使用类型守卫进行细化
      * @throws 若证书格式无效或公钥类型不受支持，将抛出错误
-     * - 定义链接:@see {@link https://datatracker.ietf.org/doc/html/rfc9052#name-cose-key-map|COSE Key Map Specification}
+     * - 查看定义:@see {@link https://datatracker.ietf.org/doc/html/rfc9052#name-cose-key-map|COSE Key Map Specification}
      */
     export function convertX509PublicKeyToCOSE(x509Certificate: Uint8Array_): COSEPublicKey;
 }
 
 // ================================= cose.js =================================
 /**
+ * ```js
+ * // 文件导出内容:
+ * COSEPublicKey, COSEPublicKeyOKP, COSEPublicKeyEC2, COSEPublicKeyRSA; // COSE 公钥类型
+ * COSEKEYS, COSEKTY, COSECRV, COSEALG; // COSE 相关枚举
+ * isCOSEPublicKeyOKP(), isCOSEPublicKeyEC2(), isCOSEPublicKeyRSA(), isCOSEKty(), isCOSECrv(), isCOSEAlg(); // 类型守卫函数
+ * ```
+ * ---
  * @module cose.js
- * @description COSE 公钥类型、枚举及类型守卫
- * - 定义链接:@see {@link COSEPublicKey}、{@link COSEPublicKeyOKP}、{@link COSEPublicKeyEC2}、{@link COSEPublicKeyRSA}、
+ * - 查看定义:@see {@link COSEPublicKey}、{@link COSEPublicKeyOKP}、{@link COSEPublicKeyEC2}、{@link COSEPublicKeyRSA}、
  * - {@link COSEKEYS}、{@link COSEKTY}、{@link COSECRV}、{@link COSEALG}、{@link isCOSEPublicKeyOKP}、
  * - {@link isCOSEPublicKeyEC2}、{@link isCOSEPublicKeyRSA}、{@link isCOSEKty}、{@link isCOSECrv}、{@link isCOSEAlg}
  *
@@ -158,7 +184,7 @@ declare module './cose.js' {
      *
      * @param kty - 待检测的密钥类型值（可能为 undefined）
      * @returns 类型谓词，若为有效的 COSEKTY 枚举值则返回 true，同时将类型收窄为 COSEKTY
-     * - 定义链接:@see {@link https://www.iana.org/assignments/cose/cose.xhtml#key-type|COSE Key Type Registry}
+     * - 查看定义:@see {@link https://www.iana.org/assignments/cose/cose.xhtml#key-type|COSE Key Type Registry}
      */
     export function isCOSEKty(kty: number | undefined): kty is COSEKTY;
 
@@ -173,7 +199,7 @@ declare module './cose.js' {
      *
      * @param crv - 待检测的曲线参数值（可能为 undefined）
      * @returns 类型谓词，若为有效的 COSECRV 枚举值则返回 true，同时将类型收窄为 COSECRV
-     * - 定义链接:@see {@link https://www.iana.org/assignments/cose/cose.xhtml#elliptic-curves|COSE Elliptic Curves Registry}
+     * - 查看定义:@see {@link https://www.iana.org/assignments/cose/cose.xhtml#elliptic-curves|COSE Elliptic Curves Registry}
      */
     export function isCOSECrv(crv: number | undefined): crv is COSECRV;
 
@@ -191,16 +217,21 @@ declare module './cose.js' {
      *
      * @param alg - 待检测的算法标识值（可能为 undefined）
      * @returns 类型谓词，若为有效的 COSEALG 枚举值则返回 true，同时将类型收窄为 COSEALG
-     * - 定义链接:@see {@link https://www.iana.org/assignments/cose/cose.xhtml#algorithms|COSE Algorithms Registry}
+     * - 查看定义:@see {@link https://www.iana.org/assignments/cose/cose.xhtml#algorithms|COSE Algorithms Registry}
      */
     export function isCOSEAlg(alg: number | undefined): alg is COSEALG;
 }
 
 // ================================= decodeAttestationObject.js =================================
 /**
+ * ```js
+ * // 文件导出内容:
+ * decodeAttestationObject(); // 将 AttestationObject 缓冲区转换为对应的对象
+ * AttestationFormat, AttestationObject, AttestationStatement; // 相关类型
+ * ```
+ * ---
  * @module decodeAttestationObject.js
- * @description 将 AttestationObject 缓冲区转换为对应的对象
- * - 定义链接:@see {@link decodeAttestationObject}、{@link AttestationFormat}、{@link AttestationObject}、{@link AttestationStatement}
+ * - 查看定义:@see {@link decodeAttestationObject}、{@link AttestationFormat}、{@link AttestationObject}、{@link AttestationStatement}
  */
 declare module './decodeAttestationObject.js' {
     /**
@@ -237,9 +268,14 @@ declare module './decodeAttestationObject.js' {
 
 // ================================= decodeAuthenticatorExtensions.js =================================
 /**
+ * ```js
+ * // 文件导出内容:
+ * decodeAuthenticatorExtensions(); // 将身份验证器扩展数据缓冲区转换为相应的对象
+ * AuthenticationExtensionsAuthenticatorOutputs; // 扩展输出类型
+ * ```
+ * ---
  * @module decodeAuthenticatorExtensions.js
- * @description 将身份验证器扩展数据缓冲区转换为相应的对象
- * - 定义链接:@see {@link decodeAuthenticatorExtensions}、{@link AuthenticationExtensionsAuthenticatorOutputs}
+ * - 查看定义:@see {@link decodeAuthenticatorExtensions}、{@link AuthenticationExtensionsAuthenticatorOutputs}
  */
 declare module './decodeAuthenticatorExtensions.js' {
     /**
@@ -258,9 +294,14 @@ declare module './decodeAuthenticatorExtensions.js' {
 
 // ================================= decodeClientDataJSON.js =================================
 /**
+ * ```js
+ * // 文件导出内容:
+ * decodeClientDataJSON(); // 将身份验证器的 base64url 编码的 clientDataJSON 解码为 JSON
+ * ClientDataJSON; // 客户端数据类型
+ * ```
+ * ---
  * @module decodeClientDataJSON.js
- * @description 将身份验证器的 base64url 编码的 clientDataJSON 解码为 JSON
- * - 定义链接:@see {@link decodeClientDataJSON}、{@link ClientDataJSON}
+ * - 查看定义:@see {@link decodeClientDataJSON}、{@link ClientDataJSON}
  */
 declare module './decodeClientDataJSON.js' {
     /**
@@ -285,9 +326,13 @@ declare module './decodeClientDataJSON.js' {
 
 // ================================= decodeCredentialPublicKey.js =================================
 /**
+ * ```js
+ * // 文件导出内容:
+ * decodeCredentialPublicKey(); // 将 WebAuthn 凭证公钥（CBOR 编码的 COSE 公钥）解码为 COSEPublicKey Map 对象
+ * ```
+ * ---
  * @module decodeCredentialPublicKey.js
- * @description 将 WebAuthn 凭证公钥（CBOR 编码的 COSE 公钥）解码为 COSEPublicKey Map 对象
- * - 定义链接:@see {@link decodeCredentialPublicKey}
+ * - 查看定义:@see {@link decodeCredentialPublicKey}
  */
 declare module './decodeCredentialPublicKey.js' {
     /**
@@ -296,8 +341,8 @@ declare module './decodeCredentialPublicKey.js' {
      * @param publicKey - 来自 authenticatorData 的凭证公钥缓冲区（CBOR 编码的 COSE_Key）
      * @returns 解码后的 COSE 公钥 Map，可通过类型守卫（isCOSEPublicKeyOKP / EC2 / RSA）进一步细化类型
      * @throws 如果输入不是有效的 CBOR 结构或不包含预期的 COSE 密钥参数，将抛出错误
-     * - 定义链接:@see {@link https://www.w3.org/TR/webauthn-2/#sctn-public-key-easy|WebAuthn Credential Public Key}
-     * - 定义链接:@see {@link https://datatracker.ietf.org/doc/html/rfc9052#name-cose-key-map|COSE Key Map Specification}
+     * - 查看定义:@see {@link https://www.w3.org/TR/webauthn-2/#sctn-public-key-easy|WebAuthn Credential Public Key}
+     * - 查看定义:@see {@link https://datatracker.ietf.org/doc/html/rfc9052#name-cose-key-map|COSE Key Map Specification}
      */
     export function decodeCredentialPublicKey(publicKey: Uint8Array_): COSEPublicKey;
 
@@ -312,9 +357,13 @@ declare module './decodeCredentialPublicKey.js' {
 
 // ================================= fetch.js =================================
 /**
+ * ```js
+ * // 文件导出内容:
+ * fetch(); // 一个用于通过标准 fetch 请求数据的简单方法,可在多种运行时环境中工作
+ * ```
+ * ---
  * @module fetch.js
- * @description 一个用于通过标准 fetch 请求数据的简单方法,可在多种运行时环境中工作
- * - 定义链接:@see {@link fetch}
+ * - 查看定义:@see {@link fetch}
  */
 declare module './fetch.js' {
     /**
@@ -333,9 +382,13 @@ declare module './fetch.js' {
 
 // ================================= generateChallenge.js =================================
 /**
+ * ```js
+ * // 文件导出内容:
+ * generateChallenge(); // 生成一个合适的随机值,用作证明（attestation）或断言（assertion）的挑战值（challenge）
+ * ```
+ * ---
  * @module generateChallenge.js
- * @description 生成一个合适的随机值,用作证明（attestation）或断言（assertion）的挑战值（challenge）
- * - 定义链接:@see {@link generateChallenge}
+ * - 查看定义:@see {@link generateChallenge}
  */
 declare module './generateChallenge.js' {
     /**
@@ -354,9 +407,13 @@ declare module './generateChallenge.js' {
 
 // ================================= generateUserID.js =================================
 /**
+ * ```js
+ * // 文件导出内容:
+ * generateUserID(); // 生成一个适合作为用户 ID 的随机值
+ * ```
+ * ---
  * @module generateUserID.js
- * @description 生成一个适合作为用户 ID 的随机值
- * - 定义链接:@see {@link generateUserID}
+ * - 查看定义:@see {@link generateUserID}
  */
 declare module './generateUserID.js' {
     /**
@@ -375,9 +432,14 @@ declare module './generateUserID.js' {
 
 // ================================= getCertificateInfo.js =================================
 /**
+ * ```js
+ * // 文件导出内容:
+ * getCertificateInfo(); // 提取 PEM 证书信息
+ * CertificateInfo, Issuer, Subject; // 证书信息相关类型
+ * ```
+ * ---
  * @module getCertificateInfo.js
- * @description 提取 PEM 证书信息
- * - 定义链接:@see {@link getCertificateInfo}、{@link CertificateInfo}、{@link Issuer}、{@link Subject}
+ * - 查看定义:@see {@link getCertificateInfo}、{@link CertificateInfo}、{@link Issuer}、{@link Subject}
  */
 declare module './getCertificateInfo.js' {
     export type CertificateInfo = {
@@ -402,9 +464,13 @@ declare module './getCertificateInfo.js' {
 
 // ================================= isCertRevoked.js =================================
 /**
+ * ```js
+ * // 文件导出内容:
+ * isCertRevoked(); // 从证书中获取证书吊销列表（CRL）,并将其中的序列号与 CRL 内已吊销证书的序列号进行比对
+ * ```
+ * ---
  * @module isCertRevoked.js
- * @description 从证书中获取证书吊销列表（CRL）,并将其中的序列号与 CRL 内已吊销证书的序列号进行比对
- * - 定义链接:@see {@link isCertRevoked}
+ * - 查看定义:@see {@link isCertRevoked}
  */
 declare module './isCertRevoked.js' {
     /**
@@ -417,9 +483,13 @@ declare module './isCertRevoked.js' {
 
 // ================================= logging.js =================================
 /**
+ * ```js
+ * // 文件导出内容:
+ * getLogger(); // 生成一个 debug 日志记录器的实例,该实例基于 "flunWebauthn" 扩展
+ * ```
+ * ---
  * @module logging.js
- * @description 生成一个 debug 日志记录器的实例,该实例基于 "flunWebauthn" 扩展
- * - 定义链接:@see {@link getLogger}
+ * - 查看定义:@see {@link getLogger}
  */
 declare module './logging.js' {
     /**
@@ -439,9 +509,13 @@ declare module './logging.js' {
 
 // ================================= mapX509SignatureAlgToCOSEAlg.js =================================
 /**
+ * ```js
+ * // 文件导出内容:
+ * mapX509SignatureAlgToCOSEAlg(); // 将 X.509 签名算法 OID 映射到 COSE 算法 ID
+ * ```
+ * ---
  * @module mapX509SignatureAlgToCOSEAlg.js
- * @description 将 X.509 签名算法 OID 映射到 COSE 算法 ID
- * - 定义链接:@see {@link mapX509SignatureAlgToCOSEAlg}
+ * - 查看定义:@see {@link mapX509SignatureAlgToCOSEAlg}
  */
 declare module './mapX509SignatureAlgToCOSEAlg.js' {
     /**
@@ -455,9 +529,14 @@ declare module './mapX509SignatureAlgToCOSEAlg.js' {
 
 // ================================= matchExpectedRPID.js =================================
 /**
+ * ```js
+ * // 文件导出内容:
+ * matchExpectedRPID();        // 遍历预期的 RP ID，找到匹配项，返回未哈希的 RP ID
+ * class UnexpectedRPIDHash{}; // ID不匹配错误处理类
+ * ```
+ * ---
  * @module matchExpectedRPID.js
- * @description 遍历预期的 RP ID，找到匹配项，返回未哈希的 RP ID
- * - 定义链接:@see {@link matchExpectedRPID}
+ * - 查看定义:@see {@link matchExpectedRPID}、{@link UnexpectedRPIDHash}
  */
 declare module './matchExpectedRPID.js' {
     /**
@@ -466,13 +545,23 @@ declare module './matchExpectedRPID.js' {
      * 如果未找到匹配项,则抛出 `UnexpectedRPIDHash` 错误;
      */
     export function matchExpectedRPID(rpIDHash: Uint8Array_, expectedRPIDs: string[]): Promise<string>;
+
+    /**
+     * 当响应中的 RP ID 哈希值与所有预期的 RP ID 均不匹配时抛出的错误;
+     */
+    export class UnexpectedRPIDHash extends Error { constructor(); }
 }
 
 // ================================= parseAuthenticatorData.js =================================
 /**
+ * ```js
+ * // 文件导出内容:
+ * parseAuthenticatorData(); // 解析 Attestation 中包含的 authData 缓冲区,使其变得可读
+ * ParsedAuthenticatorData;  // 解析后的认证器数据类型
+ * ```
+ * ---
  * @module parseAuthenticatorData.js
- * @description 解析 Attestation 中包含的 authData 缓冲区,使其变得可读
- * - 定义链接:@see {@link parseAuthenticatorData}、{@link ParsedAuthenticatorData}
+ * - 查看定义:@see {@link parseAuthenticatorData}、{@link ParsedAuthenticatorData}
  */
 declare module './parseAuthenticatorData.js' {
     /**
@@ -504,9 +593,13 @@ declare module './parseAuthenticatorData.js' {
 
 // ================================= parseBackupFlags.js =================================
 /**
- * @module parseBackupFlags.js
- * @description 解析身份验证器中的备份相关标志位
- * - 定义链接:@see {@link parseBackupFlags}、{@link InvalidBackupFlags}
+ * ```js
+ * // 文件导出内容:
+ * parseBackupFlags();         // 解析身份验证器中的备份相关标志位
+ * class InvalidBackupFlags{}; // 无效备份标志错误类
+ * ```
+ * ---
+ * - 查看定义:@see {@link parseBackupFlags}、{@link InvalidBackupFlags}
  */
 declare module './parseBackupFlags.js' {
     /**
@@ -520,14 +613,21 @@ declare module './parseBackupFlags.js' {
     export function parseBackupFlags({ be, bs }: { be: boolean, bs: boolean; })
         : { credentialDeviceType: CredentialDeviceType, credentialBackedUp: boolean };
 
+    /**
+     * 当解析备份标志（be/bs）时遇到无效组合（如单设备凭证却标记为已备份）抛出的错误;
+     */
     export class InvalidBackupFlags extends Error { constructor(message: string) }
 }
 
 // ================================= toHash.js =================================
 /**
+ * ```js
+ * // 文件导出内容:
+ * toHash(); // 返回给定数据的哈希摘要,默认使用 SHA-256
+ * ```
+ * ---
  * @module toHash.js
- * @description 返回给定数据的哈希摘要,默认使用 SHA-256
- * - 定义链接:@see {@link toHash}
+ * - 查看定义:@see {@link toHash}
  */
 declare module './toHash.js' {
     /**
@@ -538,9 +638,13 @@ declare module './toHash.js' {
 
 // ================================= validateCertificatePath.js =================================
 /**
+ * ```js
+ * // 文件导出内容:
+ * validateCertificatePath(); // 遍历 PEM 证书数组,确保形成有效的证书链
+ * ```
+ * ---
  * @module validateCertificatePath.js
- * @description 遍历 PEM 证书数组,确保形成有效的证书链
- * - 定义链接:@see {@link validateCertificatePath}
+ * - 查看定义:@see {@link validateCertificatePath}
  */
 declare module './validateCertificatePath.js' {
     /**
@@ -553,9 +657,13 @@ declare module './validateCertificatePath.js' {
 
 // ================================= validateExtFIDOGenCEAAGUID.js =================================
 /**
+ * ```js
+ * // 文件导出内容:
+ * validateExtFIDOGenCEAAGUID(); // 查找 FIDO Gen CE AAGUID 证书扩展并比对 AAGUID
+ * ```
+ * ---
  * @module validateExtFIDOGenCEAAGUID.js
- * @description 查找 FIDO Gen CE AAGUID 证书扩展并比对 AAGUID
- * - 定义链接:@see {@link validateExtFIDOGenCEAAGUID}
+ * - 查看定义:@see {@link validateExtFIDOGenCEAAGUID}
  */
 declare module './validateExtFIDOGenCEAAGUID.js' {
     /**
@@ -569,9 +677,13 @@ declare module './validateExtFIDOGenCEAAGUID.js' {
 
 // ================================= verifySignature.js =================================
 /**
+ * ```js
+ * // 文件导出内容:
+ * verifySignature(); // 验证身份验证器的签名
+ * ```
+ * ---
  * @module verifySignature.js
- * @description 验证身份验证器的签名
- * - 定义链接:@see {@link verifySignature}
+ * - 查看定义:@see {@link verifySignature}
  */
 declare module './verifySignature.js' {
     /**
