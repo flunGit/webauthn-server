@@ -262,9 +262,8 @@
  *
  * ---
  */
-declare module 'flun-webauthn-server' {
-    export * from 'flun-webauthn-server/authentication/index.js';
-    export * from 'flun-webauthn-server/metadata/index.js';
-    export * from 'flun-webauthn-server/registration/index.js';
-    export * from 'flun-webauthn-server/services/index.js';
-}
+declare module 'flun-webauthn-server' { }
+export * from './registration/index.js';
+export * from './authentication/index.js';
+export * from './services/index.js';
+export * from './metadata/index.js';
