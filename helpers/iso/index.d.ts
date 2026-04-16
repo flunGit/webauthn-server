@@ -1,6 +1,13 @@
 import type { Base64URLString, Uint8Array_ } from '../../types/index.js';
 import * as tinyCbor from '@levischuck/tiny-cbor';
 
+/**
+ *
+ * @module
+ */
+declare module './index.js' {
+
+}
 // ================================= isoBase64URL.js =================================
 declare namespace IsoBase64URL {
     /**
@@ -138,17 +145,17 @@ export const isoUint8Array: typeof IsoUint8Array;
 // 以下声明使得直接 require 子路径文件（如 '../../../helpers/iso/isoUint8Array.js'）
 // 也能获得正确的 TypeScript 类型提示;
 
-declare module '*/helpers/iso/isoBase64URL.js' {
+declare module './isoBase64URL.js' {
     const base64: typeof IsoBase64URL;
     export default base64;
 }
 
-declare module '*/helpers/iso/isoCBOR.js' {
+declare module './isoCBOR.js' {
     const cbor: typeof IsoCBOR;
     export default cbor;
 }
 
-declare module '*/helpers/iso/isoUint8Array.js' {
+declare module './isoUint8Array.js' {
     const uint8: typeof IsoUint8Array;
     export default uint8;
 }
