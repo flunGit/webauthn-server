@@ -10,7 +10,7 @@ import type { Uint8Array_, Crypto } from '../../../types/index.js';
  * @param data - 需要生成摘要的数据
  * @param algorithm - 映射到所需 SHA 算法的 COSE 算法 ID
  */
-export declare function digest(data: Uint8Array_, algorithm: COSEALG): Promise<Uint8Array_>;
+export function digest(data: Uint8Array_, algorithm: COSEALG): Promise<Uint8Array_>;
 
 // ================================= getRandomValues.js =================================
 /**
@@ -18,26 +18,26 @@ export declare function digest(data: Uint8Array_, algorithm: COSEALG): Promise<U
  *
  * @returns 返回传入的同一个字节数组
  */
-export declare function getRandomValues(array: Uint8Array_): Promise<Uint8Array_>;
+export function getRandomValues(array: Uint8Array_): Promise<Uint8Array_>;
 
 // ================================= getWebCrypto.js =================================
 /**
  * 尝试从当前运行时获取 Crypto API 的实例;
  * 应支持 Node.js 以及其它实现了 Web API 的运行时（如 Deno）;
  */
-export declare function getWebCrypto(): Promise<Crypto>;
+export function getWebCrypto(): Promise<Crypto>;
 
-export declare class MissingWebCrypto extends Error {
+export class MissingWebCrypto extends Error {
     constructor();
 }
 
-export declare const _getWebCryptoInternals: {
+export const _getWebCryptoInternals: {
     stubThisGlobalThisCrypto: () => import("crypto").webcrypto.Crypto;
     setCachedCrypto: (newCrypto: Crypto | undefined) => void;
 };
 
 // ================================= importKey.js =================================
-export declare function importKey(opts: {
+export function importKey(opts: {
     keyData: JsonWebKey;
     algorithm: AlgorithmIdentifier | RsaHashedImportParams | EcKeyImportParams;
 }): Promise<CryptoKey>;
@@ -46,13 +46,13 @@ export declare function importKey(opts: {
 /**
  * 将 COSE 算法标识符转换为 WebCrypto API 所期望的对应字符串值
  */
-export declare function mapCoseAlgToWebCryptoAlg(alg: COSEALG): SubtleCryptoAlg;
+export function mapCoseAlgToWebCryptoAlg(alg: COSEALG): SubtleCryptoAlg;
 
 // ================================= mapCoseAlgToWebCryptoKeyAlgName.js =================================
 /**
  * 将 COSE 算法标识符（alg ID）转换为 WebCrypto API 所期望的对应密钥算法字符串值
  */
-export declare function mapCoseAlgToWebCryptoKeyAlgName(alg: COSEALG): SubtleCryptoKeyAlgName;
+export function mapCoseAlgToWebCryptoKeyAlgName(alg: COSEALG): SubtleCryptoKeyAlgName;
 
 // ================================= structs.js =================================
 export type SubtleCryptoAlg = 'SHA-1' | 'SHA-256' | 'SHA-384' | 'SHA-512';
@@ -65,13 +65,13 @@ export type SubtleCryptoKeyAlgName = 'ECDSA' | 'Ed25519' | 'RSASSA-PKCS1-v1_5' |
  *
  * 参见 https://www.w3.org/TR/webauthn-2/#sctn-signature-attestation-types
  */
-export declare function unwrapEC2Signature(signature: Uint8Array_, crv: COSECRV): Uint8Array_;
+export function unwrapEC2Signature(signature: Uint8Array_, crv: COSECRV): Uint8Array_;
 
 // ================================= verify.js =================================
 /**
  * 使用公钥验证签名,支持 EC2 和 RSA 公钥;
  */
-export declare function verify(opts: {
+export function verify(opts: {
     cosePublicKey: COSEPublicKey, signature: Uint8Array_;
     data: Uint8Array_, shaHashOverride?: COSEALG;
 }): Promise<boolean>;
@@ -80,13 +80,13 @@ export declare function verify(opts: {
 /**
  * 使用 EC2 公钥验证签名
  */
-export declare function verifyEC2(opts: {
+export function verifyEC2(opts: {
     cosePublicKey: COSEPublicKeyEC2, signature: Uint8Array_;
     data: Uint8Array_, shaHashOverride?: COSEALG;
 }): Promise<boolean>;
 
 // ================================= verifyOKP.js =================================
-export declare function verifyOKP(opts: {
+export function verifyOKP(opts: {
     cosePublicKey: COSEPublicKeyOKP, signature: Uint8Array_, data: Uint8Array_;
 }): Promise<boolean>;
 
@@ -94,7 +94,7 @@ export declare function verifyOKP(opts: {
 /**
  * 使用 RSA 公钥验证签名
  */
-export declare function verifyRSA(opts: {
+export function verifyRSA(opts: {
     cosePublicKey: COSEPublicKeyRSA, signature: Uint8Array_;
     data: Uint8Array_, shaHashOverride?: COSEALG;
 }): Promise<boolean>;
@@ -135,4 +135,24 @@ interface IsoCryptoMethods {
  * 点击左边加号查看命名空间导出函数
  */
 const isoCrypto: IsoCryptoMethods;
-export { isoCrypto }
+export { isoCrypto };
+// ================================= 模块整体导出 =================================
+
+/**
+ *  isoCrypto工具库模块入口;
+ *
+ * - 本模块重新导出了对外子模块（digest、getRandomValues、verify）,
+ *
+ * 本模块对外导出的主要函数包括：
+ * ```js
+ *  // isoBase64URL命名空间函数：
+ * digest(), getRandomValues(), verify();
+ * ```
+ * - 查看定义:@see {@link digest}、{@link getRandomValues}、{@link verify }
+ * - 具体函数请参考各子模digest
+ */
+module './index.js' {
+    export * from './digest.js';
+    export * from './getRandomValues.js';
+    export * from './verify.js';
+}

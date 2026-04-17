@@ -103,9 +103,7 @@ module './isoBase64URL.js' {
     const isBase64URL: IsoBase64URLMethods['isBase64URL'];
     const trimPadding: IsoBase64URLMethods['trimPadding'];
 
-    export {
-        isoBase64URL, toBuffer, fromBuffer, toBase64, fromUTF8String, toUTF8String, isBase64, isBase64URL, trimPadding
-    };
+    export { toBuffer, fromBuffer, toBase64, fromUTF8String, toUTF8String, isBase64, isBase64URL, trimPadding };
 }
 
 // ================================= isoCBOR.js =================================
@@ -161,7 +159,7 @@ module './isoCBOR.js' {
     const decodeFirst: IsoCBORMethods['decodeFirst'];
     const encode: IsoCBORMethods['encode'];
 
-    export { isoCBOR, decodeFirst, encode };
+    export { decodeFirst, encode };
 }
 
 // ================================= isoUint8Array.js =================================
@@ -267,9 +265,7 @@ module './isoUint8Array.js' {
     const fromASCIIString: IsoUint8ArrayMethods['fromASCIIString'];
     const toDataView: IsoUint8ArrayMethods['toDataView'];
 
-    export {
-        isoUint8Array, areEqual, toHex, fromHex, concat, toUTF8String, fromUTF8String, fromASCIIString, toDataView
-    };
+    export { areEqual, toHex, fromHex, concat, toUTF8String, fromUTF8String, fromASCIIString, toDataView };
 }
 
 // ================================= 模块整体导出 =================================
@@ -298,6 +294,6 @@ module './index.js' {
     // 重新导出所有子模块的内容
     export * from './isoBase64URL.js';
     export * from './isoCBOR.js';
-    export * from './isoUint8Array.js';
     export * from './isoCrypto/index.js';
+    export * from './isoUint8Array.js';
 }
