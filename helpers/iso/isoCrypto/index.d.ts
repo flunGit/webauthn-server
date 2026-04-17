@@ -1,6 +1,6 @@
 import type {
     COSEALG, COSECRV, COSEPublicKey, COSEPublicKeyEC2, COSEPublicKeyOKP, COSEPublicKeyRSA
-} from '../../index.js';
+} from '../../cose.js';
 import type { Uint8Array_, Crypto } from '../../../types/index.js';
 
 // ================================= digest.js =================================
@@ -104,15 +104,35 @@ export declare function verifyRSA(opts: {
  * 为了方便外部以 `import * as isoCrypto` 方式导入时获得完整的命名空间类型;
  * 这里显式导出一个包含所有功能的类型别名;
  */
-declare namespace IsoCrypto {
-    export {
-        digest, getRandomValues, getWebCrypto, MissingWebCrypto, _getWebCryptoInternals, mapCoseAlgToWebCryptoAlg,
-        importKey, mapCoseAlgToWebCryptoKeyAlgName, unwrapEC2Signature, verify, verifyEC2, verifyOKP, verifyRSA,
-    };
+interface IsoCryptoMethods {
+    // ================================= digest.js =================================
+    /**
+     * 生成所提供数据的摘要;
+     *
+     * @param data - 需要生成摘要的数据
+     * @param algorithm - 映射到所需 SHA 算法的 COSE 算法 ID
+     */
+    digest(data: Uint8Array_, algorithm: COSEALG): Promise<Uint8Array_>;
+
+    // ================================= getRandomValues.js =================================
+    /**
+     * 使用与数组长度相等的随机字节填充传入的字节数组;
+     *
+     * @returns 返回传入的同一个字节数组
+     */
+    getRandomValues(array: Uint8Array_): Promise<Uint8Array_>;
+    // ================================= verify.js =================================
+    /**
+     * 使用公钥验证签名,支持 EC2 和 RSA 公钥;
+     */
+    verify(opts: {
+        cosePublicKey: COSEPublicKey, signature: Uint8Array_;
+        data: Uint8Array_, shaHashOverride?: COSEALG;
+    }): Promise<boolean>;
 }
 
-// 使 `import * as isoCrypto` 获得类型推断的关键：
-// 将命名空间类型赋值给模块自身（仅类型层面有效）
-export type TypeOfIsoCrypto = typeof IsoCrypto;
-declare const _default: typeof IsoCrypto;
-export default _default;
+/**
+ * 点击左边加号查看命名空间导出函数
+ */
+const isoCrypto: IsoCryptoMethods;
+export { isoCrypto }

@@ -721,7 +721,6 @@ declare module './verifySignature.js' {
  *
  * 所有函数均设计为在 Node.js、Deno、现代浏览器等支持 Web Crypto API 的环境中运行。
  *
- * @module flun-webauthn-server/helpers
  */
 declare module 'flun-webauthn-server/helpers' {
     export * from './convertAAGUIDToString.js';
