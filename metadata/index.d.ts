@@ -1,5 +1,6 @@
 import type { Base64URLString, Uint8Array_ } from '../types/index.js';
 import type { COSEALG, COSECRV, COSEKTY } from '../helpers/index.js';
+import { verifyMDSBlob } from './verifyMDSBlob.js';
 
 // ================================= mdsTypes.js =================================
 /**
@@ -264,13 +265,13 @@ export declare function verifyJWT(jwt: string, leafCert: Uint8Array_): Promise<b
 
 // ================================= verifyMDSBlob.js =================================
 /**
- * 对符合 [FIDO 元数据服务 (MDS)](https://fidoalliance.org/metadata/) 规范的 JWT ,
- * 并提取其中包含的 FIDO2 ,该方法会发起网络请求以执行 CRL 检查等操作;
- *
- * @param blob - 从 MDS 服务器下载的 JWT 字符串（例如 https://mds3.fidoalliance.org）
+ * ```js
+ * // 文件导出内容:
+ * verifyMDSBlob(); // 对符合规范的 BLOB 进行真实性与完整性验证,并提取其中包含的 FIDO2,该方法会发起网络请求以执行 CRL 检查等操作;
+ * ```
+ * ---
+ * - 查看定义:@see {@link verifyMDSBlob}
  */
-export declare function verifyMDSBlob(blob: string): Promise<{
-    statements: MetadataStatement[]; // 已验证数据块中包含的 MetadataStatement 条目列表
-    parsedNextUpdate: Date;          // 已验证数据块的 `nextUpdate` 字段值,表示该数据块的过期时间
-    payload: MDSJWTPayload;          // 已验证数据块的完整 JWT 载荷对象,包含所有原始字段和数据
-}>;
+module './verifyMDSBlob.js' {
+    export * from './verifyMDSBlob.js';
+}

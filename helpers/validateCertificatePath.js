@@ -4,6 +4,7 @@ import { getWebCrypto } from './iso/isoCrypto/getWebCrypto.js';
 
 /**
  * 当证书链中某一证书的颁发者无法为下一证书签名,或根证书不自签名时抛出的内部错误;
+* - 查看定义:@see {@link InvalidSubjectAndIssuer}
  */
 class InvalidSubjectAndIssuer extends Error {
     constructor() {
@@ -125,4 +126,4 @@ const assertCertNotRevoked = async certificate => {
         return true;
     };
 
-export { validateCertificatePath };
+export { validateCertificatePath, InvalidSubjectAndIssuer };
