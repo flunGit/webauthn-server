@@ -111,15 +111,8 @@ module './convertX509PublicKeyToCOSE.js' {
  * ```
  * ---
  * - 查看定义:@see {@link COSEPublicKey}、{@link COSEPublicKeyOKP}、{@link COSEPublicKeyEC2}、{@link COSEPublicKeyRSA}、
- * - {@link COSEKEYS}、{@link COSEKTY}、{@link COSECRV}、{@link COSEALG}、{@link isCOSEPublicKeyOKP}、
- * - {@link isCOSEPublicKeyEC2}、{@link isCOSEPublicKeyRSA}、{@link isCOSEKty}、{@link isCOSECrv}、{@link isCOSEAlg}
- *
- * 以下基本值用于区分下面更具体的 COSE 公钥类型;
- *
- * 这里使用 `Map` 是因为公钥使用了 CBOR 编码,而 CBOR 的 "Map" 类型在解码时会变成 JavaScript 的 `Map` 类型,
- * 而不是我们 JS 开发者更习惯的普通对象;
- *
- * 这些类型以一种非传统的方式表达了“这些 Map 应该包含下面这些离散的键列表”,但这样是可行的;
+ *  {@link COSEKEYS}、{@link COSEKTY}、{@link COSECRV}、{@link COSEALG}、{@link isCOSEPublicKeyOKP}、
+ *  {@link isCOSEPublicKeyEC2}、{@link isCOSEPublicKeyRSA}、{@link isCOSEKty}、{@link isCOSECrv}、{@link isCOSEAlg}
  */
 module './cose.js' {
     /**
@@ -353,13 +346,7 @@ module './logging.js' {
  * - 查看定义:@see {@link mapX509SignatureAlgToCOSEAlg}
  */
 module './mapX509SignatureAlgToCOSEAlg.js' {
-    /**
-     * 将 X.509 签名算法 OID 映射到 COSE 算法 ID
-     *
-     * - EC2 OID：https://oidref.com/1.2.840.10045.4.3
-     * - RSA OID：https://oidref.com/1.2.840.113549.1.1
-     */
-    export function mapX509SignatureAlgToCOSEAlg(signatureAlgorithm: string): COSEALG;
+    export * from './mapX509SignatureAlgToCOSEAlg.js';
 }
 
 // ================================= matchExpectedRPID.js =================================
@@ -504,20 +491,22 @@ module './verifySignature.js' {
  * isCOSEPublicKeyOKP(); isCOSEPublicKeyEC2(); isCOSEPublicKeyRSA(); isCOSEKty(); isCOSECrv(); isCOSEAlg();
  *
  * // 解码与解析函数
- * decodeAttestationObject();      // 将 AttestationObject 缓冲区转换为对应的对象
+ * decodeAttestationObject();       // 将 AttestationObject 缓冲区转换为对应的对象
  * decodeAuthenticatorExtensions(); // 将身份验证器扩展数据缓冲区转换为相应的对象
- * decodeClientDataJSON();         // 将身份验证器的 base64url 编码的 clientDataJSON 解码为 JSON
- * decodeCredentialPublicKey();    // 将 WebAuthn 凭证公钥（CBOR 编码的 COSE 公钥）解码为 COSEPublicKey Map 对象
+ * decodeClientDataJSON();          // 将身份验证器的 base64url 编码的 clientDataJSON 解码为 JSON
+ * decodeCredentialPublicKey();     // 将 WebAuthn 凭证公钥（CBOR 编码的 COSE 公钥）解码为 COSEPublicKey Map 对象
  *
  * // 证书处理
- * getCertificateInfo();           // 提取 PEM 证书信息
- * isCertRevoked();                // 从证书中获取证书吊销列表（CRL），并将其中的序列号与 CRL 内已吊销证书的序列号进行比对
- * validateCertificatePath();      // 遍历 PEM 证书数组，确保形成有效的证书链
- * validateExtFIDOGenCEAAGUID();   // 查找 FIDO Gen CE AAGUID 证书扩展并比对 AAGUID
+ * getCertificateInfo();            // 提取 PEM 证书信息
+ * isCertRevoked();                 // 从证书中获取证书吊销列表（CRL），并将其中的序列号与 CRL 内已吊销证书的序列号进行比对
+ * validateCertificatePath();       // 遍历 PEM 证书数组，确保形成有效的证书链
+ * validateExtFIDOGenCEAAGUID();    // 查找 FIDO Gen CE AAGUID 证书扩展并比对 AAGUID
+ * class InvalidSubjectAndIssuer{}; // 当证书链中某一证书的颁发者无法为下一证书签名,或根证书不自签名时,则抛出错误;
  *
  * // 认证器数据解析
  * parseAuthenticatorData();       // 解析 Attestation 中包含的 authData 缓冲区，使其变得可读
  * parseBackupFlags();             // 解析身份验证器中的第 3 位和第 4 位，返回匹配标志
+ * class InvalidBackupFlags{};     // 当解析备份标志（be/bs）时遇到无效组合时抛出的错误;
  *
  * // 签名与校验
  * verifySignature();              // 验证身份验证器的签名
@@ -530,6 +519,7 @@ module './verifySignature.js' {
  * generateUserID();                // 生成一个适合作为用户 ID 的随机值
  * matchExpectedRPID();             // 遍历每一个预期的 RP ID，尝试找到匹配项，返回与响应中的哈希值匹配的未哈希 RP ID
  * getLogger();                     // 生成一个 debug 日志记录器的实例，基于 "flunWebauthn" 扩展
+ * class UnexpectedRPIDHash{};      // 当响应中的 RP ID 哈希值与所有预期的 RP ID 均不匹配时抛出的错误;
  * ```
  * ---
  * - 查看定义@see :
@@ -541,11 +531,12 @@ module './verifySignature.js' {
  * {@link isCOSEPublicKeyEC2}、{@link isCOSEPublicKeyRSA}、{@link isCOSEKty}、{@link isCOSECrv}、{@link isCOSEAlg}
  * - 解码与解析：{@link decodeAttestationObject}、{@link decodeAuthenticatorExtensions}、{@link decodeClientDataJSON}、
  * {@link decodeCredentialPublicKey}
- * - 证书处理：{@link getCertificateInfo}、{@link isCertRevoked}、{@link validateCertificatePath}、{@link validateExtFIDOGenCEAAGUID}
- * - 认证器数据解析：{@link parseAuthenticatorData}、{@link parseBackupFlags}、
- * {@link InvalidBackupFlags}
+ * - 证书处理：{@link getCertificateInfo}、{@link isCertRevoked}、{@link validateCertificatePath}、
+ * {@link validateExtFIDOGenCEAAGUID}、{@link InvalidSubjectAndIssuer}
+ * - 认证器数据解析：{@link parseAuthenticatorData}、{@link parseBackupFlags}、 {@link InvalidBackupFlags}
  * - 签名与校验：{@link verifySignature}、{@link toHash}、{@link mapX509SignatureAlgToCOSEAlg}
- * - 工具与辅助：{@link fetch}、{@link generateChallenge}、{@link generateUserID}、{@link matchExpectedRPID}、{@link getLogger}
+ * - 工具与辅助：{@link fetch}、{@link generateChallenge}、{@link generateUserID}、{@link matchExpectedRPID}、
+ * {@link getLogger}、{@link UnexpectedRPIDHash}
  */
 module './index' { }
 export * from './iso/index.js';

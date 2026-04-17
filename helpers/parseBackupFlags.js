@@ -12,7 +12,7 @@ class InvalidBackupFlags extends Error {
  *
  * - 凭证是否可以在多设备上使用
  * - 凭证是否已备份
- * 无效的配置将抛出 `Error`
+ * >无效的配置将抛出 `Error`
  * - 查看定义:@see {@link parseBackupFlags}
  */
 const parseBackupFlags = ({ be, bs }) => {

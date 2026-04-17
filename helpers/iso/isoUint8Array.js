@@ -1,9 +1,4 @@
 /**
- * 一套与运行环境无关的 Uint8Array 操作方法集
- * @module
- */
-
-/**
  * 确保两个 Uint8Array 深度相等
  */
 const areEqual = (array1, array2) => {
