@@ -3,6 +3,7 @@
 /**
  * COSE 通用参数和密钥参数标识
  * @enum {number}
+ * - 查看定义:@see {@link COSEKEYS}
  * @see https://www.iana.org/assignments/cose/cose.xhtml#key-common-parameters
  * @see https://www.iana.org/assignments/cose/cose.xhtml#key-type-parameters
  */
@@ -15,6 +16,7 @@ const COSEKEYS = {
     /**
      * COSE 密钥类型
      * @enum {number}
+    * - 查看定义:@see {@link COSEKTY}
      * @see https://www.iana.org/assignments/cose/cose.xhtml#key-type
      */
     COSEKTY = { OKP: 1, 1: 'OKP', EC2: 2, 2: 'EC2', RSA: 3, 3: 'RSA' },
@@ -22,6 +24,7 @@ const COSEKEYS = {
     /**
      * COSE 椭圆曲线参数
      * @enum {number}
+     * - 查看定义:@see {@link COSECRV}
      * @see https://www.iana.org/assignments/cose/cose.xhtml#elliptic-curves
      */
     COSECRV = {
@@ -32,6 +35,7 @@ const COSEKEYS = {
     /**
      * COSE 算法标识
      * @enum {number}
+     * - 查看定义:@see {@link COSEALG}
      * @see https://www.iana.org/assignments/cose/cose.xhtml#algorithms
      */
     COSEALG = {
@@ -45,6 +49,7 @@ const COSEKEYS = {
 
     /**
      * 判断给定的 COSE 公钥是否为 OKP 密钥对（类型守卫）
+     * - 查看定义:@see {@link isCOSEPublicKeyOKP}
      */
     isCOSEPublicKeyOKP = cosePublicKey => {
         const kty = cosePublicKey.get(COSEKEYS.kty);
@@ -53,6 +58,7 @@ const COSEKEYS = {
 
     /**
      * 判断给定的 COSE 公钥是否为 EC2 密钥对（类型守卫）
+     * - 查看定义:@see {@link isCOSEPublicKeyEC2}
      */
     isCOSEPublicKeyEC2 = cosePublicKey => {
         const kty = cosePublicKey.get(COSEKEYS.kty);
@@ -61,6 +67,7 @@ const COSEKEYS = {
 
     /**
      * 判断给定的 COSE 公钥是否为 RSA 密钥对（类型守卫）
+     * - 查看定义:@see {@link isCOSEPublicKeyRSA}
      */
     isCOSEPublicKeyRSA = cosePublicKey => {
         const kty = cosePublicKey.get(COSEKEYS.kty);
@@ -68,12 +75,14 @@ const COSEKEYS = {
     },
     /**
      * 检查给定值是否为有效的 COSE 密钥类型（kty）
+     * - 查看定义:@see {@link isCOSEKty}
      */
     isCOSEKty = kty => {
         return Object.values(COSEKTY).indexOf(kty) >= 0;
     },
     /**
      * 检查给定值是否为有效的 COSE 曲线（crv）
+     * - 查看定义:@see {@link isCOSECrv}
      */
     isCOSECrv = crv => {
         return Object.values(COSECRV).indexOf(crv) >= 0;
@@ -81,6 +90,7 @@ const COSEKEYS = {
 
     /**
      * 检查给定值是否为有效的 COSE 算法（alg）
+     * - 查看定义:@see {@link isCOSEAlg}
      */
     isCOSEAlg = alg => {
         return Object.values(COSEALG).indexOf(alg) >= 0;

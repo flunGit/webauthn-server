@@ -16,7 +16,7 @@ const convertMapToObjectDeep = input => {
 },
     /**
      * 将身份验证器扩展数据缓冲区转换为相应的对象
-     *
+     * - 查看定义:@see {@link decodeAuthenticatorExtensions}
      * @param extensionData 身份验证器扩展数据缓冲区
      */
     decodeAuthenticatorExtensions = extensionData => {

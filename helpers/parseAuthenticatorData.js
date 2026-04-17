@@ -4,12 +4,14 @@ import { isoUint8Array, isoCBOR } from './iso/index.js';
 const { toDataView, fromHex, areEqual } = isoUint8Array, { decodeFirst, encode } = isoCBOR,
     /**
      * 便于在测试时对返回值进行桩（stub）操作
+     * - 查看定义:@see {@link _parseAuthenticatorDataInternals}
      * @ignore 不要将此导出包含在文档输出中
      */
     _parseAuthenticatorDataInternals = { stubThis: value => value },
 
     /**
      * 解析认证数据（Attestation 中包含的 authData 缓冲区）
+     * - 查看定义:@see {@link parseAuthenticatorData}
      */
     parseAuthenticatorData = authData => {
         if (authData.byteLength < 37) throw new Error(`认证数据长度为 ${authData.byteLength} 字节,预期至少 37 字节`);

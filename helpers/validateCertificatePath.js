@@ -32,6 +32,7 @@ const assertCertNotRevoked = async certificate => {
     },
     /**
      * 遍历 PEM 证书数组,确保它们形成正确的证书链
+     * - 查看定义:@see {@link validateCertificatePath}
      * @param {string[]} x5cCertsPEM 通常是 `x5c.map(convertASN1toPEM)` 的结果
      * @param {string[]} trustAnchorsPEM PEM 格式的信任锚证书,用于验证 x5c 证书链
      */

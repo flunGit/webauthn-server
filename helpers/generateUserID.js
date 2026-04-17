@@ -2,12 +2,14 @@ import { getRandomValues } from './iso/isoCrypto/index.js';
 
 /**
  * 使得在测试过程中可以模拟（stub）该函数的返回值
+ * - 查看定义:@see {@link _generateUserIDInternals}
  * @ignore 不要将此内容包含在文档输出中
  */
 const _generateUserIDInternals = { stubThis: value => value },
 
     /**
      * 生成一个适合作为用户 ID 的随机值
+     * - 查看定义:@see {@link generateUserID}
      */
     generateUserID = async () => {
         /**

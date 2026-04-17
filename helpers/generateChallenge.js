@@ -2,12 +2,14 @@ import { getRandomValues } from './iso/isoCrypto/index.js';
 
 /**
  * 使得在测试期间可以存根（stub）返回值
+ * - 查看定义:@see {@link _generateChallengeInternals}
  * @ignore 不要在文档输出中包含此项
  */
 const _generateChallengeInternals = { stubThis: value => value },
 
     /**
      * 生成一个合适的随机值,用作证明或断言的挑战值
+     * - 查看定义:@see {@link generateChallenge}
      */
     generateChallenge = async () => {
         /**

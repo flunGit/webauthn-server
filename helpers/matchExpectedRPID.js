@@ -3,6 +3,7 @@ import { fromASCIIString, areEqual } from './iso/isoUint8Array.js';
 
 /**
  * 当响应中的 RP ID 哈希值与所有预期的 RP ID 均不匹配时抛出的错误;
+* - 查看定义:@see {@link UnexpectedRPIDHash}
  */
 class UnexpectedRPIDHash extends Error {
     constructor() {
@@ -12,9 +13,9 @@ class UnexpectedRPIDHash extends Error {
 }
 
 /**
- * 遍历每个预期的 RP ID,尝试找到匹配项,返回与响应中的哈希值匹配的未哈希 RP ID;
- *
+ * 遍历所有预期的 RP ID,找出与响应中哈希值匹配的项,并返回对应的原始 RP ID
  * 如果未找到匹配项,则抛出 `UnexpectedRPIDHash` 错误;
+ * - 查看定义:@see {@link matchExpectedRPID}
  */
 const matchExpectedRPID = async (rpIDHash, expectedRPIDs) => {
     try {

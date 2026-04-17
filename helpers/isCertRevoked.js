@@ -10,7 +10,7 @@ const cacheRevokedCerts = {},
      * 从证书中获取 CRL 分发点,下载 CRL 并比对证书序列号是否在吊销列表中;
      *
      * CRL 证书结构参考 https://tools.ietf.org/html/rfc5280#page-117
-     *
+     * - 查看定义:@see {@link isCertRevoked}
      * @param cert - 要检查吊销状态的证书
      * @returns 如果证书已被吊销则返回 `true`，否则返回 `false`
      */

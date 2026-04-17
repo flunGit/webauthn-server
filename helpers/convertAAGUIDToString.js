@@ -1,6 +1,7 @@
 import { toHex } from './iso/isoUint8Array.js';
 /**
  * 将 authData 中的 aaguid 缓冲区转换为 UUID 字符串
+ * - 查看定义:@see {@link convertAAGUIDToString}
  */
 const convertAAGUIDToString = aaguid => {
     // Raw Hex: adce000235bcc60a648b0b25f1f05503

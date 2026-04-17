@@ -28,7 +28,7 @@ const issuerSubjectIDKey = {
 
     /**
      * 提取 PEM 证书信息
-     *
+     * - 查看定义:@see {@link getCertificateInfo}
      * @param {ArrayBuffer} leafCertBuffer 由 convertASN1toPEM(x5c[0]) 返回的证书缓冲区（DER 格式）
      */
     getCertificateInfo = leafCertBuffer => {

@@ -10,6 +10,7 @@ const id_fido_gen_ce_aaguid = '1.3.6.1.4.1.45724.1.1.4',
 
     /**
      * 查找 id-fido-gen-ce-aaguid 证书扩展,如果存在,则将其与 attestation 语句中的 AAGUID 进行比较;
+     * - 查看定义:@see {@link validateExtFIDOGenCEAAGUID}
      */
     validateExtFIDOGenCEAAGUID = (certExtensions, aaguid) => {
         if (!certExtensions) return true; // 证书没有扩展,无需验证

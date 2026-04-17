@@ -4,12 +4,14 @@ import { convertX509PublicKeyToCOSE } from './convertX509PublicKeyToCOSE.js';
 
 /**
  * 用于在测试时模拟返回值
+ * - 查看定义:@see {@link _verifySignatureInternals}
  * @ignore 不要将此内容包含在文档输出中
  */
 const _verifySignatureInternals = { stubThis: value => value },
 
     /**
      * 验证身份验证器的签名
+     * - 查看定义:@see {@link verifySignature}
      */
     verifySignature = opts => {
         const { signature, data, credentialPublicKey, x509Certificate, hashAlgorithm, } = opts;

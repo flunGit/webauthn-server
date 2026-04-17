@@ -5,6 +5,15 @@ import { id_rsaEncryption, RSAPublicKey } from '@peculiar/asn1-rsa';
 import { COSECRV, COSEKEYS, COSEKTY } from './cose.js';
 import { mapX509SignatureAlgToCOSEAlg } from './mapX509SignatureAlgToCOSEAlg.js';
 
+/**
+ * 从 X.509 证书（DER 格式）中提取公钥，并将其转换为 COSE 公钥结构
+ *
+ * @param x509Certificate - DER 编码的 X.509 证书缓冲区
+ * @returns 解析出的 COSE 公钥 Map 对象，可根据密钥类型（OKP/EC2/RSA）使用类型守卫进行细化
+ * @throws 若证书格式无效或公钥类型不受支持，将抛出错误
+ * - 查看定义:@see {@link convertX509PublicKeyToCOSE}
+ * - {@link https://datatracker.ietf.org/doc/html/rfc9052#name-cose-key-map|COSE Key Map Specification}
+ */
 const convertX509PublicKeyToCOSE = x509Certificate => {
     let cosePublicKey = new Map();
 

@@ -1,5 +1,6 @@
 /**
- * 当解析备份标志（be/bs）时遇到无效组合（如单设备凭证却标记为已备份）抛出的错误;
+ * 当解析备份标志（be/bs）时遇到无效组合抛出的错误（如单设备凭证标记为已备份）;
+* - 查看定义:@see {@link InvalidBackupFlags}
  */
 class InvalidBackupFlags extends Error {
     constructor(message) {
@@ -11,8 +12,8 @@ class InvalidBackupFlags extends Error {
  *
  * - 凭证是否可以在多设备上使用
  * - 凭证是否已备份
- *
  * 无效的配置将抛出 `Error`
+ * - 查看定义:@see {@link parseBackupFlags}
  */
 const parseBackupFlags = ({ be, bs }) => {
     const credentialBackedUp = bs;
