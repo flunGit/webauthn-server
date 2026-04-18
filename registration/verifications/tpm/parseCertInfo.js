@@ -1,5 +1,5 @@
 import { TPM_ALG, TPM_ST } from './constants.js';
-import { toDataView } from '../../../helpers/iso/isoUint8Array.js';
+import { toDataView } from '../../../helpers/index.js';
 
 /**
  * 将 TPM 认证信息（certInfo）解析为可读的结构化数据

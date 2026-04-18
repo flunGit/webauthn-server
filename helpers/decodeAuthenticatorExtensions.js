@@ -1,4 +1,4 @@
-import { decodeFirst } from './iso/isoCBOR.js';
+import { decodeFirst } from './iso/index.js';
 
 
 

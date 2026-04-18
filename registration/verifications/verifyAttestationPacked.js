@@ -1,6 +1,6 @@
 import {
     isCOSEAlg, convertCertBufferToPEM, validateCertificatePath, getCertificateInfo, validateExtFIDOGenCEAAGUID,
-    verifySignature, isoUint8Array
+    verifySignature, concat
 } from '../../helpers/index.js';
 import { MetadataService } from '../../services/metadataService.js';
 import { verifyAttestationWithMetadata } from '../../metadata/verifyAttestationWithMetadata.js';
@@ -16,7 +16,7 @@ const verifyAttestationPacked = async options => {
     if (!alg) throw new Error('attestation 语句中未包含 alg (Packed)');
     if (!isCOSEAlg(alg)) throw new Error(`attestation 语句包含无效的 alg ${alg} (Packed)`);
 
-    const signatureBase = isoUint8Array.concat([authData, clientDataHash]);
+    const signatureBase = concat([authData, clientDataHash]);
     let verified = false;
 
     if (x5c) {

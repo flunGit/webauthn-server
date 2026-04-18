@@ -1,33 +1,32 @@
-import { isoBase64URL, isoUint8Array, generateChallenge, generateUserID } from '../helpers/index.js';
+import { fromBuffer, isBase64URL, trimPadding, utf8Tobytes, generateChallenge, generateUserID } from '../helpers/index.js';
 
-const { fromBuffer, isBase64URL, trimPadding } = isoBase64URL,
-    /**
-     * 支持的加密算法标识符
-     * 参见 https://w3c.github.io/webauthn/#sctn-alg-identifier
-     * 以及 https://www.iana.org/assignments/cose/cose.xhtml#algorithms
-     */
-    supportedCOSEAlgorithmIdentifiers = [
-        // EdDSA（放在首位以鼓励验证器优先使用此算法而非 ES256）
-        -8,
-        // 带 SHA-256 的 ECDSA
-        -7,
-        // 带 SHA-512 的 ECDSA
-        -36,
-        // 带 SHA-256 的 RSASSA-PSS
-        -37,
-        // 带 SHA-384 的 RSASSA-PSS
-        -38,
-        // 带 SHA-512 的 RSASSA-PSS
-        -39,
-        // 带 SHA-256 的 RSASSA-PKCS1-v1_5
-        -257,
-        // 带 SHA-384 的 RSASSA-PKCS1-v1_5
-        -258,
-        // 带 SHA-512 的 RSASSA-PKCS1-v1_5
-        -259,
-        // 带 SHA-1 的 RSASSA-PKCS1-v1_5（已弃用，仅为遗留支持）
-        -65535,
-    ],
+/**
+ * 支持的加密算法标识符
+ * 参见 https://w3c.github.io/webauthn/#sctn-alg-identifier
+ * 以及 https://www.iana.org/assignments/cose/cose.xhtml#algorithms
+ */
+const supportedCOSEAlgorithmIdentifiers = [
+    // EdDSA（放在首位以鼓励验证器优先使用此算法而非 ES256）
+    -8,
+    // 带 SHA-256 的 ECDSA
+    -7,
+    // 带 SHA-512 的 ECDSA
+    -36,
+    // 带 SHA-256 的 RSASSA-PSS
+    -37,
+    // 带 SHA-384 的 RSASSA-PSS
+    -38,
+    // 带 SHA-512 的 RSASSA-PSS
+    -39,
+    // 带 SHA-256 的 RSASSA-PKCS1-v1_5
+    -257,
+    // 带 SHA-384 的 RSASSA-PKCS1-v1_5
+    -258,
+    // 带 SHA-512 的 RSASSA-PKCS1-v1_5
+    -259,
+    // 带 SHA-1 的 RSASSA-PKCS1-v1_5（已弃用，仅为遗留支持）
+    -65535,
+],
 
     /**
      * 根据最新规范设置默认的身份验证器选择选项：
@@ -111,10 +110,10 @@ const { fromBuffer, isBase64URL, trimPadding } = isoBase64URL,
          * 保留对字符串类型 challenge 的支持
          */
         let _challenge = challenge;
-        if (typeof _challenge === 'string') _challenge = isoUint8Array.utf8Tobytes(_challenge);
+        if (typeof _challenge === 'string') _challenge = utf8Tobytes(_challenge);
 
         /**
-         * 显式禁止再使用字符串类型的 userID,因为下面的 `isoBase64URL.fromBuffer()` 会在字符串传入时返回空字符串！
+         * 显式禁止再使用字符串类型的 userID,因为下面的 `fromBuffer()` 会在字符串传入时返回空字符串！
          */
         if (typeof userID === 'string') throw new Error('不再支持使用字符串类型的 `userID`;');
 

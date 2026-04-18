@@ -1,4 +1,4 @@
-import { b64urlToUtf8 } from './iso/isoBase64URL.js';
+import { b64urlToUtf8 } from './iso/index.js';
 
 /**
  * 使测试期间能够模拟（stub）返回值

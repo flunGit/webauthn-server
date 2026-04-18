@@ -1,5 +1,5 @@
 import { AsnParser, OctetString } from '@peculiar/asn1-schema';
-import { areEqual, toHex } from './iso/isoUint8Array.js';
+import { areEqual, toHex } from './iso/index.js';
 
 /**
  *  attestation 证书扩展 OID：`id-fido-gen-ce-aaguid`

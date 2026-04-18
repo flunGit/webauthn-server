@@ -1,4 +1,4 @@
-import { isoCrypto } from './iso/index.js';
+import { verify } from './iso/index.js';
 import { decodeCredentialPublicKey } from './decodeCredentialPublicKey.js';
 import { convertX509PublicKeyToCOSE } from './convertX509PublicKeyToCOSE.js';
 
@@ -20,7 +20,7 @@ const _verifySignatureInternals = { stubThis: value => value },
         let cosePublicKey = new Map();
         if (credentialPublicKey) cosePublicKey = decodeCredentialPublicKey(credentialPublicKey);
         else if (x509Certificate) cosePublicKey = convertX509PublicKeyToCOSE(x509Certificate);
-        return _verifySignatureInternals.stubThis(isoCrypto.verify({
+        return _verifySignatureInternals.stubThis(verify({
             cosePublicKey, signature, data, shaHashOverride: hashAlgorithm
         }));
     };

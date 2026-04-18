@@ -1,4 +1,4 @@
-import { decodeFirst } from './iso/isoCBOR.js';
+import { decodeFirst } from './iso/index.js';
 
 /**
  * 使测试期间能够对返回值进行桩替换

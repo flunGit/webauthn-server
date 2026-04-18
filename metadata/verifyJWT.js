@@ -1,5 +1,5 @@
 import { convertX509PublicKeyToCOSE } from '../helpers/convertX509PublicKeyToCOSE.js';
-import { isoBase64URL, isoUint8Array } from '../helpers/iso/index.js';
+import { toBuffer, utf8Tobytes } from '../helpers/iso/index.js';
 import { isCOSEPublicKeyEC2, isCOSEPublicKeyRSA, COSEKEYS, COSEALG } from '../helpers/cose.js';
 import { verifyEC2 } from '../helpers/iso/isoCrypto/verifyEC2.js';
 import { verifyRSA } from '../helpers/iso/isoCrypto/verifyRSA.js';
@@ -15,7 +15,7 @@ import { verifyRSA } from '../helpers/iso/isoCrypto/verifyRSA.js';
  */
 const verifyJWT = (jwt, leafCert) => {
     const [header, payload, signature] = jwt.split('.'), certCOSE = convertX509PublicKeyToCOSE(leafCert),
-        data = isoUint8Array.utf8Tobytes(`${header}.${payload}`), signatureBytes = isoBase64URL.toBuffer(signature);
+        data = utf8Tobytes(`${header}.${payload}`), signatureBytes = toBuffer(signature);
 
     if (isCOSEPublicKeyEC2(certCOSE))
         return verifyEC2({ data, signature: signatureBytes, cosePublicKey: certCOSE, shaHashOverride: COSEALG.ES256 });

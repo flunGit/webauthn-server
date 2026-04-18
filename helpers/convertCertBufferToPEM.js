@@ -1,4 +1,4 @@
-import { isBase64URL, toBase64, isBase64, fromBuffer } from './iso/isoBase64URL.js';
+import { isBase64URL, toBase64, isBase64, fromBuffer } from './iso/index.js';
 
 /**
  * 将证书缓冲区转换为 OpenSSL 兼容的 PEM 文本格式;

@@ -1,4 +1,4 @@
-import { toHex } from './iso/isoUint8Array.js';
+import { toHex } from './iso/index.js';
 /**
  * 将 authData 中的 aaguid 缓冲区转换为 UUID 字符串
  * - 查看定义:@see {@link convertAAGUIDToString}

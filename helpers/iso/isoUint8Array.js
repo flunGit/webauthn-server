@@ -11,15 +11,15 @@ const fromHex = hex => {
 
     const byteStrings = hex.match(/.{1,2}/g) ?? [];
     return Uint8Array.from(byteStrings.map((byte) => parseInt(byte, 16)));
+};
+/**
+ * 将 UTF-8 字符串转换回 Uint8Array
+ * - 查看定义:@see {@link utf8Tobytes}
+ */
+const utf8Tobytes = utf8String => {
+    const encoder = new globalThis.TextEncoder();
+    return encoder.encode(utf8String);
 },
-    /**
-     * 将 UTF-8 字符串转换回 Uint8Array
-     * - 查看定义:@see {@link utf8Tobytes}
-     */
-    utf8Tobytes = utf8String => {
-        const encoder = new globalThis.TextEncoder();
-        return encoder.encode(utf8String);
-    },
 
     /**
      * 将 ASCII 字符串转换为 Uint8Array

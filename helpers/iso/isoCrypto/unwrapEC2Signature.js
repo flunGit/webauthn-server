@@ -37,24 +37,24 @@ const getSignatureComponentLength = crv => {
         else throw new Error(`无效的签名分量长度 ${bytes.length}，期望为 ${componentLength}`);
 
         return normalizedBytes;
-    },
-
-    /**
-     * 从 COSE 结构的 EC2 签名（ASN.1 格式）中提取并规范化 r/s 值
-     * - 查看定义:@see {@link unwrapEC2Signature}
-     * @param {BufferSource} signature - ASN.1 编码的 ECDSA 签名（ECDSA-Sig-Value）
-     * @param {number} crv - COSE 曲线标识符,用于确定分量长度
-     * @returns {Uint8Array} 拼接后的规范化签名（r || s）,长度为 2 * componentLength
-     * @throws 当解析失败或分量长度无效时抛出错误
-     */
-    unwrapEC2Signature = (signature, crv) => {
-        const parsedSignature = AsnParser.parse(signature, ECDSASigValue),
-            rBytes = new Uint8Array(parsedSignature.r), sBytes = new Uint8Array(parsedSignature.s),
-            componentLength = getSignatureComponentLength(crv),
-            rNormalizedBytes = toNormalizedBytes(rBytes, componentLength),
-            sNormalizedBytes = toNormalizedBytes(sBytes, componentLength),
-            finalSignature = concat([rNormalizedBytes, sNormalizedBytes,]);
-        return finalSignature;
     };
+
+/**
+ * 从 COSE 结构的 EC2 签名（ASN.1 格式）中提取并规范化 r/s 值
+ * - 查看定义:@see {@link unwrapEC2Signature}
+ * @param {BufferSource} signature - ASN.1 编码的 ECDSA 签名（ECDSA-Sig-Value）
+ * @param {number} crv - COSE 曲线标识符,用于确定分量长度
+ * @returns {Uint8Array} 拼接后的规范化签名（r || s）,长度为 2 * componentLength
+ * @throws 当解析失败或分量长度无效时抛出错误
+ */
+const unwrapEC2Signature = (signature, crv) => {
+    const parsedSignature = AsnParser.parse(signature, ECDSASigValue),
+        rBytes = new Uint8Array(parsedSignature.r), sBytes = new Uint8Array(parsedSignature.s),
+        componentLength = getSignatureComponentLength(crv),
+        rNormalizedBytes = toNormalizedBytes(rBytes, componentLength),
+        sNormalizedBytes = toNormalizedBytes(sBytes, componentLength),
+        finalSignature = concat([rNormalizedBytes, sNormalizedBytes,]);
+    return finalSignature;
+};
 
 export { unwrapEC2Signature };

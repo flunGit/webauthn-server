@@ -1,4 +1,4 @@
-import { getRandomValues } from './iso/isoCrypto/index.js';
+import { getRandomValues } from './iso/index.js';
 
 /**
  * 使得在测试过程中可以模拟（stub）该函数的返回值

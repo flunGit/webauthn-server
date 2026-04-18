@@ -1,4 +1,4 @@
-import { getRandomValues } from './iso/isoCrypto/index.js';
+import { getRandomValues } from './iso/index.js';
 
 /**
  * 使得在测试期间可以存根（stub）返回值

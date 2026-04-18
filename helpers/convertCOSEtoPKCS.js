@@ -1,5 +1,4 @@
-import { decodeFirst } from './iso/isoCBOR.js';
-import { concat } from './iso/isoUint8Array.js';
+import { decodeFirst, concat } from './iso/index.js';
 import { COSEKEYS } from './cose.js';
 
 /**

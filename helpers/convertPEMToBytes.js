@@ -1,4 +1,4 @@
-import { toBuffer } from './iso/isoBase64URL.js';
+import { toBuffer } from './iso/index.js';
 
 /**
  * 将 PEM 格式的证书转换为字节数组

@@ -1,6 +1,6 @@
 /**
  * 当解析备份标志（be/bs）时遇到无效组合抛出的错误（如单设备凭证标记为已备份）;
-* - 查看定义:@see {@link InvalidBackupFlags}
+ * - 查看定义:@see {@link InvalidBackupFlags}
  */
 class InvalidBackupFlags extends Error {
     constructor(message) {

@@ -1,5 +1,5 @@
 import { TPM_ALG, TPM_ECC_CURVE } from './constants.js';
-import { toDataView, concat } from '../../../helpers/iso/isoUint8Array.js';
+import { toDataView, concat } from '../../../helpers/iso/index.js';
 
 /**
  * 解析 TPM 证明中的 pubArea 缓冲区

@@ -1,4 +1,4 @@
-import { b64urlToUtf8 } from '../helpers/iso/isoBase64URL.js';
+import { b64urlToUtf8 } from '../helpers/iso/index.js';
 /**
  * 将 JWT 处理为 JavaScript 友好的数据结构
  */

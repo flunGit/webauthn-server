@@ -4,7 +4,7 @@ import {
 } from '@peculiar/asn1-x509';
 import {
     decodeCredentialPublicKey, toHash, convertCertBufferToPEM, validateCertificatePath, getCertificateInfo,
-    verifySignature, isoUint8Array, validateExtFIDOGenCEAAGUID, COSEKEYS, COSEALG, isCOSEAlg, isCOSEPublicKeyRSA,
+    verifySignature, areEqual, concat, validateExtFIDOGenCEAAGUID, COSEKEYS, COSEALG, isCOSEAlg, isCOSEPublicKeyRSA,
     isCOSEPublicKeyEC2
 } from '../../../helpers/index.js';
 import { MetadataService } from '../../../services/metadataService.js';
@@ -13,53 +13,51 @@ import { TPM_ECC_CURVE_COSE_CRV_MAP, TPM_MANUFACTURERS } from './constants.js';
 import { parseCertInfo } from './parseCertInfo.js';
 import { parsePubArea } from './parsePubArea.js';
 
-const { areEqual, concat } = isoUint8Array,
+/**
+ * 包含从 subjectAlternativeName 扩展中提取 TPM 特定值的逻辑
+ */
+const getTcgAtTpmValues = root => {
+    const oidManufacturer = '2.23.133.2.1', oidModel = '2.23.133.2.2', oidVersion = '2.23.133.2.3';
+    let tcgAtTpmManufacturer, tcgAtTpmModel, tcgAtTpmVersion;
 
     /**
-     * 包含从 subjectAlternativeName 扩展中提取 TPM 特定值的逻辑
+     * 遍历以下两种可能的结构：
+     *
+     * （符合规范的正常结构）
+     * https://trustedcomputinggroup.org/wp-content/uploads/TCG_IWG_EKCredentialProfile_v2p3_r2_pub.pdf (第33页)
+     * Name [
+     *   RelativeDistinguishedName [
+     *     AttributeTypeAndValue { type, value }
+     *   ]
+     *   RelativeDistinguishedName [
+     *     AttributeTypeAndValue { type, value }
+     *   ]
+     *   RelativeDistinguishedName [
+     *     AttributeTypeAndValue { type, value }
+     *   ]
+     * ]
+     *
+     * （不符合规范的非正常结构）
+     * Name [
+     *   RelativeDistinguishedName [
+     *     AttributeTypeAndValue { type, value }
+     *     AttributeTypeAndValue { type, value }
+     *     AttributeTypeAndValue { type, value }
+     *   ]
+     * ]
+     *
+     * 两种结构在实际环境中都出现过,都需要支持
      */
-    getTcgAtTpmValues = root => {
-        const oidManufacturer = '2.23.133.2.1', oidModel = '2.23.133.2.2', oidVersion = '2.23.133.2.3';
-        let tcgAtTpmManufacturer, tcgAtTpmModel, tcgAtTpmVersion;
-
-        /**
-         * 遍历以下两种可能的结构：
-         *
-         * （符合规范的正常结构）
-         * https://trustedcomputinggroup.org/wp-content/uploads/TCG_IWG_EKCredentialProfile_v2p3_r2_pub.pdf (第33页)
-         * Name [
-         *   RelativeDistinguishedName [
-         *     AttributeTypeAndValue { type, value }
-         *   ]
-         *   RelativeDistinguishedName [
-         *     AttributeTypeAndValue { type, value }
-         *   ]
-         *   RelativeDistinguishedName [
-         *     AttributeTypeAndValue { type, value }
-         *   ]
-         * ]
-         *
-         * （不符合规范的非正常结构）
-         * Name [
-         *   RelativeDistinguishedName [
-         *     AttributeTypeAndValue { type, value }
-         *     AttributeTypeAndValue { type, value }
-         *     AttributeTypeAndValue { type, value }
-         *   ]
-         * ]
-         *
-         * 两种结构在实际环境中都出现过,都需要支持
-         */
-        root.forEach(relName => {
-            relName.forEach(attr => {
-                if (attr.type === oidManufacturer) tcgAtTpmManufacturer = attr.value.toString();
-                else if (attr.type === oidModel) tcgAtTpmModel = attr.value.toString();
-                else if (attr.type === oidVersion) tcgAtTpmVersion = attr.value.toString();
-            });
+    root.forEach(relName => {
+        relName.forEach(attr => {
+            if (attr.type === oidManufacturer) tcgAtTpmManufacturer = attr.value.toString();
+            else if (attr.type === oidModel) tcgAtTpmModel = attr.value.toString();
+            else if (attr.type === oidVersion) tcgAtTpmVersion = attr.value.toString();
         });
+    });
 
-        return { tcgAtTpmManufacturer, tcgAtTpmModel, tcgAtTpmVersion };
-    },
+    return { tcgAtTpmManufacturer, tcgAtTpmModel, tcgAtTpmVersion };
+},
 
     /**
      * 将 TPM 特定的 SHA 算法 ID 转换为 COSE 对应的算法 ID;

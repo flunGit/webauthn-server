@@ -1,4 +1,4 @@
-import { decodeFirst } from './iso/isoCBOR.js';
+import { decodeFirst } from './iso/index.js';
 
 /**
  * 使得在测试期间可以模拟（stub）返回值

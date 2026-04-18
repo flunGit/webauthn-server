@@ -18,8 +18,8 @@ import { verifyRSA } from './verifyRSA.js';
  * ```
  * - 查看定义:@see {@link digest}
  */
-module './isoBase64URL.js' {
-    export * from './isoBase64URL.js';
+module './digest.js' {
+    export * from './digest.js';
 }
 
 // ================================= getRandomValues.js =================================
