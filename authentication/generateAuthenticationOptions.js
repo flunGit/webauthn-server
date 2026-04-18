@@ -1,19 +1,25 @@
 import { fromBuffer, isBase64URL, trimPadding, utf8Tobytes, generateChallenge } from '../helpers/index.js';
 
 /**
- * 生成用于身份验证器认证的参数,该参数可直接传递给 `navigator.credentials.get(...)`
- *
- * **选项说明：**
- *
- * @param rpID - 有效的域名（`https://` 之后的部分）
- * @param allowCredentials **（可选）** - 用户之前注册过的身份验证器列表（如有）,如果未提供,客户端将询问用户选择要使用的凭证
- * @param challenge **（可选）** - 随机值，身份验证器需要对其签名并返回以完成用户认证;默认会生成一个随机值
- * @param timeout **（可选）** - 用户完成认证所允许的最长时间（毫秒）,默认为 `60000`
- * @param userVerification **（可选）** - 在作为双因素认证流程的一部分进行断言时设置为 `'discouraged'`
- *  否则根据需要设置为 `'preferred'` 或 `'required'`;默认为 `"preferred"`
- * @param extensions **（可选）** - 身份验证器或浏览器在认证过程中应使用的附加插件/扩展
+ * 生成用于身份验证器认证的参数
+ * - 查看定义:@see {@link generateAuthenticationOptions}
+ * @param {Object} options - 配置选项
+ * @param {string} options.rpID - 有效的域名（`https://` 之后的部分）
+ * @param {BufferSource} [options.challenge] - 随机挑战值
+ * @param {PublicKeyCredentialDescriptor[]} [options.allowCredentials] - 之前注册过的凭证列表
+ * @param {number} [options.timeout] - 超时毫秒数，默认 60000
+ * @param {UserVerificationRequirement} [options.userVerification] - 用户验证要求
+ * @param {AuthenticationExtensionsClientInputs} [options.extensions] - 扩展项
+ * @returns {Promise<{
+ *   rpId: string,
+ *   challenge: string,
+ *   allowCredentials: PublicKeyCredentialDescriptor[],
+ *   timeout: number,
+ *   userVerification: UserVerificationRequirement,
+ *   extensions: AuthenticationExtensionsClientInputs
+ * }>}
  */
-generateAuthenticationOptions = async options => {
+const generateAuthenticationOptions = async options => {
     const {
         allowCredentials, challenge = await generateChallenge(), timeout = 60000,
         userVerification = 'preferred', extensions, rpID,

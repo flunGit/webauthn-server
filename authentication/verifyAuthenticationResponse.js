@@ -5,19 +5,46 @@ import {
 
 /**
  * 验证用户是否合法完成了认证流程
+ * - 查看定义:@see {@link verifyAuthenticationResponse}
+ * @param {Object} options - 配置选项
+ * @param {Object} options.response - 由 **flun-webauthn-browser** 的 `startAuthentication()` 返回的响应
+ * @param {string} options.response.id - 凭证 ID（base64url 字符串）
+ * @param {string} options.response.rawId - 原始凭证 ID（应与 `id` 相同）
+ * @param {'public-key'} options.response.type - 凭证类型，必须为 `"public-key"`
+ * @param {Object} options.response.response - 认证断言响应数据
+ * @param {string} options.response.response.clientDataJSON - 客户端数据 JSON（字符串）
+ * @param {string} options.response.response.authenticatorData - 认证器数据（base64url 字符串）
+ * @param {string} options.response.response.signature - 签名（base64url 字符串）
+ * @param {string} [options.response.response.userHandle] - 用户句柄（可选）
  *
- * **选项说明：**
+ * @param {string|Function} options.expectedChallenge - Base64URL 编码的 `options.challenge`,即 `generateAuthenticationOptions()`返回的值；
+ *                                                       也可传入自定义验证函数 `(challenge: string) => boolean | Promise<boolean>`
+ * @param {string|string[]} options.expectedOrigin - 认证应发生的网站 URL（或 URL 数组）
+ * @param {string|string[]} options.expectedRPID - 认证选项中指定的 RP ID（或 ID 数组）
+ * @param {Object} options.credential - 与认证响应中的 `id` 对应的内部存储凭证
+ * @param {string} options.credential.id - 凭证 ID
+ * @param {BufferSource} options.credential.publicKey - 凭证公钥（CryptoKey 或 BufferSource）
+ * @param {number} options.credential.counter - 上一次记录的签名计数器值
  *
- * @param response - 由 **flun-webauthn-browser** 的 `startAuthentication()` 返回的响应
- * @param expectedChallenge - Base64URL 编码的 `options.challenge`,即 `generateAuthenticationOptions()` 返回的值
- * @param expectedOrigin - 认证应发生的网站 URL（或 URL 数组）
- * @param expectedRPID - 认证选项中指定的 RP ID（或 ID 数组）
- * @param credential - 与认证响应中的 `id` 对应的内部 {@link WebAuthnCredential}
- * @param expectedType **（可选）** - 期望的响应类型（'webauthn.get'）
- * @param requireUserVerification **（可选）** - 强制要求身份验证器进行用户验证（通过 PIN、指纹等）;默认为 `true`
- * @param advancedFIDOConfig **（可选）** - 用于满足更严格的 FIDO 依赖方（RP）功能要求的选项
- * @param advancedFIDOConfig.userVerification **（可选）** - 启用替代规则来评估身份验证器数据中的用户存在（UP）
- * 和用户验证（UV）标志：除非此值为 `"required"`,否则 UV（和 UP）标志为可选
+ * @param {string|string[]} [options.expectedType='webauthn.get'] - 期望的响应类型（例如 `'webauthn.get'`）
+ * @param {boolean} [options.requireUserVerification=true] - 强制要求身份验证器进行用户验证（通过 PIN、指纹等）
+ * @param {Object} [options.advancedFIDOConfig] - 用于满足更严格的 FIDO 依赖方（RP）功能要求的选项
+ * @param {'required'|'preferred'|'discouraged'} [options.advancedFIDOConfig.userVerification] - 启用替代规则来评估认证器数据中的
+ *                                                                                              用户存在（UP）和用户验证（UV）标志
+ *
+ * @returns {Promise<{
+ *   verified: boolean,
+ *   authenticationInfo: {
+ *     rpID: string,
+ *     newCounter: number,
+ *     credentialID: string,
+ *     userVerified: boolean,
+ *     credentialDeviceType: 'singleDevice' | 'multiDevice',
+ *     credentialBackedUp: boolean,
+ *     authenticatorExtensionResults: AuthenticationExtensionsAuthenticatorOutputs,
+ *     origin: string
+ *   }
+ * }>} 验证结果,包含签名是否有效以及认证信息
  */
 const verifyAuthenticationResponse = async options => {
     const {
