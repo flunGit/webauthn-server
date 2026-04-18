@@ -13,7 +13,7 @@ const fromHex = hex => {
     return Uint8Array.from(byteStrings.map((byte) => parseInt(byte, 16)));
 },
     /**
-     * 将 UTF-8 字符串转换回字节数组
+     * 将 UTF-8 字符串转换回 Uint8Array
      */
     utf8Tobytes = utf8String => {
         const encoder = new globalThis.TextEncoder();
