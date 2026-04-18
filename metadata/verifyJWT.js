@@ -15,7 +15,7 @@ import { verifyRSA } from '../helpers/iso/isoCrypto/verifyRSA.js';
  */
 const verifyJWT = (jwt, leafCert) => {
     const [header, payload, signature] = jwt.split('.'), certCOSE = convertX509PublicKeyToCOSE(leafCert),
-        data = isoUint8Array.fromUTF8String(`${header}.${payload}`), signatureBytes = isoBase64URL.toBuffer(signature);
+        data = isoUint8Array.utf8Tobytes(`${header}.${payload}`), signatureBytes = isoBase64URL.toBuffer(signature);
 
     if (isCOSEPublicKeyEC2(certCOSE))
         return verifyEC2({ data, signature: signatureBytes, cosePublicKey: certCOSE, shaHashOverride: COSEALG.ES256 });

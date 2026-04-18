@@ -1,4 +1,4 @@
-import { toUTF8String } from './iso/isoBase64URL.js';
+import { b64urlToUtf8 } from './iso/isoBase64URL.js';
 
 /**
  * 使测试期间能够模拟（stub）返回值
@@ -12,7 +12,7 @@ const _decodeClientDataJSONInternals = { stubThis: value => value },
      * - 查看定义:@see {@link decodeClientDataJSON}
      */
     decodeClientDataJSON = data => {
-        const toString = toUTF8String(data), clientData = JSON.parse(toString);
+        const toString = b64urlToUtf8(data), clientData = JSON.parse(toString);
         return _decodeClientDataJSONInternals.stubThis(clientData);
     };
 

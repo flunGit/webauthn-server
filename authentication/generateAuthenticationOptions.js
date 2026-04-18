@@ -24,7 +24,7 @@ const { fromBuffer, isBase64URL, trimPadding } = isoBase64URL,
          * 保留对 `string` 类型 challenge 值的支持
          */
         let _challenge = challenge;
-        if (typeof _challenge === 'string') _challenge = isoUint8Array.fromUTF8String(_challenge);
+        if (typeof _challenge === 'string') _challenge = isoUint8Array.utf8Tobytes(_challenge);
 
         return {
             rpId: rpID,

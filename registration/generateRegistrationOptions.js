@@ -111,7 +111,7 @@ const { fromBuffer, isBase64URL, trimPadding } = isoBase64URL,
          * 保留对字符串类型 challenge 的支持
          */
         let _challenge = challenge;
-        if (typeof _challenge === 'string') _challenge = isoUint8Array.fromUTF8String(_challenge);
+        if (typeof _challenge === 'string') _challenge = isoUint8Array.utf8Tobytes(_challenge);
 
         /**
          * 显式禁止再使用字符串类型的 userID,因为下面的 `isoBase64URL.fromBuffer()` 会在字符串传入时返回空字符串！

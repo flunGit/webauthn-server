@@ -1,5 +1,5 @@
 import { toHash } from './toHash.js';
-import { fromASCIIString, areEqual } from './iso/isoUint8Array.js';
+import { asciiToBytes, areEqual } from './iso/isoUint8Array.js';
 
 /**
  * 当响应中的 RP ID 哈希值与所有预期的 RP ID 均不匹配时抛出的错误;
@@ -21,7 +21,7 @@ const matchExpectedRPID = async (rpIDHash, expectedRPIDs) => {
     try {
         const matchedRPID = await Promise.any(expectedRPIDs.map(expected => {
             return new Promise((resolve, reject) => {
-                toHash(fromASCIIString(expected)).then(expectedRPIDHash => {
+                toHash(asciiToBytes(expected)).then(expectedRPIDHash => {
                     if (areEqual(rpIDHash, expectedRPIDHash)) resolve(expected);
                     else reject();
                 });

@@ -4,7 +4,7 @@ import { isoUint8Array, isoCrypto } from './iso/index.js';
  * - 查看定义:@see {@link toHash}
  */
 const toHash = (data, algorithm = -7) => {
-    if (typeof data === 'string') data = isoUint8Array.fromUTF8String(data);
+    if (typeof data === 'string') data = isoUint8Array.utf8Tobytes(data);
     const digest = isoCrypto.digest(data, algorithm);
     return digest;
 };

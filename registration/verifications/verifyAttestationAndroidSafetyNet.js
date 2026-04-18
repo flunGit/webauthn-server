@@ -5,7 +5,7 @@ import {
 import { MetadataService } from '../../services/metadataService.js';
 import { verifyAttestationWithMetadata } from '../../metadata/verifyAttestationWithMetadata.js';
 
-const { toUTF8String, concat, fromUTF8String } = isoUint8Array, { toUTF8String: b64toUTF8, fromBuffer, toBuffer } = isoBase64URL,
+const { bytesToUtf8, concat, utf8Tobytes } = isoUint8Array, { b64urlToUtf8, fromBuffer, toBuffer } = isoBase64URL,
     /**
      * 验证格式为 'android-safetynet' 的 attestation 响应
      */
@@ -19,9 +19,9 @@ const { toUTF8String, concat, fromUTF8String } = isoUint8Array, { toUTF8String: 
         if (!response) throw new Error('authenticator 的 attStmt 中未包含 response (SafetyNet)');
 
         // 准备验证 JWT
-        const jwt = toUTF8String(response), jwtParts = jwt.split('.'),
-            HEADER = JSON.parse(b64toUTF8(jwtParts[0])),
-            PAYLOAD = JSON.parse(b64toUTF8(jwtParts[1])), SIGNATURE = jwtParts[2],
+        const jwt = bytesToUtf8(response), jwtParts = jwt.split('.'),
+            HEADER = JSON.parse(b64urlToUtf8(jwtParts[0])),
+            PAYLOAD = JSON.parse(b64urlToUtf8(jwtParts[1])), SIGNATURE = jwtParts[2],
 
             /**
              * 开始验证 PAYLOAD
@@ -84,7 +84,7 @@ const { toUTF8String, concat, fromUTF8String } = isoUint8Array, { toUTF8String: 
         /**
          * 开始验证 Signature
          */
-        const signatureBaseBuffer = fromUTF8String(`${jwtParts[0]}.${jwtParts[1]}`),
+        const signatureBaseBuffer = utf8Tobytes(`${jwtParts[0]}.${jwtParts[1]}`),
             signatureBuffer = toBuffer(SIGNATURE),
             verified = await verifySignature({
                 signature: signatureBuffer, data: signatureBaseBuffer, x509Certificate: leafCertBuffer
