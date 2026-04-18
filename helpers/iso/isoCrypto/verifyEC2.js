@@ -5,7 +5,16 @@ import { importKey } from './importKey.js';
 import { getWebCrypto } from './getWebCrypto.js';
 
 /**
- * 使用 EC2 公钥验证签名
+ * 使用 EC2（椭圆曲线）COSE 公钥验证 ECDSA 签名
+ *
+ * 查看定义:@see {@link verifyEC2}
+ * @param {Object} opts - 验证选项
+ * @param {Map} opts.cosePublicKey - COSE 格式的 EC2 公钥，需包含 alg、crv、x、y 字段
+ * @param {BufferSource} opts.signature - 待验证的签名（已规范化，r||s 拼接格式）
+ * @param {BufferSource} opts.data - 原始签名数据
+ * @param {string} [opts.shaHashOverride] - 可选，强制使用的哈希算法名（如 'SHA-256'），优先级高于公钥中的 alg
+ * @returns {Promise<boolean>} 验证通过返回 true，否则 false
+ * @throws {Error} 当公钥缺少必要参数、曲线不支持或导入密钥失败时抛出错误
  */
 const verifyEC2 = async opts => {
     const { cosePublicKey, signature, data, shaHashOverride } = opts, WebCrypto = await getWebCrypto(),

@@ -2,6 +2,7 @@ import { COSEALG } from '../../cose.js';
 
 /**
  * 将 COSE 算法标识符转换为 WebCrypto API 所期望的对应密钥算法字符串值
+ * - 查看定义:@see {@link mapCoseAlgToWebCryptoKeyAlgName}
  */
 const mapCoseAlgToWebCryptoKeyAlgName = alg => {
     if ([COSEALG.EdDSA].indexOf(alg) >= 0) return 'Ed25519';

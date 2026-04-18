@@ -5,7 +5,15 @@ import { verifyOKP } from './verifyOKP.js';
 import { unwrapEC2Signature } from './unwrapEC2Signature.js';
 
 /**
- * 使用公钥验证签名,支持 EC2 和 RSA 公钥;
+ * 使用 COSE 格式公钥验证签名，支持 EC2、RSA 和 OKP 密钥类型
+  * - 查看定义:@see {@link verify}
+ * @param {Object} opts - 验证选项
+ * @param {Map} opts.cosePublicKey - COSE 格式的公钥（包含必要的密钥参数）
+ * @param {BufferSource} opts.signature - 待验证的签名（原始 ASN.1 或 COSE 格式）
+ * @param {BufferSource} opts.data - 已签名的原始数据
+ * @param {string} [opts.shaHashOverride] - 可选，覆盖默认的哈希算法（如 'SHA-256'）
+ * @returns {Promise<boolean>} 验证通过返回 true，否则 false
+ * @throws {Error} 当公钥类型不支持、曲线未知或签名格式无效时抛出错误
  */
 const verify = opts => {
     const { cosePublicKey, signature, data, shaHashOverride } = opts;

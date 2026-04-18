@@ -4,7 +4,15 @@ import { importKey } from './importKey.js';
 import { getWebCrypto } from './getWebCrypto.js';
 
 /**
- * 验证 OKP（Octet Key Pair）类型的 COSE 签名
+ * 使用 OKP（Octet Key Pair，如 Ed25519）COSE 公钥验证签名
+ *
+ * - 查看定义:@see {@link verifyOKP}
+ * @param {Object} opts - 验证选项
+ * @param {Map} opts.cosePublicKey - COSE 格式的 OKP 公钥，需包含 alg、crv、x 字段
+ * @param {BufferSource} opts.signature - 待验证的签名（原始字节序列）
+ * @param {BufferSource} opts.data - 原始签名数据
+ * @returns {Promise<boolean>} 验证通过返回 true，否则 false
+ * @throws {Error} 当公钥缺少必要字段、算法无效或曲线不支持时抛出错误
  */
 const verifyOKP = async opts => {
     const { cosePublicKey, signature, data } = opts, WebCrypto = await getWebCrypto(),

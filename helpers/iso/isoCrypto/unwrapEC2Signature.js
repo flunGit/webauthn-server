@@ -4,36 +4,30 @@ import { COSECRV } from '../../cose.js';
 import { concat } from '../isoUint8Array.js';
 
 /**
- * SubtleCrypto Web Crypto API 要求 ECDSA 签名的 `r` 和 `s` 值根据曲线阶数编码为特定的长度;
- * 此函数返回每个签名分量（`r` 和 `s`）所期望的字节长度;
- *
- * 参见 <https://www.w3.org/TR/WebCryptoAPI/#ecdsa-operations>
+ * 根据曲线类型返回 ECDSA 签名分量（r/s）的标准字节长度
+ * @param {number} crv - COSE 曲线标识符（如 COSECRV.P256）
+ * @returns {number} 签名分量的字节长度
+ * @throws 当曲线类型不支持时抛出错误
  */
 const getSignatureComponentLength = crv => {
     switch (crv) {
-        case COSECRV.P256:
-            return 32;
-        case COSECRV.P384:
-            return 48;
-        case COSECRV.P521:
-            return 66;
+        case COSECRV.P256: return 32;
+        case COSECRV.P384: return 48;
+        case COSECRV.P521: return 66;
         default: throw new Error(`非预期的 COSE crv 值 ${crv} (EC2)`);
     }
 },
 
     /**
-     * 将 ASN.1 整数表示转换为指定长度 `n` 的字节序列。
-     *
-     * DER 将整数编码为大端字节数组，采用尽可能小的表示，并且需要一个前导 `0` 字节来区分负数和正数。
-     * 这意味着 `r` 和 `s` 的字节长度可能不是 SubtleCrypto Web Crypto API 所期望的长度：
-     * 如果存在前导 `0`，则可能比预期短；如果存在前导 `1` 位，则可能长一个字节。
-     *
-     * 参见 <https://www.itu.int/rec/T-REC-X.690-202102-I/en>
-     * 参见 <https://www.w3.org/TR/WebCryptoAPI/#ecdsa-operations>
+     * 将 ASN.1 DER 编码的整数转换为 Web Crypto API 要求的固定长度字节序列
+     * @param {Uint8Array} bytes - DER 编码的整数（可能带有前导 0x00）
+     * @param {number} componentLength - 目标长度（字节）
+     * @returns {Uint8Array} 规范化后的固定长度字节序列
+     * @throws 当输入字节长度无效时抛出错误
      */
     toNormalizedBytes = (bytes, componentLength) => {
         let normalizedBytes;
-        // 如果字节长度短于预期，需要用前导 `0` 进行填充。
+        // 如果字节长度短于预期,需要用前导 `0` 进行填充;
         if (bytes.length < componentLength)
             normalizedBytes = new Uint8Array(componentLength), normalizedBytes.set(bytes, componentLength - bytes.length);
         else if (bytes.length === componentLength) normalizedBytes = bytes;
@@ -46,10 +40,13 @@ const getSignatureComponentLength = crv => {
     },
 
     /**
-    * 在 WebAuthn 中，EC2 签名被包装在 ASN.1 结构中，因此我们需要从中提取出 r 和 s;
-    *
-    * 参见 https://www.w3.org/TR/webauthn-2/#sctn-signature-attestation-types
-    */
+     * 从 COSE 结构的 EC2 签名（ASN.1 格式）中提取并规范化 r/s 值
+     * - 查看定义:@see {@link unwrapEC2Signature}
+     * @param {BufferSource} signature - ASN.1 编码的 ECDSA 签名（ECDSA-Sig-Value）
+     * @param {number} crv - COSE 曲线标识符,用于确定分量长度
+     * @returns {Uint8Array} 拼接后的规范化签名（r || s）,长度为 2 * componentLength
+     * @throws 当解析失败或分量长度无效时抛出错误
+     */
     unwrapEC2Signature = (signature, crv) => {
         const parsedSignature = AsnParser.parse(signature, ECDSASigValue),
             rBytes = new Uint8Array(parsedSignature.r), sBytes = new Uint8Array(parsedSignature.s),

@@ -1,6 +1,9 @@
 import { Certificate } from '@peculiar/asn1-x509';
 import type { Uint8Array_ } from '../types/index.js';
-import { isoBase64URL, isoCBOR, isoCrypto, isoUint8Array } from './iso/index.js';
+import {
+    digest, getRandomValues, verify, fromBuffer, utf8Tob64url, toBuffer, toBase64, b64urlToUtf8, isBase64,
+    isBase64URL, trimPadding, fromHex, utf8Tobytes, asciiToBytes, toHex, toDataView, bytesToUtf8, areEqual, concat
+} from './iso/index.js';
 import { convertAAGUIDToString } from './convertAAGUIDToString.js';
 import { convertCertBufferToPEM } from './convertCertBufferToPEM.js';
 import { convertCOSEtoPKCS } from './convertCOSEtoPKCS.js';
@@ -472,9 +475,28 @@ module './verifySignature.js' {
 // ================================= 主模块聚合导出 =================================
 /**
  * ```js
- * // 文件导出内容:
- * // 命名空间
- * const isoBase64URL, isoCBOR, isoCrypto, isoUint8Array;
+ * // iso目录工具:
+ * digest();                     // 生成所提供数据的摘要;
+ * getRandomValues();            // 使用与数组长度相等的随机字节填充传入的字节数组;
+ * verify();                     // 使用公钥验证签名,支持 EC2 和 RSA 公钥;
+ * fromBuffer();                 // 将给定的 ArrayBuffer编码为 Base64URL
+ * utf8Tob64url();               // 将 UTF-8字符串编码为 base64url
+ * toBuffer();                   // 将 Base64URL编码的字符串解码为 ArrayBuffer
+ * toBase64();                   // 将 Base64URL字符串转换为标准 base64
+ * b64urlToUtf8();               // 将 base64url字符串解码为其原始的 UTF-8
+ * isBase64();                   // 检查是否为 base64编码
+ * isBase64URL();                // 检查是否为 base64url编码
+ * trimPadding();                // 移除 base64url 编码字符串中可选的填充字符
+ * decodeFirst();                // 解码 CBOR 数据的第一个项
+ * encode();                     // 将数据编码为 CBOR
+ * fromHex();                    // 从十六进制字符串创建 Uint8Array
+ * utf8Tobytes();                // 将 UTF-8 字符串编码为 Uint8Array
+ * asciiToBytes();               // 将 ASCII 字符串转换为 Uint8Array
+ * toHex();                      // 转换为十六进制字符串
+ * toDataView();                 // 转换为 DataView 对象
+ * bytesToUtf8();                // 将 Uint8Array 解码为 UTF-8 字符串
+ * areEqual();                   // 判断两个 Uint8Array 是否相等
+ * concat();                     // 合并多个 Uint8Array
  *
  * verifyMDSBlob();              // 对 BLOB 进行真实性与完整性验证
  * // 转换函数
@@ -523,7 +545,10 @@ module './verifySignature.js' {
  * ```
  * ---
  * - 查看定义@see :
- * - 命名空间:{@link isoBase64URL}、{@link isoCBOR}、{@link isoUint8Array }、{@link isoCrypto}
+ * - iso目录工具:{@link digest}、{@link getRandomValues}、{@link verify }、{@link fromBuffer}、{@link utf8Tob64url}、
+ * {@link toBuffer}、{@link toBase64}、{@link b64urlToUtf8}、{@link isBase64}、{@link isBase64URL}、{@link trimPadding}、
+ * {@link fromHex}、{@link utf8Tobytes}、{@link asciiToBytes}、{@link toHex}、{@link toDataView}、 {@link bytesToUtf8}、
+ * {@link areEqual}、{@link concat}
  * - BLOB验证函数:{@link verifyMDSBlob};
  * - 转换函数:{@link convertAAGUIDToString}、{@link convertCertBufferToPEM}、{@link convertCOSEtoPKCS}、
  *  {@link convertPEMToBytes}、{@link convertX509PublicKeyToCOSE}

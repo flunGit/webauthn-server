@@ -2,6 +2,7 @@ import { COSEALG } from '../../cose.js';
 
 /**
  * 将 COSE 算法 ID 转换为 WebCrypto API 所期望的对应字符串值
+ * - 查看定义:@see {@link mapCoseAlgToWebCryptoAlg}
  */
 const mapCoseAlgToWebCryptoAlg = alg => {
     if ([COSEALG.RS1].indexOf(alg) >= 0) return 'SHA-1';

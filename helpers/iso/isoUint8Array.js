@@ -1,6 +1,6 @@
 /**
  * 将十六进制字符串转换为 Uint8Array;
- *
+ * - 查看定义:@see {@link fromBuffer}
  * 替代 `Buffer.from('...', 'hex')`
  */
 const fromHex = hex => {
@@ -14,6 +14,7 @@ const fromHex = hex => {
 },
     /**
      * 将 UTF-8 字符串转换回 Uint8Array
+     * - 查看定义:@see {@link utf8Tobytes}
      */
     utf8Tobytes = utf8String => {
         const encoder = new globalThis.TextEncoder();
@@ -22,15 +23,15 @@ const fromHex = hex => {
 
     /**
      * 将 ASCII 字符串转换为 Uint8Array
+     * - 查看定义:@see {@link asciiToBytes}
      */
     asciiToBytes = value => {
         return Uint8Array.from(value.split('').map((x) => x.charCodeAt(0)));
     },
 
     /**
-     * 将 Uint8Array 转换为十六进制字符串;
-     *
-     * 替代 `Buffer.toString('hex')`
+     * 将 Uint8Array 转换为十六进制字符串,替代 `Buffer.toString('hex')`;
+     * - 查看定义:@see {@link toHex}
      */
     toHex = array => {
         const hexParts = Array.from(array, (i) => i.toString(16).padStart(2, '0'));
@@ -39,6 +40,7 @@ const fromHex = hex => {
 
     /**
      * 创建一个 DataView，以便在解析 Uint8Array 的字节时可以灵活切分
+     * - 查看定义:@see {@link toDataView}
      */
     toDataView = array => {
         return new DataView(array.buffer, array.byteOffset, array.length);
@@ -46,6 +48,7 @@ const fromHex = hex => {
 
     /**
      * 将字节数组转换为 UTF-8 字符串
+     * - 查看定义:@see {@link bytesToUtf8}
      */
     bytesToUtf8 = array => {
         const decoder = new globalThis.TextDecoder('utf-8');
@@ -54,6 +57,7 @@ const fromHex = hex => {
 
     /**
      * 确保两个 Uint8Array 深度相等
+     * - 查看定义:@see {@link areEqual}
      */
     areEqual = (array1, array2) => {
         if (array1.length != array2.length) return false;
@@ -62,6 +66,7 @@ const fromHex = hex => {
 
     /**
      * 将多个 Uint8Array 合并成一个 Uint8Array
+     * - 查看定义:@see {@link concat}
      */
     concat = arrays => {
         let pointer = 0;

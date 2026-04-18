@@ -2,7 +2,7 @@ import { getWebCrypto } from './getWebCrypto.js';
 
 /**
  * 使用与数组长度相等的随机字节填充传入的字节数组;
- *
+ * - 查看定义:@see {@link getRandomValues}
  * @returns 返回传入的同一个字节数组
  */
 const getRandomValues = async array => {

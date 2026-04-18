@@ -1,7 +1,3 @@
-/**
- * 一组与运行时无关的 CBOR 编解码方法
- * @module
- */
 import { decodePartialCBOR, encodeCBOR } from '@levischuck/tiny-cbor';
 
 /**
@@ -16,7 +12,7 @@ import { decodePartialCBOR, encodeCBOR } from '@levischuck/tiny-cbor';
 
 /**
  * 解码并返回一个 CBOR 编码值序列中的第一个项
- *
+ * - 查看定义:@see {@link decodeFirst}
  * @param input 要解码的 CBOR 数据
  * @param asObject （可选）是否将任何 CBOR Map 转换为 JavaScript 对象,默认为 `false`
  */
@@ -28,6 +24,7 @@ const decodeFirst = input => {
 
     /**
      * 将数据编码为 CBOR
+     * - 查看定义:@see {@link encode}
      */
     encode = input => {
         return encodeCBOR(input);
