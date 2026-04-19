@@ -29,7 +29,7 @@ module './verifyRegistrationResponse.js' {
 // ================================= 模块整体导出 =================================
 /**
  *
- * 本模块导出的内容：
+ * 验证器注册处理模块函数：
  * ```js
  * generateRegistrationOptions(); // 生成用于身份验证器注册的参数
  * verifyRegistrationResponse();  // 验证用户是否合法地完成了注册流程

@@ -9,7 +9,7 @@ import { getWebCrypto } from './getWebCrypto.js';
  *
  * 查看定义:@see {@link verifyEC2}
  * @param {Object} opts - 验证选项
- * @param {Map} opts.cosePublicKey - COSE 格式的 EC2 公钥，需包含 alg、crv、x、y 字段
+ * @param {Map<number, number | BufferSource>} opts.cosePublicKey - COSE 格式的 EC2 公钥,需包含 alg、crv、x、y 字段
  * @param {BufferSource} opts.signature - 待验证的签名（已规范化，r||s 拼接格式）
  * @param {BufferSource} opts.data - 原始签名数据
  * @param {string} [opts.shaHashOverride] - 可选，强制使用的哈希算法名（如 'SHA-256'），优先级高于公钥中的 alg

@@ -4,7 +4,7 @@ import { validateCertificatePath, convertCertBufferToPEM, toHash, convertCOSEtoP
 
 /**
  * 验证 Apple 类型的证明（attestation）
- * - 查看定义: @see {@link verifyAttestationApple}
+ * - 查看定义:@see {@link verifyAttestationApple}
  *
  * @param {Object} options - 验证选项
  * @param {Map<string, unknown>} options.attStmt - 证明声明的键值对（包含 x5c 等字段）

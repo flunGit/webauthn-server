@@ -20,6 +20,7 @@ const getSignatureComponentLength = crv => {
 
     /**
      * 将 ASN.1 DER 编码的整数转换为 Web Crypto API 要求的固定长度字节序列
+     * @type { (bytes: Uint8Array, componentLength: number) => Uint8Array }
      * @param {Uint8Array} bytes - DER 编码的整数（可能带有前导 0x00）
      * @param {number} componentLength - 目标长度（字节）
      * @returns {Uint8Array} 规范化后的固定长度字节序列

@@ -10,7 +10,7 @@ import { mapCoseAlgToWebCryptoKeyAlgName } from './mapCoseAlgToWebCryptoKeyAlgNa
  *
  * - 查看定义:@see {@link verifyRSA}
  * @param {Object} opts - 验证选项
- * @param {Map} opts.cosePublicKey - COSE 格式的 RSA 公钥，需包含 alg、n、e 字段
+ * @param {Map<number, number | BufferSource>} opts.cosePublicKey - COSE 格式的 RSA 公钥，需包含 alg、n、e 字段
  * @param {BufferSource} opts.signature - 待验证的签名（原始格式）
  * @param {BufferSource} opts.data - 原始签名数据
  * @param {string} [opts.shaHashOverride] - 可选,强制使用的哈希算法名（如 'SHA-256'）,优先级高于公钥中的 alg

@@ -14,8 +14,8 @@ import { verifyRSA } from '../helpers/iso/isoCrypto/verifyRSA.js';
  * （摘自 https://www.rfc-editor.org/rfc/rfc7515#section-4.1.1）
  *
  * @param {string} jwt - 待验证的 JWT 字符串（三段式 base64url 编码）
- * @param {BufferSource} leafCert - 叶子证书（DER 格式），用于提取公钥进行签名验证
- * @returns {Promise<boolean>} 签名验证通过时返回 true，否则抛出错误
+ * @param {BufferSource} leafCert - 叶子证书（DER 格式）,用于提取公钥进行签名验证
+ * @returns {Promise<boolean>} 签名验证通过时返回 true,否则抛出错误
  */
 const verifyJWT = (jwt, leafCert) => {
     const [header, payload, signature] = jwt.split('.'), certCOSE = convertX509PublicKeyToCOSE(leafCert),

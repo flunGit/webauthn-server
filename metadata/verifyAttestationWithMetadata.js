@@ -26,27 +26,27 @@ const algSignToCOSEInfoMap = {
     secp384r1_ecdsa_sha384_raw: { kty: 2, alg: -35, crv: 2 },
     secp512r1_ecdsa_sha256_raw: { kty: 2, alg: -36, crv: 3 },
     ed25519_eddsa_sha512_raw: { kty: 1, alg: -8, crv: 6 },
-},
+};
 
-    /**
-     * 辅助函数，以比 JSON.stringify() 更友好的方式格式化 COSEInfo
-     *
-     * 输入：`{ "kty": 3, "alg": -257 }`
-     *
-     * 输出：`"{ kty: 3, alg: -257 }"`
-     *
-     * @param {{ kty: number, alg: number, crv?: number }} info - COSE 信息对象
-     * @returns {string} 格式化后的字符串
-     */
-    stringifyCOSEInfo = info => {
-        const { kty, alg, crv } = info;
+/**
+ * 辅助函数，以比 JSON.stringify() 更友好的方式格式化 COSEInfo
+ *
+ * 输入：`{ "kty": 3, "alg": -257 }`
+ *
+ * 输出：`"{ kty: 3, alg: -257 }"`
+ *
+ * @param {{ kty: number, alg: number, crv?: number }} info - COSE 信息对象
+ * @returns {string} 格式化后的字符串
+ */
+const stringifyCOSEInfo = info => {
+    const { kty, alg, crv } = info;
 
-        let toReturn = '';
-        if (kty !== COSEKTY.RSA) toReturn = `{ kty: ${kty}, alg: ${alg}, crv: ${crv} }`;
-        else toReturn = `{ kty: ${kty}, alg: ${alg} }`;
+    let toReturn = '';
+    if (kty !== COSEKTY.RSA) toReturn = `{ kty: ${kty}, alg: ${alg}, crv: ${crv} }`;
+    else toReturn = `{ kty: ${kty}, alg: ${alg} }`;
 
-        return toReturn;
-    };
+    return toReturn;
+};
 
 /**
  * 将身份验证器的 attestation 陈述中的属性与 FIDO 联盟元数据服务中注册的期望值进行匹配

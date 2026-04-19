@@ -3,7 +3,7 @@ import { convertCOSEtoPKCS, convertCertBufferToPEM, validateCertificatePath, ver
 
 /**
  * 验证格式为 'fido-u2f' 的认证声明
- * - 查看定义: @see {@link verifyAttestationFIDOU2F}
+ * - 查看定义:@see {@link verifyAttestationFIDOU2F}
  *
  * @param {Object} options - 验证配置选项
  * @param {Map<number, BufferSource>} options.attStmt - attestation 声明数据 Map

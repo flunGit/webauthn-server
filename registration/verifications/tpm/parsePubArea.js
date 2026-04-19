@@ -26,12 +26,8 @@ import { toDataView, concat } from '../../../helpers/iso/index.js';
  *   },
  *   authPolicy: Uint8Array,
  *   parameters: {
- *     rsa?: {
- *       symmetric: string, scheme: string, keyBits: number, exponent: number
- *     },
- *     ecc?: {
- *       symmetric: string, scheme: string, curveID: string, kdf: string
- *     }
+ *     rsa?: { symmetric: string, scheme: string, keyBits: number, exponent: number },
+ *     ecc?: { symmetric: string, scheme: string, curveID: string, kdf: string }
  *   },
  *   unique: Uint8Array
  * }} 解析后的公钥区域结构

@@ -70,7 +70,7 @@ const getTcgAtTpmValues = root => {
 
 /**
  * 验证 TPM 认证器返回的 attestation 陈述,确保其符合 FIDO2 规范
- * - 查看定义: @see {@link verifyAttestationTPM}
+ * - 查看定义:@see {@link verifyAttestationTPM}
  *
  * @param {Object} options - 验证所需的选项
  * @param {string} options.aaguid - 身份验证器的 AAGUID

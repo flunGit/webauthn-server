@@ -7,7 +7,7 @@ import { verifyAttestationWithMetadata } from '../../metadata/verifyAttestationW
 
 /**
  * 验证格式为 'packed' 的 attestation 响应
- * - 查看定义: @see {@link verifyAttestationPacked}
+ * - 查看定义:@see {@link verifyAttestationPacked}
  *
  * @param {Object} options - 验证选项
  * @param {Map<number, BufferSource>} options.attStmt - attestation 语句的原始 Map
