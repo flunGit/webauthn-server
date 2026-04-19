@@ -22,13 +22,13 @@
     "index.d.ts",
     "helpers/",
     "authentication/",
+    "metadata/",
     "registration/",
     "services/",
     "types/",
-    "metadata/",
+    "CHANGELOG.md",
     "LICENSE.md",
-    "README.md",
-    "CHANGELOG.md"
+    "README.md"
   ],
   "author": "flun <cn@flun.top>",
   "repository": {
