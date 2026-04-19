@@ -2,7 +2,7 @@ import { b64urlToUtf8 } from '../helpers/iso/index.js';
 
 /**
  * 将 JWT 解析为 JavaScript 友好的数据结构
- * - 查看定义: @see {@link verifyJWT}
+ * - 查看定义:@see {@link verifyJWT}
  * @param {string} jwt - 原始的 JWT 字符串（三段式 base64url 编码）
  * @returns {[Record<string, unknown>, Record<string, unknown>, string]}
  *   返回一个元组：
