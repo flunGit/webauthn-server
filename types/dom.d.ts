@@ -64,7 +64,7 @@ export interface AuthenticatorSelectionCriteria {
 }
 
 /**
- * 当前上下文中可用的基本密码学功能。允许访问密码学安全的随机数生成器和密码学原语。
+ * 当前上下文中可用的基本密码学功能,允许访问密码学安全的随机数生成器和密码学原语;
  *
  * [MDN 参考](https://developer.mozilla.org/docs/Web/API/Crypto)
  */
@@ -86,7 +86,7 @@ export interface Crypto {
 }
 
 /**
- * 仅在安全上下文中可用。
+ * 仅在安全上下文中可用;
  *
  * [MDN 参考](https://developer.mozilla.org/docs/Web/API/PublicKeyCredential)
  */
@@ -139,7 +139,7 @@ export interface PublicKeyCredentialUserEntity extends PublicKeyCredentialEntity
 }
 
 /**
- * 仅在安全上下文中可用。
+ * 仅在安全上下文中可用;
  *
  * [MDN 参考](https://developer.mozilla.org/docs/Web/API/AuthenticatorResponse)
  */
@@ -153,8 +153,8 @@ export interface CredentialPropertiesOutput {
 }
 
 /**
- * 此 Web Crypto API 接口提供许多低级密码学函数。可通过窗口上下文中的 Crypto.subtle 属性访问（通过 Window.crypto）。
- * 仅在安全上下文中可用。
+ * 此 Web Crypto API 接口提供许多低级密码学函数,可通过窗口上下文中的 Crypto.subtle 属性访问（通过 Window.crypto）;
+ * 仅在安全上下文中可用;
  *
  * [MDN 参考](https://developer.mozilla.org/docs/Web/API/SubtleCrypto)
  */
@@ -192,7 +192,7 @@ export interface SubtleCrypto {
 }
 
 /**
- * 仅在安全上下文中可用。
+ * 仅在安全上下文中可用;
  *
  * [MDN 参考](https://developer.mozilla.org/docs/Web/API/Credential)
  */
@@ -231,8 +231,8 @@ export interface AesGcmParams extends Algorithm {
 }
 
 /**
- * Web Crypto API 的 CryptoKey 字典表示一个加密密钥。
- * 仅在安全上下文中可用。
+ * Web Crypto API 的 CryptoKey 字典表示一个加密密钥;
+ * 仅在安全上下文中可用;
  *
  * [MDN 参考](https://developer.mozilla.org/docs/Web/API/CryptoKey)
  */
@@ -273,24 +273,11 @@ export interface HmacImportParams extends Algorithm {
 }
 
 export interface JsonWebKey {
-    alg?: string;
-    crv?: string;
-    d?: string;
-    dp?: string;
-    dq?: string;
-    e?: string;
+    alg?: string, crv?: string, d?: string, dp?: string, dq?: string, e?: string;
     ext?: boolean;
-    k?: string;
-    key_ops?: string[];
-    kty?: string;
-    n?: string;
+    k?: string, key_ops?: string[], kty?: string, n?: string;
     oth?: RsaOtherPrimesInfo[];
-    p?: string;
-    q?: string;
-    qi?: string;
-    use?: string;
-    x?: string;
-    y?: string;
+    p?: string, q?: string, qi?: string, use?: string, x?: string, y?: string;
 }
 
 export interface CryptoKeyPair {
@@ -344,9 +331,7 @@ export interface KeyAlgorithm {
 }
 
 export interface RsaOtherPrimesInfo {
-    d?: string;
-    r?: string;
-    t?: string;
+    d?: string, r?: string, t?: string;
 }
 
 export interface RsaKeyGenParams extends Algorithm {

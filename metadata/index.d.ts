@@ -64,3 +64,15 @@ module './verifyJWT.js' {
 module './verifyMDSBlob.js' {
     export * from './verifyMDSBlob.js';
 }
+
+// ================================= 模块整体导出 =================================
+/**
+ *
+ * 模块导出内容：
+ * ```js
+ * const AlgSign=[]; // 支持的签名算法数组
+ * ```
+ * - 查看定义:@see {@link AlgSign}
+ */
+module './index.js' { }
+export * from './mdsTypes.js';

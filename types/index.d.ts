@@ -23,8 +23,8 @@ export type {
 } from './dom.js';
 
 /**
- * PublicKeyCredentialCreationOptions 的变体,适合通过 JSON 传输到浏览器，
- * 最终传入浏览器的 navigator.credentials.create(...) 方法。
+ * PublicKeyCredentialCreationOptions 的变体,适合通过 JSON 传输到浏览器,
+ * 最终传入浏览器的 navigator.credentials.create(...) 方法;
  *
  * 当 WebAuthn L3 类型最终被纳入语言时，应被官方的 TypeScript DOM 类型取代：
  *
@@ -45,8 +45,8 @@ export interface PublicKeyCredentialCreationOptionsJSON {
 }
 
 /**
- * PublicKeyCredentialRequestOptions 的变体,适合通过 JSON 传输到浏览器，
- * 最终传入浏览器的 navigator.credentials.get(...) 方法。
+ * PublicKeyCredentialRequestOptions 的变体,适合通过 JSON 传输到浏览器,
+ * 最终传入浏览器的 navigator.credentials.get(...) 方法;
  */
 export interface PublicKeyCredentialRequestOptionsJSON {
     challenge: Base64URLString;
@@ -84,8 +84,8 @@ export interface RegistrationCredential extends PublicKeyCredentialFuture {
 }
 
 /**
- * 略微修改的 RegistrationCredential，简化处理在浏览器中经过 Base64URL 编码的 ArrayBuffer，
- * 以便以 JSON 形式发送到服务器。
+ * 略微修改的 RegistrationCredential,简化处理在浏览器中经过 Base64URL 编码的 ArrayBuffer,
+ * 以便以 JSON 形式发送到服务器;
  *
  * https://w3c.github.io/webauthn/#dictdef-registrationresponsejson
  */
@@ -106,8 +106,8 @@ export interface AuthenticationCredential extends PublicKeyCredentialFuture {
 }
 
 /**
- * 略微修改的 AuthenticationCredential，简化处理在浏览器中经过 Base64URL 编码的 ArrayBuffer，
- * 以便以 JSON 形式发送到服务器。
+ * 略微修改的 AuthenticationCredential,简化处理在浏览器中经过 Base64URL 编码的 ArrayBuffer,
+ * 以便以 JSON 形式发送到服务器;
  *
  * https://w3c.github.io/webauthn/#dictdef-authenticationresponsejson
  */
@@ -121,8 +121,8 @@ export interface AuthenticationResponseJSON {
 }
 
 /**
- * 略微修改的 AuthenticatorAttestationResponse，简化处理在浏览器中经过 Base64URL 编码的 ArrayBuffer，
- * 以便以 JSON 形式发送到服务器。
+ * 略微修改的 AuthenticatorAttestationResponse,简化处理在浏览器中经过 Base64URL 编码的 ArrayBuffer,
+ * 以便以 JSON 形式发送到服务器;
  *
  * https://w3c.github.io/webauthn/#dictdef-authenticatorattestationresponsejson
  */
@@ -136,8 +136,8 @@ export interface AuthenticatorAttestationResponseJSON {
 }
 
 /**
- * 略微修改的 AuthenticatorAssertionResponse，简化处理在浏览器中经过 Base64URL 编码的 ArrayBuffer，
- * 以便以 JSON 形式发送到服务器。
+ * 略微修改的 AuthenticatorAssertionResponse,简化处理在浏览器中经过 Base64URL 编码的 ArrayBuffer,
+ * 以便以 JSON 形式发送到服务器;
  *
  * https://w3c.github.io/webauthn/#dictdef-authenticatorassertionresponsejson
  */
@@ -164,8 +164,8 @@ export type WebAuthnCredential = {
 export type Base64URLString = string;
 
 /**
- * TypeScript DOM 库中的 AuthenticatorAttestationResponse 已过时（最高到 v3.9.7）。
- * 此处维护一个增强版本，以便在 WebAuthn 规范演进时实现附加属性。
+ * TypeScript DOM 库中的 AuthenticatorAttestationResponse 已过时（最高到 v3.9.7）;
+ * 此处维护一个增强版本，以便在 WebAuthn 规范演进时实现附加属性;
  *
  * 参见 https://www.w3.org/TR/webauthn-2/#iface-authenticatorattestationresponse
  *
@@ -176,14 +176,14 @@ export interface AuthenticatorAttestationResponseFuture extends AuthenticatorAtt
 }
 
 /**
- * TypeScript 的 `AuthenticatorTransport` 的超集，包含对最新传输方式的支持。
- * 最终当 TypeScript 更新（大约在 4.6.3 之后）知晓这些传输方式时，应被 TypeScript 的类型取代。
+ * TypeScript 的 `AuthenticatorTransport` 的超集,包含对最新传输方式的支持;
+ * 最终当 TypeScript 更新（大约在 4.6.3 之后）知晓这些传输方式时，应被 TypeScript 的类型取代;
  */
 export type AuthenticatorTransportFuture = 'ble' | 'cable' | 'hybrid' | 'internal' | 'nfc' | 'smart-card' | 'usb';
 
 /**
- * TypeScript 的 `PublicKeyCredentialDescriptor` 的超集，知晓最新的传输方式。
- * 最终当 TypeScript 更新（大约在 4.6.3 之后）知晓这些传输方式时，应被 TypeScript 的类型取代。
+ * TypeScript 的 `PublicKeyCredentialDescriptor` 的超集，知晓最新的传输方式;
+ * 最终当 TypeScript 更新（大约在 4.6.3 之后）知晓这些传输方式时，应被 TypeScript 的类型取代;
  */
 export interface PublicKeyCredentialDescriptorFuture extends Omit<PublicKeyCredentialDescriptor, 'transports'> {
     transports?: AuthenticatorTransportFuture[];
@@ -211,7 +211,7 @@ export interface PublicKeyCredentialFuture extends PublicKeyCredential {
 export type CredentialDeviceType = 'singleDevice' | 'multiDevice';
 
 /**
- * 依赖方可以在注册时传递给浏览器的验证器类别。支持这些值的浏览器可以优化其模态体验，
+ * 依赖方可以在注册时传递给浏览器的验证器类别。支持这些值的浏览器可以优化其模态体验;
  * 让用户从特定的注册流程开始：
  *
  * - `hybrid`：移动设备上的平台验证器
@@ -232,12 +232,12 @@ export type PublicKeyCredentialHint = 'hybrid' | 'security-key' | 'client-device
 export type AttestationFormat = 'fido-u2f' | 'packed' | 'android-safetynet' | 'android-key' | 'tpm' | 'apple' | 'none';
 
 /**
- * 在 TypeScript 5.7 之前等同于 `Uint8Array`，在 TypeScript 5.7 及之后等同于 `Uint8Array<ArrayBuffer>`。
+ * 在 TypeScript 5.7 之前等同于 `Uint8Array`，在 TypeScript 5.7 及之后等同于 `Uint8Array<ArrayBuffer>`;
  *
  * **背景**
  *
  * `Uint8Array` 在 TypeScript 5.7 中成为泛型类型，要求从 Deno 2.2 开始将简单定义为 `Uint8Array` 的类型重构为 `Uint8Array<ArrayBuffer>`。
- * 然而在 Deno 2.1.x 及更早版本中 `Uint8Array` _不是_ 泛型，因此此类型有助于弥合这一差距。
+ * 然而在 Deno 2.1.x 及更早版本中 `Uint8Array` _不是_ 泛型，因此此类型有助于弥合这一差距;
  *
  * 灵感来自 Deno 的标准库：
  *

@@ -1,7 +1,7 @@
 /**
  * GlobalSign 根证书 CA - R3
- *
- * 下载地址：https://valid.r3.roots.globalsign.com/
+ * - 查看定义:@see {@link GlobalSign_Root_CA_R3}
+ * - 下载地址：https://valid.r3.roots.globalsign.com/
  *
  * 有效期至：2029-03-18 @ 00:00 PST（太平洋标准时间）
  *

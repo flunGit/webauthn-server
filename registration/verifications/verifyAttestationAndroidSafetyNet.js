@@ -8,6 +8,17 @@ import { verifyAttestationWithMetadata } from '../../metadata/verifyAttestationW
 /**
  * 验证格式为 'android-safetynet' 的 attestation 响应
  * - 查看定义:@see {@link verifyAttestationAndroidSafetyNet}
+ *
+ * @param {Object} options - 验证选项
+ * @param {Map<number, BufferSource>} options.attStmt - Attestation 陈述，包含 alg、response、ver 字段
+ * @param {BufferSource} options.clientDataHash - 客户端数据哈希
+ * @param {BufferSource} options.authData - 认证器数据
+ * @param {BufferSource} options.aaguid - 认证器 AAGUID
+ * @param {string[]} options.rootCertificates - 信任锚根证书（PEM 格式）
+ * @param {boolean} [options.verifyTimestampMS=true] - 是否验证时间戳有效性
+ * @param {BufferSource} options.credentialPublicKey - 凭证公钥（COSE 编码）
+ * @param {boolean} [options.attestationSafetyNetEnforceCTSCheck] - 是否强制验证设备完整性
+ * @returns {Promise<boolean>} 签名验证通过时返回 true，否则抛出错误
  */
 const verifyAttestationAndroidSafetyNet = async options => {
     const {
@@ -92,7 +103,6 @@ const verifyAttestationAndroidSafetyNet = async options => {
     /**
      * 结束验证 Signature
      */
-
     return verified;
 };
 

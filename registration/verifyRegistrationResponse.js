@@ -13,19 +13,42 @@ import { verifyAttestationApple } from './verifications/verifyAttestationApple.j
 
 /**
  * 验证用户是否合法完成了注册流程
+ * - 查看定义:@see {@link verifyRegistrationResponse}
  *
- * **选项说明：**
- *
- * @param response - `flun-webauthn-browser` 的 `startAuthentication()` 返回的响应对象
- * @param expectedChallenge - `generateRegistrationOptions()` 返回的 `options.challenge` 的 base64url 编码值
- * @param expectedOrigin - 注册应发生的网站 URL（或 URL 数组）
- * @param expectedRPID - 注册选项中指定的 RP ID（或 ID 数组）
- * @param expectedType **（可选）** - 期望的响应类型（'webauthn.create'）
- * @param requireUserPresence **（可选）** - 强制要求身份验证器验证用户存在（或在自动注册时跳过）,默认为 `true`
- * @param requireUserVerification **（可选）** - 强制要求身份验证器验证用户（通过 PIN、指纹等）,默认为 `true`
- * @param supportedAlgorithmIDs **（可选）** - 本 RP 支持的用于证明的 COSE 算法标识符数值数组,
- * 参见 https://www.iana.org/assignments/cose/cose.xhtml#algorithms。默认为所有支持的算法 ID
- * @param attestationSafetyNetEnforceCTSCheck **（可选）** - 如果使用 SafetyNet 证明,要求 Android 设备的系统完整性未被篡改,默认为 `true`
+ * @param {Object} options - 验证选项
+ * @param {Object} options.response - `flun-webauthn-browser` 的 `startAuthentication()` 返回的响应对象
+ * @param {Object} options.response.response - 包含证明数据的响应对象
+ * @param {string} options.response.id - 凭证 ID (base64url)
+ * @param {string} options.response.rawId - 原始凭证 ID (base64url)
+ * @param {string} options.response.type - 凭证类型 (应为 'public-key')
+ * @param {Object} options.response.response - 证明响应数据
+ * @param {string} options.response.response.clientDataJSON - base64url 编码的客户端数据
+ * @param {string} options.response.response.attestationObject - base64url 编码的证明对象
+ * @param {string[]} [options.response.response.transports] - 支持的传输方式列表
+ * @param {string|string[]|function} options.expectedChallenge - `generateRegistrationOptions()` 返回的 `options.challenge` 的 base64url 编码值，或自定义验证函数
+ * @param {string|string[]} options.expectedOrigin - 注册应发生的网站 URL（或 URL 数组）
+ * @param {string|string[]} options.expectedRPID - 注册选项中指定的 RP ID（或 ID 数组）
+ * @param {string|string[]} [options.expectedType] - 期望的响应类型（默认为 'webauthn.create'）
+ * @param {boolean} [options.requireUserPresence] - 强制要求身份验证器验证用户存在（或在自动注册时跳过），默认为 `true`
+ * @param {boolean} [options.requireUserVerification] - 强制要求身份验证器验证用户（通过 PIN、指纹等），默认为 `true`
+ * @param {number[]} [options.supportedAlgorithmIDs] - 本 RP 支持的用于证明的 COSE 算法标识符数值数组，默认为所有支持的算法 ID
+ * @param {boolean} [options.attestationSafetyNetEnforceCTSCheck] - 如果使用 SafetyNet 证明，要求 Android 设备的系统完整性未被篡改，默认为 `true`
+ * @returns {Promise<{
+ *   verified: boolean,
+ *   registrationInfo?: {
+ *     fmt: string,
+ *     aaguid: string,
+ *     credentialType: string,
+ *     credential: { id: string, publicKey: BufferSource, counter: number, transports?: string[] },
+ *     attestationObject: BufferSource,
+ *     userVerified: boolean,
+ *     credentialDeviceType: string,
+ *     credentialBackedUp: boolean,
+ *     origin: string,
+ *     rpID: string,
+ *     authenticatorExtensionResults: Record<string, unknown> | undefined,
+ *   }
+ * }>} 验证结果对象。若验证失败则返回 `{ verified: false }`
  */
 const verifyRegistrationResponse = async options => {
     const { response, expectedChallenge, expectedOrigin, expectedRPID, expectedType, requireUserPresence = true,

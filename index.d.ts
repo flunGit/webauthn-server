@@ -1,12 +1,16 @@
 /**
  * WebAuthn认证模块 主要功能：
  * ```js
- * generateAuthenticationOptions(); // 生成用于身份验证器认证的参数
- * verifyAuthenticationResponse();  // 验证用户是否合法完成了认证流程
- * generateRegistrationOptions();   // 生成用于身份验证器注册的参数
- * verifyRegistrationResponse();    // 验证用户是否合法完成了注册流程
- * class metadataService{};         // 用于协调与 FIDO 元数据交互的基础服务
- * class settingsService{};         // 用于指定所有支持 attestation 语句格式接受的根证书
+ * generateAuthenticationOptions();                // 生成用于身份验证器认证的参数
+ * verifyAuthenticationResponse();                 // 验证用户是否合法完成了认证流程
+ * generateRegistrationOptions();                  // 生成用于身份验证器注册的参数
+ * verifyRegistrationResponse();                   // 验证用户是否合法完成了注册流程
+ * class BaseMetadataService{};                    // 下载和解析 BLOB,并支持按需请求和缓存各个元数据声明;
+ * const MetadataService= new BaseMetadataService; // 用于协调与 FIDO 元数据交互的基础服务;
+ * class BaseSettingsService{};                    // 用于管理各类 attestation 语句格式的根证书;
+ * const SettingsService= new BaseSettingsService; // 用于为所有支持的证明声明格式指定可接受的根证书;
+ * const supportedCOSEAlgorithmIdentifiers=[];     // 支持的加密算法标识符
+ * const AlgSign=[];                               // 支持的签名算法数组
  * ```
  * ---
  *
@@ -263,7 +267,7 @@
  * ---
  */
 declare module 'flun-webauthn-server' { }
-export * from './registration/index.js';
 export * from './authentication/index.js';
-export * from './services/index.js';
 export * from './metadata/index.js';
+export * from './registration/index.js';
+export * from './services/index.js';

@@ -1,7 +1,7 @@
 /**
  * GlobalSign 根证书
- *
- * 下载地址：https://pki.goog/roots.pem
+ * - 查看定义:@see {@link GlobalSign_Root_CA}
+ * - 下载地址：https://pki.goog/roots.pem
  *
  * 有效期至：2028-01-28 @ 04:00 PST（太平洋标准时间）
  *

@@ -1,7 +1,7 @@
 /**
  * Google 硬件认证根证书 1
- *
- * 下载自：https://developer.android.com/training/articles/security-key-attestation#root_certificate
+ * - 查看定义:@see {@link Google_Hardware_Attestation_Root_1}
+ * - 下载自：https://developer.android.com/training/articles/security-key-attestation#root_certificate
  * （第一个条目）
  *
  * 有效期至：2026-05-24 @ 09:28 PST
@@ -26,20 +26,20 @@ TV0QkXvaJWF4nUaHOTNA4uJU9WDvZLI1j83A+/xnAJUucIv/zGJ1AMH2boHqF8CY16LpsYgBt6tKxxWH
 f818NUsZdBWBaR/OukXrNLfkQ79IyZohZbvabO/X+MVT3rriAoKc8oE2Uws6DF+60PV7/WIPjNvXySdqspImSN78mflxDqwLqRBYkA3I75qppLGG9rp7UCdRj
 xMl8ZDBld+7yvHVgt1cVzJx9xnyGCC23UaicMDSXYrB4I4WHXPGjxhZuCuPBLTdOLU8YRvMYdEvYebWHMpvwGCF6bAx3JBpIeOQ1wDB5y0USicV3YgYGmi+NZ
 fhA4URSh77Yd6uuJOJENRaNVTzk
------END CERTIFICATE-----`,
+-----END CERTIFICATE-----`;
 
-    /**
-     * Google 硬件认证根证书 2
-     *
-     * 下载自：https://developer.android.com/training/articles/security-key-attestation#root_certificate
-     * （第二个条目）
-     *
-     * 有效期至：2034-11-18 @ 12:37 PST
-     *
-     * SHA256 指纹：
-     * 1E:F1:A0:4B:8B:A5:8A:B9:45:89:AC:49:8C:89:82:A7:83:F2:4E:A7:30:7E:01:59:A0:C3:A7:3B:37:7D:87:CC
-     */
-    Google_Hardware_Attestation_Root_2 = `-----BEGIN CERTIFICATE-----
+/**
+ * Google 硬件认证根证书 2
+ * - 查看定义:@see {@link Google_Hardware_Attestation_Root_2}
+ * - 下载自：https://developer.android.com/training/articles/security-key-attestation#root_certificate
+ * （第二个条目）
+ *
+ * 有效期至：2034-11-18 @ 12:37 PST
+ *
+ * SHA256 指纹：
+ * 1E:F1:A0:4B:8B:A5:8A:B9:45:89:AC:49:8C:89:82:A7:83:F2:4E:A7:30:7E:01:59:A0:C3:A7:3B:37:7D:87:CC
+ */
+const Google_Hardware_Attestation_Root_2 = `-----BEGIN CERTIFICATE-----
 MIIFHDCCAwSgAwIBAgIJANUP8luj8tazMA0GCSqGSIb3DQEBCwUAMBsxGTAXBgNVBAUTEGY5MjAwOWU4NTNiNmIwNDUwHhcNMTkxMTIyMjAzNzU4WhcNMzQx
 MTE4MjAzNzU4WjAbMRkwFwYDVQQFExBmOTIwMDllODUzYjZiMDQ1MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAr7bHgiuxpwHsK7Qui8xUFmOr
 75gvMsd/dTEDDJdSSxtf6An7xyqpRR90PL2abxM1dEqlXnf2tqw1Ne4Xwl5jlRfdnJLmN0pTy/4lj4/7tv0Sk3iiKkypnEUtR6WfMgH0QZfKHM1+di+y9TFRt
@@ -55,20 +55,20 @@ cZqZJSTnghIC/vAD32KdNQ+c3N+vl2OTsUVMC1GiWkngNx1OO1+kXW+YTnnTUOtOIswUP/Vqd5SYgAIm
 IuUFsVXJMTz+Jucth+IqoWFua9v1R93/k98p41pjtFX+H8DslVgfP097vju4KDlqN64xV1grw3ZLl4CiOe/A91oeLm2UHOq6wn3esB4r2EIQKb6jTVGu5sYCc
 dWpXr0AUVqcABPdgL+H7qJguBw09ojm6xNIrw2OocrDKsudk/okr/AwqEyPKw9WnMlQgLIKw1rODG2NvU9oR3GVGdMkUBZutL8VuFkERQGt6vQ2OCw0sV47VM
 kuYbacK/xyZFiRcrPJPb41zgbQj9XAEyLKCHex0SdDrx+tWUDqG8At2JHA==
------END CERTIFICATE-----`,
+-----END CERTIFICATE-----`;
 
-    /**
-     * Google 硬件认证根证书 3
-     *
-     * 下载自：https://developer.android.com/training/articles/security-key-attestation#root_certificate
-     * （第三个条目）
-     *
-     * 有效期至：2036-11-13 @ 15:10 PST
-     *
-     * SHA256 指纹：
-     * AB:66:41:17:8A:36:E1:79:AA:0C:1C:DD:DF:9A:16:EB:45:FA:20:94:3E:2B:8C:D7:C7:C0:5C:26:CF:8B:48:7A
-     */
-    Google_Hardware_Attestation_Root_3 = `-----BEGIN CERTIFICATE-----
+/**
+ * Google 硬件认证根证书 3
+ * - 查看定义:@see {@link Google_Hardware_Attestation_Root_3}
+ * - 下载自：https://developer.android.com/training/articles/security-key-attestation#root_certificate
+ * （第三个条目）
+ *
+ * 有效期至：2036-11-13 @ 15:10 PST
+ *
+ * SHA256 指纹：
+ * AB:66:41:17:8A:36:E1:79:AA:0C:1C:DD:DF:9A:16:EB:45:FA:20:94:3E:2B:8C:D7:C7:C0:5C:26:CF:8B:48:7A
+ */
+const Google_Hardware_Attestation_Root_3 = `-----BEGIN CERTIFICATE-----
 MIIFHDCCAwSgAwIBAgIJAMNrfES5rhgxMA0GCSqGSIb3DQEBCwUAMBsxGTAXBgNVBAUTEGY5MjAwOWU4NTNiNmIwNDUwHhcNMjExMTE3MjMxMDQyWhcNMzYx
 MTEzMjMxMDQyWjAbMRkwFwYDVQQFExBmOTIwMDllODUzYjZiMDQ1MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAr7bHgiuxpwHsK7Qui8xUFmOr
 75gvMsd/dTEDDJdSSxtf6An7xyqpRR90PL2abxM1dEqlXnf2tqw1Ne4Xwl5jlRfdnJLmN0pTy/4lj4/7tv0Sk3iiKkypnEUtR6WfMgH0QZfKHM1+di+y9TFRt
@@ -84,20 +84,20 @@ aGCJd4KHT0MsGiLZez9WP81xYSrKMNEsDK+zK5fVzw6jA7cxmpXcARTnmAuGUeI7VVDhDzKeVOctf3a0
 ySe7pJ6wcHnl5EZ0lwc4xH7Y4Dx9RA1JlfooLMw3tOdJZH0enxPXaydfAD3YifeZpFaUzicHeLzVJLt9dvGB0bHQLE4+EqKFgOZv2EoP686DQqbVS1u+9k0p2
 xbMA105TBIk7npraa8VM0fnrRKi7wlZKwdH+aNAyhbXRW9xsnODJ+g8eF452zvbiKKngEKirK5LGieoXBX7tZ9D1GNBH2Ob3bKOwwIWdEFle/YF/h6zWgdeoa
 NGDqVBrLr2+0DtWoiB1aDEjLWl9FmyIUyUm7mD/vFDkzF+wm7cyWpQpCVQ==
------END CERTIFICATE-----`,
+-----END CERTIFICATE-----`;
 
-    /**
-     * Google 硬件认证根证书 4
-     *
-     * 下载自：https://developer.android.com/training/articles/security-key-attestation#root_certificate
-     * （第四个条目）
-     *
-     * 有效期至：2042-03-15 @ 11:07 PDT
-     *
-     * SHA256 指纹：
-     * CE:DB:1C:B6:DC:89:6A:E5:EC:79:73:48:BC:E9:28:67:53:C2:B3:8E:E7:1C:E0:FB:E3:4A:9A:12:48:80:0D:FC
-     */
-    Google_Hardware_Attestation_Root_4 = `-----BEGIN CERTIFICATE-----
+/**
+ * Google 硬件认证根证书 4
+ * - 查看定义:@see {@link Google_Hardware_Attestation_Root_4}
+ * - 下载自：https://developer.android.com/training/articles/security-key-attestation#root_certificate
+ * （第四个条目）
+ *
+ * 有效期至：2042-03-15 @ 11:07 PDT
+ *
+ * SHA256 指纹：
+ * CE:DB:1C:B6:DC:89:6A:E5:EC:79:73:48:BC:E9:28:67:53:C2:B3:8E:E7:1C:E0:FB:E3:4A:9A:12:48:80:0D:FC
+ */
+const Google_Hardware_Attestation_Root_4 = `-----BEGIN CERTIFICATE-----
 MIIFHDCCAwSgAwIBAgIJAPHBcqaZ6vUdMA0GCSqGSIb3DQEBCwUAMBsxGTAXBgNVBAUTEGY5MjAwOWU4NTNiNmIwNDUwHhcNMjIwMzIwMTgwNzQ4WhcNNDI
 wMzE1MTgwNzQ4WjAbMRkwFwYDVQQFExBmOTIwMDllODUzYjZiMDQ1MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAr7bHgiuxpwHsK7Qui8xUFmOr
 75gvMsd/dTEDDJdSSxtf6An7xyqpRR90PL2abxM1dEqlXnf2tqw1Ne4Xwl5jlRfdnJLmN0pTy/4lj4/7tv0Sk3iiKkypnEUtR6WfMgH0QZfKHM1+di+y9TFRt

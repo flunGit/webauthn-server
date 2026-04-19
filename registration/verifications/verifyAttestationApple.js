@@ -4,7 +4,15 @@ import { validateCertificatePath, convertCertBufferToPEM, toHash, convertCOSEtoP
 
 /**
  * 验证 Apple 类型的证明（attestation）
- * - 查看定义:@see {@link verifyAttestationApple}
+ * - 查看定义: @see {@link verifyAttestationApple}
+ *
+ * @param {Object} options - 验证选项
+ * @param {Map<string, unknown>} options.attStmt - 证明声明的键值对（包含 x5c 等字段）
+ * @param {BufferSource} options.authData - 认证器数据
+ * @param {BufferSource} options.clientDataHash - 客户端数据哈希
+ * @param {BufferSource} options.credentialPublicKey - 凭证公钥（COSE 编码）
+ * @param {string[]} options.rootCertificates - 信任的根证书列表（PEM 格式）
+ * @returns {Promise<boolean>} 验证通过时返回 true，否则抛出错误
  */
 const verifyAttestationApple = async options => {
     const { attStmt, authData, clientDataHash, credentialPublicKey, rootCertificates } = options, x5c = attStmt.get('x5c');

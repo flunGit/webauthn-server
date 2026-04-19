@@ -10,6 +10,15 @@ import { verifyAttestationWithMetadata } from '../../metadata/verifyAttestationW
 /**
  * 验证格式为 'android-key' 的证明响应
  * - 查看定义:@see {@link verifyAttestationAndroidKey}
+ *
+ * @param {Object} options - 验证选项
+ * @param {BufferSource} options.authData - 认证器数据（authenticatorData）
+ * @param {BufferSource} options.clientDataHash - 客户端数据哈希值
+ * @param {Map<string, any>} options.attStmt - 证明语句（attestation statement）
+ * @param {BufferSource} options.credentialPublicKey - COSE 编码的凭证公钥
+ * @param {BufferSource} options.aaguid - 认证器 AAGUID
+ * @param {string[]} [options.rootCertificates] - 可选的信任根证书列表（PEM 格式）
+ * @returns {Promise<boolean>} 验证通过时返回 true，否则抛出错误
  */
 const verifyAttestationAndroidKey = async options => {
     const { authData, clientDataHash, attStmt, credentialPublicKey, aaguid, rootCertificates, } = options,

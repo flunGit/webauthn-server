@@ -25,3 +25,17 @@ module './generateAuthenticationOptions.js' {
 module './verifyAuthenticationResponse.js' {
     export * from './verifyAuthenticationResponse.js';
 }
+
+// ================================= 模块整体导出 =================================
+/**
+ *
+ * 本模块导出的主要函数包括：
+ * ```js
+ * generateAuthenticationOptions(); // 生成用于身份验证器认证的参数
+ * verifyAuthenticationResponse();  // 验证用户是否合法完成了认证流程
+ * ```
+ * - 查看定义:@see {@link generateAuthenticationOptions}、{@link verifyAuthenticationResponse}
+ */
+module './index.js' { }
+export * from './generateAuthenticationOptions.js';
+export * from './verifyAuthenticationResponse.js';

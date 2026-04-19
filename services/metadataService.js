@@ -1,32 +1,63 @@
 import { convertAAGUIDToString, getLogger, fetch, verifyMDSBlob } from '../helpers/index.js';
 
 /**
- * 一个 `CachedMDS` 实例，不会触发刷新关联条目 BLOB 的尝试
+ * 一个 `CachedMDS` 实例,不会触发刷新关联条目 BLOB 的尝试
+ * @type {{ url: string, no: number, nextUpdate: Date }}
  */
-const NonRefreshingMDS = { url: '', no: 0, nextUpdate: new Date(0) }, defaultURLMDS = 'https://mds.fidoalliance.org/',// v3
-    SERVICE_STATE = { DISABLED: 0, REFRESHING: 1, READY: 2 }, log = getLogger('MetadataService');
+const NonRefreshingMDS = { url: '', no: 0, nextUpdate: new Date(0) },
+    defaultURLMDS = 'https://mds.fidoalliance.org/',// v3
+    /** @type {{ DISABLED: 0, REFRESHING: 1, READY: 2 }} */
+    SERVICE_STATE = { DISABLED: 0, REFRESHING: 1, READY: 2 },
+    log = getLogger('MetadataService');
 
 /**
  * `MetadataService` 的一个实现,能够下载和解析 BLOB,并支持按需请求和缓存各个元数据声明;
- *
+ * - 查看定义:@see {@link BaseMetadataService}、
  * https://fidoalliance.org/metadata/
  */
 class BaseMetadataService {
+    /**
+     * 初始化 BaseMetadataService 实例
+     */
     constructor() {
+        /**
+         * MDS 服务器缓存映射，键为 URL，值为 CachedMDS 信息
+         * @type {Record<string, { url: string, no: number, nextUpdate: Date }>}
+         */
         Object.defineProperty(this, "mdsCache", {
             enumerable: true, configurable: true, writable: true, value: {}
         });
+        /**
+         * 元数据声明缓存映射，键为 AAGUID 字符串，值为包含条目和 URL 的对象
+         * @type {Record<string, { entry: Object, url: string }>}
+         */
         Object.defineProperty(this, "statementCache", {
             enumerable: true, configurable: true, writable: true, value: {}
         });
+        /**
+         * 服务当前状态
+         * @type {0 | 1 | 2}
+         */
         Object.defineProperty(this, "state", {
             enumerable: true, configurable: true, writable: true, value: SERVICE_STATE.DISABLED
         });
+        /**
+         * 验证模式：'strict' 或宽松模式（允许跳过未注册的 AAGUID）
+         * @type {'strict' | 'permissive'}
+         */
         Object.defineProperty(this, "verificationMode", {
             enumerable: true, configurable: true, writable: true, value: 'strict'
         });
     }
 
+    /**
+     * 初始化元数据服务
+     * @param {Object} [opts] - 初始化选项
+     * @param {string[]} [opts.mdsServers] - MDS 服务器 URL 列表，默认使用 FIDO 官方服务器
+     * @param {Object[]} [opts.statements] - 预先提供的元数据声明列表
+     * @param {'strict' | 'permissive'} [opts.verificationMode] - 验证模式
+     * @returns {Promise<void>}
+     */
     async initialize(opts = {}) {
         // 重置声明缓存
         this.statementCache = {};
@@ -80,6 +111,12 @@ class BaseMetadataService {
         this.setState(SERVICE_STATE.READY);
     }
 
+    /**
+     * 获取指定 AAGUID 的元数据声明
+     * @param {string | Uint8Array} aaguid - 认证器 GUID（字符串或二进制形式）
+     * @returns {Promise<Object | undefined>} 元数据声明对象，若未找到且模式非 strict 则返回 undefined
+     * @throws {Error} 当 strict 模式下未找到声明或检测到认证器泄露时抛出错误
+     */
     async getStatement(aaguid) {
         if (this.state === SERVICE_STATE.DISABLED || !aaguid) return;
         if (aaguid instanceof Uint8Array) aaguid = convertAAGUIDToString(aaguid);
@@ -121,6 +158,8 @@ class BaseMetadataService {
 
     /**
      * 从 MDS 下载并处理最新的 BLOB
+     * @param {{ url: string, no: number, nextUpdate: Date }} cachedMDS - 缓存的 MDS 信息
+     * @returns {Promise<string>} BLOB 原始文本内容
      */
     async downloadBlob(cachedMDS) {
         // 获取最新的“BLOB”（FIDO 的术语）
@@ -130,6 +169,9 @@ class BaseMetadataService {
 
     /**
      * 验证并处理 MDS 元数据 BLOB
+     * @param {string} blob - BLOB 原始文本内容
+     * @param {{ url: string, no: number, nextUpdate: Date }} cachedMDS - 缓存的 MDS 信息
+     * @returns {Promise<void>}
      */
     async verifyBlob(blob, cachedMDS) {
         const { url, no } = cachedMDS, { payload, parsedNextUpdate } = await verifyMDSBlob(blob);
@@ -164,6 +206,7 @@ class BaseMetadataService {
 
     /**
      * 辅助方法：暂停执行直到服务就绪
+     * @returns {Promise<void>}
      */
     pauseUntilReady() {
         if (this.state === SERVICE_STATE.READY) return new Promise((resolve) => resolve());
@@ -186,6 +229,8 @@ class BaseMetadataService {
 
     /**
      * 报告服务状态变更
+     * @param {0 | 1 | 2} newState - 新状态值
+     * @returns {void}
      */
     setState(newState) {
         this.state = newState;
@@ -198,8 +243,9 @@ class BaseMetadataService {
 /**
  * 用于协调与 FIDO 元数据交互的基础服务;
  * 包括 BLOB 下载与解析,以及按需请求和缓存各个元数据声明;
- *
+ * - 查看定义:@see {@link MetadataService}、
  * https://fidoalliance.org/metadata/
+ * @type {BaseMetadataService}
  */
 const MetadataService = new BaseMetadataService();
 

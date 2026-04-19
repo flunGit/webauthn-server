@@ -7,14 +7,22 @@ import { GlobalSign_Root_CA } from './defaultRootCerts/android-safetynet.js';
 import { Apple_WebAuthn_Root_CA } from './defaultRootCerts/apple.js';
 import { GlobalSign_Root_CA_R3 } from './defaultRootCerts/mds.js';
 
+/**
+ * 基础设置服务类,用于管理各类 attestation 语句格式的根证书
+ * - 查看定义:@see {@link BaseSettingsService}
+ */
 class BaseSettingsService {
+    /**
+     * @type {Map<string, string[]>}
+     */
     pemCertificates = new Map();
 
     /**
      * 设置指定标识符的根证书列表
-     * @param opts 配置项
-     * @param opts.identifier 证书标识符（如 'android-key'）
-     * @param opts.certificates 证书数组，支持 Uint8Array 或 PEM 字符串
+     * @param {Object} opts 配置项
+     * @param {string} opts.identifier 证书标识符（如 'android-key'）
+     * @param {(Uint8Array|string)[]} opts.certificates 证书数组，支持 Uint8Array 或 PEM 字符串
+     * @returns {void}
      */
     setRootCertificates(opts) {
         const { identifier, certificates } = opts, newCertificates = [];
@@ -27,9 +35,9 @@ class BaseSettingsService {
 
     /**
      * 获取指定标识符的根证书列表
-     * @param opts 配置项
-     * @param opts.identifier 证书标识符
-     * @returns 证书 PEM 字符串数组，若不存在则返回空数组
+     * @param {Object} opts 配置项
+     * @param {string} opts.identifier 证书标识符
+     * @returns {string[]} 证书 PEM 字符串数组，若不存在则返回空数组
      */
     getRootCertificates(opts) {
         const { identifier } = opts;
@@ -48,6 +56,9 @@ class BaseSettingsService {
  * - `'mds'`
  *
  * 可以通过 `setRootCertificates()` 为特定格式标识符设置替代根证书来覆盖默认值;
+ * - 查看定义:@see {@link SettingsService}
+ *
+ * @type {BaseSettingsService}
  */
 const SettingsService = new BaseSettingsService();
 

@@ -7,7 +7,16 @@ import { verifyAttestationWithMetadata } from '../../metadata/verifyAttestationW
 
 /**
  * 验证格式为 'packed' 的 attestation 响应
- * - 查看定义:@see {@link verifyAttestationPacked}
+ * - 查看定义: @see {@link verifyAttestationPacked}
+ *
+ * @param {Object} options - 验证选项
+ * @param {Map<number, BufferSource>} options.attStmt - attestation 语句的原始 Map
+ * @param {BufferSource} options.authData - 认证器数据
+ * @param {BufferSource} options.clientDataHash - 客户端数据的 SHA-256 哈希
+ * @param {BufferSource} options.credentialPublicKey - COSE 编码的凭证公钥
+ * @param {BufferSource} options.aaguid - 认证器 Attestation GUID
+ * @param {string[]} [options.rootCertificates] - PEM 格式的可信根证书列表
+ * @returns {Promise<boolean>} 验证通过时返回 true，否则抛出错误
  */
 const verifyAttestationPacked = async options => {
     const { attStmt, clientDataHash, authData, credentialPublicKey, aaguid, rootCertificates, } = options,

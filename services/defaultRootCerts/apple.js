@@ -1,7 +1,7 @@
 /**
  * Apple WebAuthn 根证书
- *
- * 下载自 https://www.apple.com/certificateauthority/Apple_WebAuthn_Root_CA.pem
+ * - 查看定义:@see {@link Apple_WebAuthn_Root_CA}
+ * - 下载自 https://www.apple.com/certificateauthority/Apple_WebAuthn_Root_CA.pem
  *
  * 有效期至 2045 年 3 月 14 日 17:00（太平洋标准时间）
  *
