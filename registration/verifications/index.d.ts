@@ -1,10 +1,8 @@
-import type { AttestationFormatVerifierOpts } from '../index.js';
-
-import type { verifyAttestationAndroidKey } from './verifyAttestationAndroidKey.js';
-import type { verifyAttestationAndroidSafetyNet } from './verifyAttestationAndroidSafetyNet.js';
-import type { verifyAttestationApple } from './verifyAttestationApple.js';
-import type { verifyAttestationFIDOU2F } from './verifyAttestationFIDOU2F.js';
-import type { verifyAttestationPacked } from './verifyAttestationPacked.js';
+import { verifyAttestationAndroidKey } from './verifyAttestationAndroidKey.js';
+import { verifyAttestationAndroidSafetyNet } from './verifyAttestationAndroidSafetyNet.js';
+import { verifyAttestationApple } from './verifyAttestationApple.js';
+import { verifyAttestationFIDOU2F } from './verifyAttestationFIDOU2F.js';
+import { verifyAttestationPacked } from './verifyAttestationPacked.js';
 // ================================= verifyAttestationAndroidKey.js =================================
 /**
  * ```js
