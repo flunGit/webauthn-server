@@ -7,6 +7,7 @@ import { verifyAttestationWithMetadata } from '../../metadata/verifyAttestationW
 
 /**
  * 验证格式为 'android-safetynet' 的 attestation 响应
+ * - 查看定义:@see {@link verifyAttestationAndroidSafetyNet}
  */
 const verifyAttestationAndroidSafetyNet = async options => {
     const {

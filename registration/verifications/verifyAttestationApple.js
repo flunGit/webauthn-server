@@ -4,6 +4,7 @@ import { validateCertificatePath, convertCertBufferToPEM, toHash, convertCOSEtoP
 
 /**
  * 验证 Apple 类型的证明（attestation）
+ * - 查看定义:@see {@link verifyAttestationApple}
  */
 const verifyAttestationApple = async options => {
     const { attStmt, authData, clientDataHash, credentialPublicKey, rootCertificates } = options, x5c = attStmt.get('x5c');

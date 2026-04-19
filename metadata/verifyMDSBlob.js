@@ -9,7 +9,13 @@ import { SettingsService } from '../services/settingsService.js';
  * 对符合 [FIDO 元数据服务 (MDS)](https://fidoalliance.org/metadata/) 规范的 BLOB 进行真实性与完整性验证,
  * 并提取其中包含的 FIDO2 元数据声明,此方法将发起网络请求以执行 CRL 等检查;
  * - 查看定义:@see {@link verifyMDSBlob}
- * @param blob - 从 MDS 服务器下载的 JWT（例如 https://mds3.fidoalliance.org）
+ *
+ * @param {string} blob - 从 MDS 服务器下载的 JWT（例如 https://mds3.fidoalliance.org）
+ * @returns {Promise<{
+ *   statements: object[],
+ *   parsedNextUpdate: Date,
+ *   payload: object
+ * }>} 返回一个对象，包含解析出的元数据声明列表、下次更新时间的 Date 对象以及原始载荷对象
  */
 const verifyMDSBlob = async blob => {
     // 解析 JWT

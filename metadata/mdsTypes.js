@@ -1,11 +1,6 @@
 /**
- * @file mdsTypes.js
- * @description 定义支持的签名算法类型列表
- * 包含各种椭圆曲线、RSA和Ed25519等签名算法，支持raw和DER编码格式
- */
-
-/**
- * 支持的签名算法常量数组
+ * 支持的签名算法数组
+ * - 查看定义:@see {@link AlgSign}
  * @type {string[]}
  * @constant
  * @description

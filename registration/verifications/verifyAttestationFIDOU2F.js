@@ -3,6 +3,7 @@ import { convertCOSEtoPKCS, convertCertBufferToPEM, validateCertificatePath, ver
 
 /**
  * 验证格式为 'fido-u2f' 的认证声明
+ * - 查看定义:@see {@link verifyAttestationFIDOU2F}
  */
 const verifyAttestationFIDOU2F = async options => {
     const { attStmt, clientDataHash, rpIdHash, credentialID, credentialPublicKey, aaguid, rootCertificates } = options,

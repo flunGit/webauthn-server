@@ -7,6 +7,7 @@ import { verifyAttestationWithMetadata } from '../../metadata/verifyAttestationW
 
 /**
  * 验证格式为 'packed' 的 attestation 响应
+ * - 查看定义:@see {@link verifyAttestationPacked}
  */
 const verifyAttestationPacked = async options => {
     const { attStmt, clientDataHash, authData, credentialPublicKey, aaguid, rootCertificates, } = options,

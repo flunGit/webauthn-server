@@ -3,9 +3,38 @@ import { toDataView, concat } from '../../../helpers/iso/index.js';
 
 /**
  * 解析 TPM 证明中的 pubArea 缓冲区
- *
- * 参考规范 12.2.4 TPMT_PUBLIC：
+ * - 查看定义:@see {@link parsePubArea}
+ * - 参考规范 12.2.4 TPMT_PUBLIC：
  * https://trustedcomputinggroup.org/wp-content/uploads/TPM-Rev-2.0-Part-2-Structures-00.96-130315.pdf
+ *
+ * @param {BufferSource} pubArea - 包含 TPMT_PUBLIC 结构的原始字节缓冲区
+ * @returns {{
+ *   type: string,
+ *   nameAlg: string,
+ *   objectAttributes: {
+ *     fixedTPM: boolean,
+ *     stClear: boolean,
+ *     fixedParent: boolean,
+ *     sensitiveDataOrigin: boolean,
+ *     userWithAuth: boolean,
+ *     adminWithPolicy: boolean,
+ *     noDA: boolean,
+ *     encryptedDuplication: boolean,
+ *     restricted: boolean,
+ *     decrypt: boolean,
+ *     signOrEncrypt: boolean
+ *   },
+ *   authPolicy: Uint8Array,
+ *   parameters: {
+ *     rsa?: {
+ *       symmetric: string, scheme: string, keyBits: number, exponent: number
+ *     },
+ *     ecc?: {
+ *       symmetric: string, scheme: string, curveID: string, kdf: string
+ *     }
+ *   },
+ *   unique: Uint8Array
+ * }} 解析后的公钥区域结构
  */
 const parsePubArea = pubArea => {
     let pointer = 0;

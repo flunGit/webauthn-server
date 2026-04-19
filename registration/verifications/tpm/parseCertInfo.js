@@ -3,6 +3,23 @@ import { toDataView } from '../../../helpers/index.js';
 
 /**
  * 将 TPM 认证信息（certInfo）解析为可读的结构化数据
+ * - 查看定义:@see {@link parseCertInfo}
+ *
+ * @param {BufferSource} certInfo - 原始的 TPM 认证信息（certInfo）字节数据
+ * @returns {{
+ *   magic: number,
+ *   type: string,
+ *   qualifiedSigner: Uint8Array,
+ *   extraData: Uint8Array,
+ *   clockInfo: { clock: Uint8Array, resetCount: number, restartCount: number, safe: boolean },
+ *   firmwareVersion: Uint8Array,
+ *   attested: {
+ *     nameAlg: string,
+ *     nameAlgBuffer: Uint8Array,
+ *     name: Uint8Array,
+ *     qualifiedName: Uint8Array
+ *   }
+ * }} 解析后的结构化认证信息对象
  */
 const parseCertInfo = certInfo => {
     let pointer = 0;

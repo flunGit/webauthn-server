@@ -6,12 +6,16 @@ import { verifyRSA } from '../helpers/iso/isoCrypto/verifyRSA.js';
 
 /**
  * 针对 FIDO MDS JWT 的轻量级验证,支持 EC2 和 RSA 算法;
- *
- * 如果需要支持更多 JWS 算法,可参考以下列表：
+ * - 查看定义:@see {@link verifyJWT}
+ * - 如果需要支持更多 JWS 算法,可参考以下列表：
  *
  * https://www.rfc-editor.org/rfc/rfc7518.html#section-3.1
  *
  * （摘自 https://www.rfc-editor.org/rfc/rfc7515#section-4.1.1）
+ *
+ * @param {string} jwt - 待验证的 JWT 字符串（三段式 base64url 编码）
+ * @param {BufferSource} leafCert - 叶子证书（DER 格式），用于提取公钥进行签名验证
+ * @returns {Promise<boolean>} 签名验证通过时返回 true，否则抛出错误
  */
 const verifyJWT = (jwt, leafCert) => {
     const [header, payload, signature] = jwt.split('.'), certCOSE = convertX509PublicKeyToCOSE(leafCert),

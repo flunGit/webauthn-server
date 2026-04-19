@@ -1,32 +1,66 @@
 import type { AttestationFormatVerifierOpts } from '../index.js';
 
-
+import type { verifyAttestationAndroidKey } from './verifyAttestationAndroidKey.js';
+import type { verifyAttestationAndroidSafetyNet } from './verifyAttestationAndroidSafetyNet.js';
+import type { verifyAttestationApple } from './verifyAttestationApple.js';
+import type { verifyAttestationFIDOU2F } from './verifyAttestationFIDOU2F.js';
+import type { verifyAttestationPacked } from './verifyAttestationPacked.js';
 // ================================= verifyAttestationAndroidKey.js =================================
 /**
- * 验证格式为 'android-key' 的 attestation 响应
+ * ```js
+ * // 文件导出内容
+ * verifyAttestationAndroidKey(); // 验证格式为 'android-key' 的 attestation 响应
+ * ```
+ * - 查看定义:@see {@link verifyAttestationAndroidKey}
  */
-export declare function verifyAttestationAndroidKey(options: AttestationFormatVerifierOpts): Promise<boolean>;
+module './verifyAttestationAndroidKey.js' {
+    export * from './verifyAttestationAndroidKey.js';
+}
 
 // ================================= verifyAttestationAndroidSafetyNet.js =================================
 /**
- * 验证格式为 'android-safetynet' 的证明响应
+ * ```js
+ * // 文件导出内容
+ * verifyAttestationAndroidSafetyNet(); // 验证格式为 'android-safetynet' 的证明响应
+ * ```
+ * - 查看定义:@see {@link verifyAttestationAndroidSafetyNet}
  */
-export declare function verifyAttestationAndroidSafetyNet(options: AttestationFormatVerifierOpts): Promise<boolean>;
+module './verifyAttestationAndroidSafetyNet.js' {
+    export * from './verifyAttestationAndroidSafetyNet.js';
+}
 
 // ================================= verifyAttestationApple.js =================================
 /**
- * 验证 Apple 类型的证明响应
+ * ```js
+ * // 文件导出内容
+ * verifyAttestationApple(); // 验证 Apple 类型的证明响应
+ * ```
+ * - 查看定义:@see {@link verifyAttestationApple}
  */
-export declare function verifyAttestationApple(options: AttestationFormatVerifierOpts): Promise<boolean>;
+module './verifyAttestationApple.js' {
+    export * from './verifyAttestationApple.js';
+}
 
 // ================================= verifyAttestationFIDOU2F.js =================================
 /**
- * 使用 'fido-u2f' 格式验证认证（Attestation）响应
+ * ```js
+ * // 文件导出内容
+ * verifyAttestationFIDOU2F(); // 使用 'fido-u2f' 格式验证认证（Attestation）响应
+ * ```
+ * - 查看定义:@see {@link verifyAttestationFIDOU2F}
  */
-export declare function verifyAttestationFIDOU2F(options: AttestationFormatVerifierOpts): Promise<boolean>;
+module './verifyAttestationFIDOU2F.js' {
+    export * from './verifyAttestationFIDOU2F.js';
+}
 
 // ================================= verifyAttestationPacked.js =================================
 /**
- * 验证格式为 'packed' 的 attestation 响应
+ * ```js
+ * // 文件导出内容
+ * verifyAttestationPacked(); // 验证格式为 'packed' 的 attestation 响应
+ * ```
+ * - 查看定义:@see {@link verifyAttestationPacked}
  */
-export declare function verifyAttestationPacked(options: AttestationFormatVerifierOpts): Promise<boolean>;
+module './verifyAttestationPacked.js' {
+    export * from './verifyAttestationPacked.js';
+}

@@ -9,6 +9,7 @@ import { verifyAttestationWithMetadata } from '../../metadata/verifyAttestationW
 
 /**
  * 验证格式为 'android-key' 的证明响应
+ * - 查看定义:@see {@link verifyAttestationAndroidKey}
  */
 const verifyAttestationAndroidKey = async options => {
     const { authData, clientDataHash, attStmt, credentialPublicKey, aaguid, rootCertificates, } = options,
