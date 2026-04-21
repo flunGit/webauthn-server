@@ -1,4 +1,4 @@
-import { digest, getRandomValues, verify } from './isoCrypto/index.js';
+import { digest, getRandomValues, verify, verifyEC2, verifyOKP, verifyRSA } from './isoCrypto/index.js';
 import {
     fromBuffer, utf8Tob64url, toBuffer, toBase64, b64urlToUtf8, isBase64, isBase64URL, trimPadding
 } from './isoBase64URL.js';
@@ -74,7 +74,7 @@ module './isoUint8Array.js' {
  * 本模块导出的主要函数包括：
  * ```js
  *  // isoCrypto目录导出函数：
- * digest(), getRandomValues(), verify();
+ * digest(), getRandomValues(), verify(),verifyEC2(), verifyOKP(), verifyRSA;
  *
  *  // isoBase64URL.js文件函数：
  *   fromBuffer(),utf8Tob64url(), toBuffer(), toBase64(), b64urlToUtf8(), isBase64(), isBase64URL(), trimPadding();
@@ -86,7 +86,7 @@ module './isoUint8Array.js' {
  * fromHex(), utf8Tobytes(), asciiToBytes(), toHex(), bytesToUtf8(), toDataView(),areEqual(), concat();
  * ```
  * - 查看定义:@see
- * - isoCrypto目录函数: {@link digest}、{@link getRandomValues}、{@link verify }
+ * - isoCrypto目录函数: {@link digest}、{@link getRandomValues}、{@link verify }、{@link verifyEC2 }、{@link verifyOKP}、{@link verifyRSA}
  * - isoBase64URL文件函数：{@link fromBuffer}、{@link utf8Tob64url}、{@link toBuffer}、{@link toBase64}、
  *  {@link b64urlToUtf8}、{@link isBase64}、{@link isBase64URL}、{@link trimPadding}
  * - isoUint8Array文件函数:{@link fromHex}、{@link utf8Tobytes}、{@link asciiToBytes}、{@link toHex}、{@link toDataView}、

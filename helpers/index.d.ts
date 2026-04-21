@@ -1,8 +1,8 @@
 import { Certificate } from '@peculiar/asn1-x509';
 import type { Uint8Array_ } from '../types/index.js';
 import {
-    digest, getRandomValues, verify, fromBuffer, utf8Tob64url, toBuffer, toBase64, b64urlToUtf8, isBase64,
-    isBase64URL, trimPadding, fromHex, utf8Tobytes, asciiToBytes, toHex, toDataView, bytesToUtf8, areEqual, concat
+    digest, getRandomValues, verify, , verifyEC2, verifyOKP, verifyRSA, fromBuffer, utf8Tob64url, toBuffer, toBase64, b64urlToUtf8,
+    isBase64, isBase64URL, trimPadding, fromHex, utf8Tobytes, asciiToBytes, toHex, toDataView, bytesToUtf8, areEqual, concat
 } from './iso/index.js';
 import { convertAAGUIDToString } from './convertAAGUIDToString.js';
 import { convertCertBufferToPEM } from './convertCertBufferToPEM.js';
@@ -479,6 +479,9 @@ module './verifySignature.js' {
  * digest();                     // 生成所提供数据的摘要;
  * getRandomValues();            // 使用与数组长度相等的随机字节填充传入的字节数组;
  * verify();                     // 使用公钥验证签名,支持 EC2 和 RSA 公钥;
+ * verifyEC2();                  // 使用 EC2 公钥验证签名
+ * verifyOKP();                  // 验证 OKP 类型的 COSE 签名
+ * verifyRSA();                  // 使用 RSA 公钥验证签名
  * fromBuffer();                 // 将给定的 ArrayBuffer编码为 Base64URL
  * utf8Tob64url();               // 将 UTF-8字符串编码为 base64url
  * toBuffer();                   // 将 Base64URL编码的字符串解码为 ArrayBuffer
@@ -545,10 +548,10 @@ module './verifySignature.js' {
  * ```
  * ---
  * - 查看定义@see :
- * - iso目录工具:{@link digest}、{@link getRandomValues}、{@link verify }、{@link fromBuffer}、{@link utf8Tob64url}、
- * {@link toBuffer}、{@link toBase64}、{@link b64urlToUtf8}、{@link isBase64}、{@link isBase64URL}、{@link trimPadding}、
- * {@link fromHex}、{@link utf8Tobytes}、{@link asciiToBytes}、{@link toHex}、{@link toDataView}、 {@link bytesToUtf8}、
- * {@link areEqual}、{@link concat}
+ * - iso目录工具:{@link digest}、{@link getRandomValues}、{@link verify }、{@link verifyEC2 }、{@link verifyOKP}、{@link verifyRSA}、
+* {@link fromBuffer}、{@link utf8Tob64url}、{@link toBuffer}、{@link toBase64}、{@link b64urlToUtf8}、{@link isBase64}、
+ * {@link isBase64URL}、{@link trimPadding}、{@link fromHex}、{@link utf8Tobytes}、{@link asciiToBytes}、{@link toHex}、
+ *  {@link toDataView}、{@link bytesToUtf8}、 {@link areEqual}、{@link concat}
  * - BLOB验证函数:{@link verifyMDSBlob};
  * - 转换函数:{@link convertAAGUIDToString}、{@link convertCertBufferToPEM}、{@link convertCOSEtoPKCS}、
  *  {@link convertPEMToBytes}、{@link convertX509PublicKeyToCOSE}
