@@ -31,7 +31,7 @@ import { toHash } from './toHash.js';
 import { validateCertificatePath, InvalidSubjectAndIssuer } from './validateCertificatePath.js';
 import { validateExtFIDOGenCEAAGUID } from './validateExtFIDOGenCEAAGUID.js';
 import { _verifySignatureInternals, verifySignature } from './verifySignature.js';
-import { verifyMDSBlob } from '../metadata/verifyMDSBlob.js';
+import { verifyMDSBlob } from '../metadata/index.js';
 
 // ================================= convertAAGUIDToString.js =================================
 /**
@@ -585,4 +585,4 @@ export * from './toHash.js';
 export * from './validateCertificatePath.js';
 export * from './validateExtFIDOGenCEAAGUID.js';
 export * from './verifySignature.js';
-export * from '../metadata/verifyMDSBlob.js';
+export { verifyMDSBlob } from '../metadata/index.js';

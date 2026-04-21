@@ -3,6 +3,8 @@ import { verifyAttestationAndroidSafetyNet } from './verifyAttestationAndroidSaf
 import { verifyAttestationApple } from './verifyAttestationApple.js';
 import { verifyAttestationFIDOU2F } from './verifyAttestationFIDOU2F.js';
 import { verifyAttestationPacked } from './verifyAttestationPacked.js';
+import { verifyAttestationTPM } from './verifyAttestationTPM.js';
+
 // ================================= verifyAttestationAndroidKey.js =================================
 /**
  * ```js
@@ -11,7 +13,7 @@ import { verifyAttestationPacked } from './verifyAttestationPacked.js';
  * ```
  * - 查看定义:@see {@link verifyAttestationAndroidKey}
  */
-module './verifyAttestationAndroidKey.js' {
+declare module './verifyAttestationAndroidKey.js' {
     export * from './verifyAttestationAndroidKey.js';
 }
 
@@ -23,7 +25,7 @@ module './verifyAttestationAndroidKey.js' {
  * ```
  * - 查看定义:@see {@link verifyAttestationAndroidSafetyNet}
  */
-module './verifyAttestationAndroidSafetyNet.js' {
+declare module './verifyAttestationAndroidSafetyNet.js' {
     export * from './verifyAttestationAndroidSafetyNet.js';
 }
 
@@ -35,7 +37,7 @@ module './verifyAttestationAndroidSafetyNet.js' {
  * ```
  * - 查看定义:@see {@link verifyAttestationApple}
  */
-module './verifyAttestationApple.js' {
+declare module './verifyAttestationApple.js' {
     export * from './verifyAttestationApple.js';
 }
 
@@ -47,7 +49,7 @@ module './verifyAttestationApple.js' {
  * ```
  * - 查看定义:@see {@link verifyAttestationFIDOU2F}
  */
-module './verifyAttestationFIDOU2F.js' {
+declare module './verifyAttestationFIDOU2F.js' {
     export * from './verifyAttestationFIDOU2F.js';
 }
 
@@ -59,6 +61,41 @@ module './verifyAttestationFIDOU2F.js' {
  * ```
  * - 查看定义:@see {@link verifyAttestationPacked}
  */
-module './verifyAttestationPacked.js' {
+declare module './verifyAttestationPacked.js' {
     export * from './verifyAttestationPacked.js';
 }
+
+// ================================= verifyAttestationTPM.js =================================
+/**
+ * ```js
+ * // 文件导出内容
+ * verifyAttestationTPM(); // 验证TPM认证器返回的attestation陈述,确保其符合 FIDO2 规范
+ * ```
+ * - 查看定义:@see {@link verifyAttestationTPM}
+ */
+declare module './verifyAttestationTPM.js' {
+    export * from './verifyAttestationTPM.js';
+}
+
+// ================================= 导出入口 =================================
+/**
+ * ```js
+ * // 模块导出内容:
+ * verifyAttestationAndroidKey();       // 验证格式为 'android-key' 的 attestation 响应
+ * verifyAttestationAndroidSafetyNet(); // 验证格式为 'android-safetynet' 的证明响应
+ * verifyAttestationApple();            // 验证 Apple 类型的证明响应
+ * verifyAttestationFIDOU2F();          // 使用 'fido-u2f' 格式验证认证（Attestation）响应
+ * verifyAttestationPacked();           // 验证格式为 'packed' 的 attestation 响应
+ * verifyAttestationTPM(); // 验证TPM认证器返回的attestation陈述,确保其符合 FIDO2 规范
+ * ```
+ * - 查看定义:@see {@link verifyAttestationAndroidKey}、{@link verifyAttestationAndroidSafetyNet}、
+ * {@link verifyAttestationApple}、{@link verifyAttestationFIDOU2F}、{@link verifyAttestationPacked}、
+ * {@link verifyAttestationTPM}
+ */
+declare module './index.js' { }
+export * from './verifyAttestationAndroidKey.js';
+export * from './verifyAttestationAndroidSafetyNet.js';
+export * from './verifyAttestationApple.js';
+export * from './verifyAttestationFIDOU2F.js';
+export * from './verifyAttestationPacked.js';
+export * from './verifyAttestationTPM.js';

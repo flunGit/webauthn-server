@@ -1,8 +1,8 @@
 import { COSECRV, COSEKEYS } from '../../cose.js';
 import { fromBuffer } from '../isoBase64URL.js';
-import { mapCoseAlgToWebCryptoAlg } from './mapCoseAlgToWebCryptoAlg.js';
-import { importKey } from './importKey.js';
 import { getWebCrypto } from './getWebCrypto.js';
+import { importKey } from './importKey.js';
+import { mapCoseAlgToWebCryptoAlg } from './mapCoseAlgToWebCryptoAlg.js';
 
 /**
  * 使用 EC2（椭圆曲线）COSE 公钥验证 ECDSA 签名

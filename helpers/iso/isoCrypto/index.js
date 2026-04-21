@@ -1,7 +1,9 @@
-/**
- * 一组与运行时无关的方法集合,用于处理 WebCrypto API
- * @module
- */
-export * from './digest.js';
-export * from './getRandomValues.js';
-export * from './verify.js';
+export * from './getWebCrypto.js';
+export * from './importKey.js';
+export * from './mapCoseAlgToWebCryptoAlg.js';
+export * from './mapCoseAlgToWebCryptoKeyAlgName.js';
+export * from './output.js';
+export * from './unwrapEC2Signature.js';
+export * from './verifyEC2.js';
+export * from './verifyOKP.js';
+export * from './verifyRSA.js';

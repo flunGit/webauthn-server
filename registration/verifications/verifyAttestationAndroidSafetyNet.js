@@ -2,8 +2,8 @@ import {
     toHash, verifySignature, getCertificateInfo, validateCertificatePath, convertCertBufferToPEM, bytesToUtf8, concat,
     utf8Tobytes, b64urlToUtf8, fromBuffer, toBuffer
 } from '../../helpers/index.js';
-import { MetadataService } from '../../services/metadataService.js';
-import { verifyAttestationWithMetadata } from '../../metadata/verifyAttestationWithMetadata.js';
+import { verifyAttestationWithMetadata } from '../../metadata/index.js';
+import { MetadataService } from '../../services/index.js';
 
 /**
  * 验证格式为 'android-safetynet' 的 attestation 响应

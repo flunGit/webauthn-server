@@ -1,7 +1,7 @@
 import { COSECRV, COSEKEYS, isCOSEAlg } from '../../cose.js';
 import { fromBuffer } from '../isoBase64URL.js';
-import { importKey } from './importKey.js';
 import { getWebCrypto } from './getWebCrypto.js';
+import { importKey } from './importKey.js';
 
 /**
  * 使用 OKP（Octet Key Pair，如 Ed25519）COSE 公钥验证签名

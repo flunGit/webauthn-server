@@ -1,9 +1,6 @@
 import 'reflect-metadata';
 
-export * from './authentication/generateAuthenticationOptions.js';
-export * from './authentication/verifyAuthenticationResponse.js';
-export * from './metadata/mdsTypes.js';
-export * from './registration/generateRegistrationOptions.js';
-export * from './registration/verifyRegistrationResponse.js';
-export * from './services/metadataService.js';
-export * from './services/settingsService.js';
+export * from './authentication/index.js';
+export { AlgSign } from './metadata/index.js';
+export * from './registration/index.js';
+export * from './services/index.js';

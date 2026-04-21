@@ -1,14 +1,75 @@
+import { b64urlToUtf8, toBuffer, utf8Tobytes, verifyEC2, verifyRSA } from '../helpers/iso/index.js';
 import { convertCertBufferToPEM } from '../helpers/convertCertBufferToPEM.js';
-import { validateCertificatePath } from '../helpers/validateCertificatePath.js';
+import { convertPEMToBytes } from '../helpers/convertPEMToBytes.js';
+import { convertX509PublicKeyToCOSE } from '../helpers/convertX509PublicKeyToCOSE.js';
+import { COSEKEYS, COSEKTY, COSEALG, isCOSEPublicKeyEC2, isCOSEPublicKeyRSA } from '../helpers/cose.js';
 import { decodeCredentialPublicKey } from '../helpers/decodeCredentialPublicKey.js';
-import { COSEKEYS, COSEKTY, isCOSEPublicKeyEC2 } from '../helpers/cose.js';
+import { validateCertificatePath } from '../helpers/validateCertificatePath.js';
+import { SettingsService } from '../services/settings.js';
 
+// ================================= 算法数组 =================================
+/**
+ * 支持的签名算法数组
+ * - 查看定义:@see {@link AlgSign}
+ * @type {string[]}
+ * @constant
+ * @description
+ * 算法命名规则: [曲线/算法]_[签名类型]_[哈希算法]_[编码格式]
+ * 其中:
+ * - secp256r1, secp256k1, secp384r1, secp512r1: 椭圆曲线
+ * - ed25519: EdDSA曲线
+ * - rsassa_pss: RSA-PSS填充方案
+ * - rsassa_pkcsv1_5: RSA PKCS#1 v1.5填充方案
+ * - ecdsa: 椭圆曲线数字签名算法
+ * - eddsa: Edwards曲线数字签名算法
+ * - sha256, sha384, sha512, sha1: 哈希算法
+ * - raw: 原始签名输出（无ASN.1 DER编码）
+ * - der: DER编码格式
+ */
+const AlgSign = [
+    'secp256r1_ecdsa_sha256_raw',   // secp256r1曲线，ECDSA，SHA-256，原始格式
+    'secp256r1_ecdsa_sha256_der',   // secp256r1曲线，ECDSA，SHA-256，DER编码
+    'rsassa_pss_sha256_raw',        // RSA-PSS，SHA-256，原始格式
+    'rsassa_pss_sha256_der',        // RSA-PSS，SHA-256，DER编码
+    'secp256k1_ecdsa_sha256_raw',   // secp256k1曲线，ECDSA，SHA-256，原始格式
+    'secp256k1_ecdsa_sha256_der',   // secp256k1曲线，ECDSA，SHA-256，DER编码
+    'rsassa_pss_sha384_raw',        // RSA-PSS，SHA-384，原始格式
+    'rsassa_pkcsv15_sha256_raw',    // RSA PKCS#1 v1.5，SHA-256，原始格式
+    'rsassa_pkcsv15_sha384_raw',    // RSA PKCS#1 v1.5，SHA-384，原始格式
+    'rsassa_pkcsv15_sha512_raw',    // RSA PKCS#1 v1.5，SHA-512，原始格式
+    'rsassa_pkcsv15_sha1_raw',      // RSA PKCS#1 v1.5，SHA-1，原始格式
+    'secp384r1_ecdsa_sha384_raw',   // secp384r1曲线，ECDSA，SHA-384，原始格式
+    'secp512r1_ecdsa_sha256_raw',   // secp512r1曲线，ECDSA，SHA-256，原始格式
+    'ed25519_eddsa_sha512_raw',     // Ed25519曲线，EdDSA，SHA-512，原始格式
+];
+
+// ================================= JWT处理 =================================
+/**
+ * 将 JWT 解析为 JavaScript 友好的数据结构
+ * - 查看定义:@see {@link parseJWT}
+ * @param {string} jwt - 原始的 JWT 字符串（三段式 base64url 编码）
+ * @returns {[Record<string, unknown>, Record<string, unknown>, string]}
+ *   返回一个元组：
+ *   - 索引 0: 解码后的 JWT 头部（标准 JSON 对象）
+ *   - 索引 1: 解码后的 JWT 载荷（标准 JSON 对象）
+ *   - 索引 2: 原始签名部分（base64url 字符串）
+ */
+const parseJWT = jwt => {
+    const parts = jwt.split('.');
+    return [
+        JSON.parse(b64urlToUtf8(parts[0])),
+        JSON.parse(b64urlToUtf8(parts[1])),
+        parts[2]
+    ];
+};
+
+// ================================= 身份验证器匹配处理 =================================
 /**
  * 将 ALG_SIGN 值转换为 COSE 信息
  *
  * 值来自 FIDO 预定义值注册表中的 `ALG_KEY_COSE` 定义
- * - 查看定义:@see {@link algSignToCOSEInfoMap}、
- * https://fidoalliance.org/specs/common-specs/fido-registry-v2.2-ps-20220523.html#authentication-algorithms
+ * - 查看定义:@see {@link algSignToCOSEInfoMap}
+ * - 参考文档:https://fidoalliance.org/specs/common-specs/fido-registry-v2.2-ps-20220523.html#authentication-algorithms
  * @type {Record<string, { kty: number, alg: number, crv?: number }>}
  */
 const algSignToCOSEInfoMap = {
@@ -157,4 +218,72 @@ const verifyAttestationWithMetadata = async ({ statement, credentialPublicKey, x
     return true;
 };
 
-export { verifyAttestationWithMetadata, algSignToCOSEInfoMap };
+// ================================= JWT签名验证处理 =================================
+/**
+ * 针对 FIDO MDS JWT 的轻量级验证,支持 EC2 和 RSA 算法;
+ * - 查看定义:@see {@link verifyJWT}
+ * - 如果需要支持更多 JWS 算法,可参考以下列表：
+ *
+ * https://www.rfc-editor.org/rfc/rfc7518.html#section-3.1
+ *
+ * （摘自 https://www.rfc-editor.org/rfc/rfc7515#section-4.1.1）
+ *
+ * @param {string} jwt - 待验证的 JWT 字符串（三段式 base64url 编码）
+ * @param {BufferSource} leafCert - 叶子证书（DER 格式）,用于提取公钥进行签名验证
+ * @returns {Promise<boolean>} 签名验证通过时返回 true,否则抛出错误
+ */
+const verifyJWT = (jwt, leafCert) => {
+    const [header, payload, signature] = jwt.split('.'), certCOSE = convertX509PublicKeyToCOSE(leafCert),
+        data = utf8Tobytes(`${header}.${payload}`), signatureBytes = toBuffer(signature);
+
+    if (isCOSEPublicKeyEC2(certCOSE))
+        return verifyEC2({ data, signature: signatureBytes, cosePublicKey: certCOSE, shaHashOverride: COSEALG.ES256 });
+    else if (isCOSEPublicKeyRSA(certCOSE)) return verifyRSA({ data, signature: signatureBytes, cosePublicKey: certCOSE });
+
+    const kty = certCOSE.get(COSEKEYS.kty);
+    throw new Error(`此方法不支持使用 kty 为 ${kty} 的公钥进行 JWT 验证`);
+};
+
+// ================================= BLOB验证处理 =================================
+/**
+ * 对符合 [FIDO 元数据服务 (MDS)](https://fidoalliance.org/metadata/) 规范的 BLOB 进行真实性与完整性验证,
+ * 并提取其中包含的 FIDO2 元数据声明,此方法将发起网络请求以执行 CRL 等检查;
+ * - 查看定义:@see {@link verifyMDSBlob}
+ *
+ * @param {string} blob - 从 MDS 服务器下载的 JWT（例如 https://mds3.fidoalliance.org）
+ * @returns {Promise<{statements: object[],parsedNextUpdate: Date,payload: object}>}
+ *  返回一个对象，包含解析出的元数据声明列表、下次更新时间的 Date 对象以及原始载荷对象
+ */
+const verifyMDSBlob = async blob => {
+    // 解析 JWT
+    const parsedJWT = parseJWT(blob), header = parsedJWT[0], payload = parsedJWT[1],
+        headerCertsPEM = header.x5c.map(convertCertBufferToPEM);
+
+    try {
+        // 验证证书链
+        const rootCerts = SettingsService.getRootCertificates({ identifier: 'mds' });
+        await validateCertificatePath(headerCertsPEM, rootCerts);
+    } catch (error) {
+        // 根据 FIDO MDS 文档：“如果证书链无法验证或链中任一证书被吊销,应忽略该文件”
+        throw new Error('无法验证 BLOB 证书路径', { cause: error });
+    }
+
+    // 验证 BLOB 的 JWT 签名
+    const leafCert = headerCertsPEM[0], verified = await verifyJWT(blob, convertPEMToBytes(leafCert));
+    if (!verified) throw new Error('无法验证 BLOB 签名'); // 根据 FIDO MDS 文档：“如果签名无效,FIDO 服务器应忽略该文件”
+
+    // 缓存 FIDO2 设备的声明
+    const statements = [];
+    for (const entry of payload.entries) {
+        // 仅缓存包含 `aaguid` 的条目
+        if (entry.aaguid && entry.metadataStatement) statements.push(entry.metadataStatement);
+    }
+
+    // 将 nextUpdate 属性转换为 Date 对象,以便确定重新下载的时间(月份需要从 0 开始索引)
+    const [year, month, day] = payload.nextUpdate.split('-'),
+        parsedNextUpdate = new Date(parseInt(year, 10), parseInt(month, 10) - 1, parseInt(day, 10));
+
+    return { statements, parsedNextUpdate, payload };
+};
+
+export { AlgSign, parseJWT, verifyAttestationWithMetadata, algSignToCOSEInfoMap, verifyJWT, verifyMDSBlob };

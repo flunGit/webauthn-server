@@ -6,12 +6,10 @@ import {
     decodeCredentialPublicKey, toHash, convertCertBufferToPEM, validateCertificatePath, getCertificateInfo,
     verifySignature, areEqual, concat, validateExtFIDOGenCEAAGUID, COSEKEYS, COSEALG, isCOSEAlg, isCOSEPublicKeyRSA,
     isCOSEPublicKeyEC2
-} from '../../../helpers/index.js';
-import { verifyAttestationWithMetadata } from '../../../metadata/verifyAttestationWithMetadata.js';
-import { MetadataService } from '../../../services/metadataService.js';
-import { TPM_ECC_CURVE_COSE_CRV_MAP, TPM_MANUFACTURERS } from './constants.js';
-import { parseCertInfo } from './parseCertInfo.js';
-import { parsePubArea } from './parsePubArea.js';
+} from '../../helpers/index.js';
+import { verifyAttestationWithMetadata } from '../../metadata/index.js';
+import { MetadataService } from '../../services/index.js';
+import { TPM_ECC_CURVE_COSE_CRV_MAP, TPM_MANUFACTURERS, parseCertInfo, parsePubArea } from './tpm/index.js';
 
 /**
  * 包含从 subjectAlternativeName 扩展中提取 TPM 特定值的逻辑

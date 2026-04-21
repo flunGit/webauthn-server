@@ -1,11 +1,9 @@
 import { convertCertBufferToPEM } from '../helpers/convertCertBufferToPEM.js';
 import {
-    Google_Hardware_Attestation_Root_1, Google_Hardware_Attestation_Root_2,
-    Google_Hardware_Attestation_Root_3, Google_Hardware_Attestation_Root_4
-} from './defaultRootCerts/android-key.js';
-import { GlobalSign_Root_CA } from './defaultRootCerts/android-safetynet.js';
-import { Apple_WebAuthn_Root_CA } from './defaultRootCerts/apple.js';
-import { GlobalSign_Root_CA_R3 } from './defaultRootCerts/mds.js';
+    Google_Hardware_Attestation_Root_1, Google_Hardware_Attestation_Root_2, Google_Hardware_Attestation_Root_3,
+    Google_Hardware_Attestation_Root_4, GlobalSign_Root_CA, GlobalSign_Root_CA_R3, Apple_WebAuthn_Root_CA
+} from './defaultRootCerts/index.js';
+
 
 /**
  * 基础设置服务类,用于管理各类 attestation 语句格式的根证书

@@ -1,38 +1,12 @@
-import { digest } from './digest.js';
-import { getRandomValues } from './getRandomValues.js';
 import { _getWebCryptoInternals, getWebCrypto, MissingWebCrypto } from './getWebCrypto.js';
 import { importKey } from './importKey.js';
 import { mapCoseAlgToWebCryptoAlg } from './mapCoseAlgToWebCryptoAlg.js';
 import { mapCoseAlgToWebCryptoKeyAlgName } from './mapCoseAlgToWebCryptoKeyAlgName.js';
 import { unwrapEC2Signature } from './unwrapEC2Signature.js';
-import { verify } from './verify.js';
+import { digest, getRandomValues, verify } from './output.js';
 import { verifyEC2 } from './verifyEC2.js';
 import { verifyOKP } from './verifyOKP.js';
 import { verifyRSA } from './verifyRSA.js';
-
-// ================================= digest.js =================================
-/**
- * ```js
- * // 文件导出类容:
- * digest(); // 生成所提供数据的摘要;
- * ```
- * - 查看定义:@see {@link digest}
- */
-module './digest.js' {
-    export * from './digest.js';
-}
-
-// ================================= getRandomValues.js =================================
-/**
- * ```js
- * // 文件导出类容
- * getRandomValues(); // 使用与数组长度相等的随机字节填充传入的字节数组;
- * ```
- * - 查看定义:@see {@link getRandomValues}
- */
-module './getRandomValues.js' {
-    export * from './getRandomValues.js';
-}
 
 // ================================= getWebCrypto.js =================================
 /**
@@ -92,6 +66,20 @@ module './mapCoseAlgToWebCryptoKeyAlgName.js' {
     export * from './mapCoseAlgToWebCryptoKeyAlgName.js';
 }
 
+// ================================= output.js =================================
+/**
+ * ```js
+ * // 文件导出内容:
+ * digest();          // 生成所提供数据的摘要;
+ * getRandomValues(); // 使用与数组长度相等的随机字节填充传入的字节数组;
+ * verify();          // 使用公钥验证签名,支持 EC2 和 RSA 公钥;
+ * ```
+ * - 查看定义:@see {@link digest}、{@link getRandomValues}、{@link verify}
+ */
+module './output.js' {
+    export * from './output.js';
+}
+
 // ================================= structs.js =================================
 /**
  * ```js
@@ -116,18 +104,6 @@ module './structs.js' {
  */
 module './unwrapEC2Signature.js' {
     export * from './unwrapEC2Signature.js';
-}
-
-// ================================= verify.js =================================
-/**
- * ```js
- * // 文件导出内容
- * verify(); // 使用公钥验证签名,支持 EC2 和 RSA 公钥;
- * ```
- * - 查看定义:@see {@link verify}
- */
-module './verify.js' {
-    export * from './verify.js';
 }
 
 // ================================= verifyEC2.js =================================
@@ -178,6 +154,12 @@ module './verifyRSA.js' {
  * - 查看定义:@see {@link digest}、{@link getRandomValues}、{@link verify }
  */
 module './index.js' { }
-export * from './digest.js';
-export * from './getRandomValues.js';
-export * from './verify.js';
+export * from './getWebCrypto.js';
+export * from './importKey.js';
+export * from './mapCoseAlgToWebCryptoAlg.js';
+export * from './mapCoseAlgToWebCryptoKeyAlgName.js';
+export * from './output.js';
+export * from './unwrapEC2Signature.js';
+export * from './verifyEC2.js';
+export * from './verifyOKP.js';
+export * from './verifyRSA.js';

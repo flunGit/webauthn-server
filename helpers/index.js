@@ -1,8 +1,3 @@
-/**
- * WebAuthn 相关工具函数集合
- *
- * 本模块聚合了处理认证器数据、证书、签名验证等常用方法。
- */
 export * from './iso/index.js';
 export * from './convertAAGUIDToString.js';
 export * from './convertCertBufferToPEM.js';
@@ -24,4 +19,4 @@ export * from './toHash.js';
 export * from './validateCertificatePath.js';
 export * from './validateExtFIDOGenCEAAGUID.js';
 export * from './verifySignature.js';
-export * from '../metadata/verifyMDSBlob.js';
+export { verifyMDSBlob } from '../metadata/index.js';
