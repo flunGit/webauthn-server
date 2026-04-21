@@ -1,6 +1,5 @@
 import { TPM_ST, TPM_ALG, TPM_ECC_CURVE, TPM_MANUFACTURERS, TPM_ECC_CURVE_COSE_CRV_MAP } from './constants.js';
-import { parseCertInfo } from './parseCertInfo.js';
-import { parsePubArea } from './parsePubArea.js';
+import { parseCertInfo, parsePubArea } from './parse.js';
 
 // ================================= constants.js =================================
 /**
@@ -15,28 +14,17 @@ declare module './constants.js' {
     export * from './constants.js';
 }
 
-// ================================= parseCertInfo.js =================================
+// ================================= parse.js =================================
 /**
  * ```js
  * // 文件导出内容
  * parseCertInfo(); // 将 TPM 证明的 certInfo 解析为可读的片段
+ * parsePubArea();  // 解析 TPM 认证信息中的 pubArea 缓冲区
  * ```
- * - 查看定义:@see {@link parseCertInfo}
+ * - 查看定义:@see {@link parseCertInfo}、{@link parsePubArea}
  */
-declare module './parseCertInfo.js' {
-    export * from './parseCertInfo.js';
-}
-
-// ================================= parsePubArea.js =================================
-/**
- * ```js
- * // 文件导出内容
- * parsePubArea(); // 解析 TPM 认证信息中的 pubArea 缓冲区
- * ```
- * - 查看定义:@see {@link parsePubArea}
- */
-declare module './parsePubArea.js' {
-    export * from './parsePubArea.js';
+declare module './parse.js' {
+    export * from './parse.js';
 }
 
 // ================================= 导出入口 =================================
@@ -56,5 +44,4 @@ declare module './parsePubArea.js' {
  */
 declare module './index.js' { }
 export * from './constants.js';
-export * from './parseCertInfo.js';
-export * from './parsePubArea.js';
+export * from './parse.js';

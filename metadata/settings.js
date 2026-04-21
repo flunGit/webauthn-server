@@ -1,4 +1,4 @@
-import { convertCertBufferToPEM } from '../helpers/convertCertBufferToPEM.js';
+import { convertCertBufferToPEM } from '../helpers/index.js';
 import {
     Google_Hardware_Attestation_Root_1, Google_Hardware_Attestation_Root_2, Google_Hardware_Attestation_Root_3,
     Google_Hardware_Attestation_Root_4, GlobalSign_Root_CA, GlobalSign_Root_CA_R3, Apple_WebAuthn_Root_CA

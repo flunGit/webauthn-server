@@ -1,7 +1,7 @@
 import { Certificate } from '@peculiar/asn1-x509';
 import type { Uint8Array_ } from '../types/index.js';
 import {
-    digest, getRandomValues, verify, , verifyEC2, verifyOKP, verifyRSA, fromBuffer, utf8Tob64url, toBuffer, toBase64, b64urlToUtf8,
+    digest, getRandomValues, verify, verifyEC2, verifyOKP, verifyRSA, fromBuffer, utf8Tob64url, toBuffer, toBase64, b64urlToUtf8,
     isBase64, isBase64URL, trimPadding, fromHex, utf8Tobytes, asciiToBytes, toHex, toDataView, bytesToUtf8, areEqual, concat
 } from './iso/index.js';
 import { convertAAGUIDToString } from './convertAAGUIDToString.js';
@@ -42,7 +42,7 @@ import { verifyMDSBlob } from '../metadata/index.js';
  * ---
  * - 查看定义:@see {@link convertAAGUIDToString}
  */
-module './convertAAGUIDToString.js' {
+declare module './convertAAGUIDToString.js' {
     export * from './convertAAGUIDToString.js';
 }
 
@@ -55,7 +55,7 @@ module './convertAAGUIDToString.js' {
  * ---
  * - 查看定义:@see {@link convertCertBufferToPEM}
  */
-module './convertCertBufferToPEM.js' {
+declare module './convertCertBufferToPEM.js' {
     export * from './convertCertBufferToPEM.js';
 }
 
@@ -68,7 +68,7 @@ module './convertCertBufferToPEM.js' {
  * ---
  * - 查看定义:@see {@link convertCOSEtoPKCS}
  */
-module './convertCOSEtoPKCS.js' {
+declare module './convertCOSEtoPKCS.js' {
     export * from './convertCOSEtoPKCS.js';
 }
 
@@ -81,7 +81,7 @@ module './convertCOSEtoPKCS.js' {
  * ---
  * - 查看定义:@see {@link convertPEMToBytes}
  */
-module './convertPEMToBytes.js' {
+declare module './convertPEMToBytes.js' {
     export * from './convertPEMToBytes.js';
 }
 
@@ -94,7 +94,7 @@ module './convertPEMToBytes.js' {
  * ---
  * - 查看定义:@see {@link convertX509PublicKeyToCOSE}
  */
-module './convertX509PublicKeyToCOSE.js' {
+declare module './convertX509PublicKeyToCOSE.js' {
     export * from './convertX509PublicKeyToCOSE.js';
 }
 
@@ -117,7 +117,7 @@ module './convertX509PublicKeyToCOSE.js' {
  *  {@link COSEKEYS}、{@link COSEKTY}、{@link COSECRV}、{@link COSEALG}、{@link isCOSEPublicKeyOKP}、
  *  {@link isCOSEPublicKeyEC2}、{@link isCOSEPublicKeyRSA}、{@link isCOSEKty}、{@link isCOSECrv}、{@link isCOSEAlg}
  */
-module './cose.js' {
+declare module './cose.js' {
     /**
      * COSE 公钥通用值
      */
@@ -168,7 +168,7 @@ module './cose.js' {
  * ---
  * - 查看定义:@see {@link decodeAttestationObject}、{@link AttestationFormat}、{@link AttestationObject}、{@link AttestationStatement}
  */
-module './decodeAttestationObject.js' {
+declare module './decodeAttestationObject.js' {
     export type AttestationFormat = | 'fido-u2f' | 'packed' | 'android-safetynet' | 'android-key' | 'tpm' | 'apple' | 'none';
     export type AttestationObject = {
         get(key: 'fmt'): AttestationFormat, get(key: 'attStmt'): AttestationStatement, get(key: 'authData'): Uint8Array_;
@@ -202,7 +202,7 @@ module './decodeAttestationObject.js' {
  * ---
  * - 查看定义:@see {@link decodeAuthenticatorExtensions}、{@link AuthenticationExtensionsAuthenticatorOutputs}
  */
-module './decodeAuthenticatorExtensions.js' {
+declare module './decodeAuthenticatorExtensions.js' {
     /**
      * 尝试支持 WebAuthn 中可能未知的身份验证器扩展
      */
@@ -223,7 +223,7 @@ module './decodeAuthenticatorExtensions.js' {
  * ---
  * - 查看定义:@see {@link decodeClientDataJSON}、{@link ClientDataJSON}
  */
-module './decodeClientDataJSON.js' {
+declare module './decodeClientDataJSON.js' {
     export type ClientDataJSON = {
         type: string, challenge: string, origin: string;
         crossOrigin?: boolean;
@@ -241,7 +241,7 @@ module './decodeClientDataJSON.js' {
  * ---
  * - 查看定义:@see {@link decodeCredentialPublicKey}
  */
-module './decodeCredentialPublicKey.js' {
+declare module './decodeCredentialPublicKey.js' {
     export * from './decodeCredentialPublicKey.js';
 }
 
@@ -254,7 +254,7 @@ module './decodeCredentialPublicKey.js' {
  * ---
  * - 查看定义:@see {@link fetch}
  */
-module './fetch.js' {
+declare module './fetch.js' {
     export * from './fetch.js';
 }
 
@@ -267,7 +267,7 @@ module './fetch.js' {
  * ---
  * - 查看定义:@see {@link generateChallenge}
  */
-module './generateChallenge.js' {
+declare module './generateChallenge.js' {
     export * from './generateChallenge.js';
 }
 
@@ -280,7 +280,7 @@ module './generateChallenge.js' {
  * ---
  * - 查看定义:@see {@link generateUserID}
  */
-module './generateUserID.js' {
+declare module './generateUserID.js' {
     export * from './generateChallenge.js';
 }
 
@@ -297,7 +297,7 @@ module './generateUserID.js' {
  * ---
  * - 查看定义:@see {@link getCertificateInfo}、{@link CertificateInfo}、{@link Issuer}、{@link Subject}
  */
-module './getCertificateInfo.js' {
+declare module './getCertificateInfo.js' {
     export type CertificateInfo = {
         issuer: Issuer;
         subject: Subject;
@@ -322,7 +322,7 @@ module './getCertificateInfo.js' {
  * ---
  * - 查看定义:@see {@link isCertRevoked}
  */
-module './isCertRevoked.js' {
+declare module './isCertRevoked.js' {
     export * from './isCertRevoked.js';
 }
 
@@ -335,7 +335,7 @@ module './isCertRevoked.js' {
  * ---
  * - 查看定义:@see {@link getLogger}
  */
-module './logging.js' {
+declare module './logging.js' {
     export * from './logging.js';
 }
 
@@ -348,7 +348,7 @@ module './logging.js' {
  * ---
  * - 查看定义:@see {@link mapX509SignatureAlgToCOSEAlg}
  */
-module './mapX509SignatureAlgToCOSEAlg.js' {
+declare module './mapX509SignatureAlgToCOSEAlg.js' {
     export * from './mapX509SignatureAlgToCOSEAlg.js';
 }
 
@@ -365,7 +365,7 @@ module './mapX509SignatureAlgToCOSEAlg.js' {
  * ---
  * - 查看定义:@see {@link matchExpectedRPID}、{@link UnexpectedRPIDHash}
  */
-module './matchExpectedRPID.js' {
+declare module './matchExpectedRPID.js' {
     export * from './matchExpectedRPID.js';
 }
 
@@ -382,7 +382,7 @@ module './matchExpectedRPID.js' {
  * ---
  * - 查看定义:@see {@link parseAuthenticatorData}、{@link ParsedAuthenticatorData}
  */
-module './parseAuthenticatorData.js' {
+declare module './parseAuthenticatorData.js' {
     export type ParsedAuthenticatorData = {
         rpIdHash: Uint8Array_, flagsBuf: Uint8Array_;
         flags: {
@@ -412,7 +412,7 @@ module './parseAuthenticatorData.js' {
  * ---
  * - 查看定义:@see {@link parseBackupFlags}、{@link InvalidBackupFlags}
  */
-module './parseBackupFlags.js' {
+declare module './parseBackupFlags.js' {
     export * from './parseBackupFlags.js'
 }
 
@@ -425,7 +425,7 @@ module './parseBackupFlags.js' {
  * ---
  * - 查看定义:@see {@link toHash}
  */
-module './toHash.js' {
+declare module './toHash.js' {
     export * from './toHash.js';
 }
 
@@ -442,7 +442,7 @@ module './toHash.js' {
  * ---
  * - 查看定义:@see {@link validateCertificatePath}、{@link InvalidSubjectAndIssuer}
  */
-module './validateCertificatePath.js' {
+declare module './validateCertificatePath.js' {
     export * from './validateCertificatePath.js'
 }
 
@@ -455,7 +455,7 @@ module './validateCertificatePath.js' {
  * ---
  * - 查看定义:@see {@link validateExtFIDOGenCEAAGUID}
  */
-module './validateExtFIDOGenCEAAGUID.js' {
+declare module './validateExtFIDOGenCEAAGUID.js' {
     export * from './validateExtFIDOGenCEAAGUID.js'
 }
 
@@ -468,7 +468,7 @@ module './validateExtFIDOGenCEAAGUID.js' {
  * ---
  * - 查看定义:@see {@link verifySignature}
  */
-module './verifySignature.js' {
+declare module './verifySignature.js' {
     export * from './verifySignature.js';
 }
 
@@ -501,7 +501,6 @@ module './verifySignature.js' {
  * areEqual();                   // 判断两个 Uint8Array 是否相等
  * concat();                     // 合并多个 Uint8Array
  *
- * verifyMDSBlob();              // 对 BLOB 进行真实性与完整性验证
  * // 转换函数
  * convertAAGUIDToString();      // 将 authData 中的 aaguid 缓冲区转换为 UUID 字符串
  * convertCertBufferToPEM();     // 将缓冲区转换为 OpenSSL 兼容的 PEM 文本格式
@@ -552,7 +551,6 @@ module './verifySignature.js' {
 * {@link fromBuffer}、{@link utf8Tob64url}、{@link toBuffer}、{@link toBase64}、{@link b64urlToUtf8}、{@link isBase64}、
  * {@link isBase64URL}、{@link trimPadding}、{@link fromHex}、{@link utf8Tobytes}、{@link asciiToBytes}、{@link toHex}、
  *  {@link toDataView}、{@link bytesToUtf8}、 {@link areEqual}、{@link concat}
- * - BLOB验证函数:{@link verifyMDSBlob};
  * - 转换函数:{@link convertAAGUIDToString}、{@link convertCertBufferToPEM}、{@link convertCOSEtoPKCS}、
  *  {@link convertPEMToBytes}、{@link convertX509PublicKeyToCOSE}
  * - COSE 公钥 {@link COSEKEYS}、{@link COSEKTY}、{@link COSECRV}、{@link COSEALG}、{@link isCOSEPublicKeyOKP}、
@@ -566,7 +564,7 @@ module './verifySignature.js' {
  * - 工具与辅助：{@link fetch}、{@link generateChallenge}、{@link generateUserID}、{@link matchExpectedRPID}、
  * {@link getLogger}、{@link UnexpectedRPIDHash}
  */
-module './index' { }
+declare module './index' { }
 export * from './iso/index.js';
 export * from './convertAAGUIDToString.js';
 export * from './convertCertBufferToPEM.js';

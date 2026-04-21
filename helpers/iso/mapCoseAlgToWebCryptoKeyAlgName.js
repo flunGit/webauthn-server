@@ -1,4 +1,4 @@
-import { COSEALG } from '../../cose.js';
+import { COSEALG } from '../cose.js';
 
 /**
  * 将 COSE 算法标识符转换为 WebCrypto API 所期望的对应密钥算法字符串值

@@ -1,4 +1,4 @@
-import { isCOSEPublicKeyEC2, isCOSECrv, isCOSEPublicKeyRSA, isCOSEPublicKeyOKP, COSEKEYS } from '../../cose.js';
+import { isCOSEPublicKeyEC2, isCOSECrv, isCOSEPublicKeyRSA, isCOSEPublicKeyOKP, COSEKEYS } from '../cose.js';
 import { getWebCrypto } from './getWebCrypto.js';
 import { mapCoseAlgToWebCryptoAlg } from './mapCoseAlgToWebCryptoAlg.js';
 import { unwrapEC2Signature } from './unwrapEC2Signature.js';

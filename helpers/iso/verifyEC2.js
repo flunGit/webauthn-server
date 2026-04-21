@@ -1,5 +1,5 @@
-import { COSECRV, COSEKEYS } from '../../cose.js';
-import { fromBuffer } from '../isoBase64URL.js';
+import { COSECRV, COSEKEYS } from '../cose.js';
+import { fromBuffer } from './isoBase64URL.js';
 import { getWebCrypto } from './getWebCrypto.js';
 import { importKey } from './importKey.js';
 import { mapCoseAlgToWebCryptoAlg } from './mapCoseAlgToWebCryptoAlg.js';

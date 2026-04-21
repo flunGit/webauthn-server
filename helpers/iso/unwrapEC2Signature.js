@@ -1,7 +1,7 @@
 import { AsnParser } from '@peculiar/asn1-schema';
 import { ECDSASigValue } from '@peculiar/asn1-ecc';
-import { COSECRV } from '../../cose.js';
-import { concat } from '../isoUint8Array.js';
+import { COSECRV } from '../cose.js';
+import { concat } from './isoUint8Array.js';
 
 /**
  * 根据曲线类型返回 ECDSA 签名分量（r/s）的标准字节长度
