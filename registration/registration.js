@@ -3,7 +3,7 @@ import {
     decodeClientDataJSON, parseAuthenticatorData, decodeCredentialPublicKey, COSEKEYS, convertAAGUIDToString,
     parseBackupFlags, matchExpectedRPID, toHash
 } from '../helpers/index.js';
-import { SettingsService } from '../services/index.js';
+import { SettingsService } from '../metadata/settings.js';
 import {
     verifyAttestationFIDOU2F, verifyAttestationPacked, verifyAttestationAndroidSafetyNet,
     verifyAttestationAndroidKey, verifyAttestationApple, verifyAttestationTPM

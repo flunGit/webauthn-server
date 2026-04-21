@@ -24,7 +24,6 @@
     "authentication/",
     "metadata/",
     "registration/",
-    "services/",
     "types/",
     "CHANGELOG.md",
     "LICENSE.md",

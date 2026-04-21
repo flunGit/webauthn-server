@@ -4,8 +4,7 @@ import { id_ce_keyDescription, KeyDescription } from '@peculiar/asn1-android';
 import {
     convertCertBufferToPEM, validateCertificatePath, verifySignature, convertCOSEtoPKCS, areEqual, concat, isCOSEAlg
 } from '../../helpers/index.js';
-import { verifyAttestationWithMetadata } from '../../metadata/index.js';
-import { MetadataService } from '../../services/index.js';
+import { verifyAttestationWithMetadata, MetadataService } from '../../metadata/metadata.js';
 
 /**
  * 验证格式为 'android-key' 的证明响应
