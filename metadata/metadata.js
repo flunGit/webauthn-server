@@ -1,7 +1,7 @@
 import {
     b64urlToUtf8, toBuffer, utf8Tobytes, verifyEC2, verifyRSA, convertAAGUIDToString, convertCertBufferToPEM, convertPEMToBytes,
-    convertX509PublicKeyToCOSE, COSEKEYS, COSEKTY, COSEALG, isCOSEPublicKeyEC2, isCOSEPublicKeyRSA,
-    decodeCredentialPublicKey, fetch, getLogger, validateCertificatePath
+    convertX509PublicKeyToCOSE, COSEKEYS, COSEKTY, COSEALG, isCOSEPublicKeyEC2, isCOSEPublicKeyRSA, decodeCredentialPublicKey,
+    fetch, getLogger, validateCertificatePath
 } from '../helpers/iso/index.js';
 
 import { SettingsService } from './settings.js';
