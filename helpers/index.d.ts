@@ -563,27 +563,28 @@ declare module './verifySignature.js' {
  * - 工具与辅助：{@link fetch}、{@link generateChallenge}、{@link generateUserID}、{@link matchExpectedRPID}、
  * {@link getLogger}、{@link UnexpectedRPIDHash}
  */
-declare module './index.js' { }
-export * from './iso/index.js';
-export * from './convertAAGUIDToString.js';
-export * from './convertCertBufferToPEM.js';
-export * from './convertCOSEtoPKCS.js';
-export * from './convertPEMToBytes.js';
-export * from './convertX509PublicKeyToCOSE.js';
-export * from './cose.js';
-export * from './decodeAttestationObject.js';
-export * from './decodeClientDataJSON.js';
-export * from './decodeCredentialPublicKey.js';
-export * from './fetch.js';
-export * from './generateChallenge.js';
-export * from './generateUserID.js';
-export * from './getCertificateInfo.js';
-export * from './isCertRevoked.js';
-export * from './logging.js';
-export * from './matchExpectedRPID.js';
-export * from './parseAuthenticatorData.js';
-export * from './parseBackupFlags.js';
-export * from './toHash.js';
-export * from './validateCertificatePath.js';
-export * from './validateExtFIDOGenCEAAGUID.js';
-export * from './verifySignature.js';
+declare module './index.js' {
+    export * from './iso/index.js';
+    export * from './convertAAGUIDToString.js';
+    export * from './convertCertBufferToPEM.js';
+    export * from './convertCOSEtoPKCS.js';
+    export * from './convertPEMToBytes.js';
+    export * from './convertX509PublicKeyToCOSE.js';
+    export * from './cose.js';
+    export * from './decodeAttestationObject.js';
+    export * from './decodeClientDataJSON.js';
+    export * from './decodeCredentialPublicKey.js';
+    export * from './fetch.js';
+    export * from './generateChallenge.js';
+    export * from './generateUserID.js';
+    export * from './getCertificateInfo.js';
+    export * from './isCertRevoked.js';
+    export * from './logging.js';
+    export * from './matchExpectedRPID.js';
+    export * from './parseAuthenticatorData.js';
+    export * from './parseBackupFlags.js';
+    export * from './toHash.js';
+    export * from './validateCertificatePath.js';
+    export * from './validateExtFIDOGenCEAAGUID.js';
+    export * from './verifySignature.js';
+}

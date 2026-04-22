@@ -16,5 +16,6 @@ import {
  * {@link Google_Hardware_Attestation_Root_3}、{@link Google_Hardware_Attestation_Root_4}、{@link GlobalSign_Root_CA}、
  * {@link GlobalSign_Root_CA_R3}、{@link Apple_WebAuthn_Root_CA}
  */
-declare module './index.js' { }
-export * from './certs.js';
+declare module './index.js' {
+    export * from './certs.js';
+}

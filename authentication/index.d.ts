@@ -9,6 +9,5 @@ import { generateAuthenticationOptions, verifyAuthenticationResponse } from './a
  * - 查看定义:@see {@link generateAuthenticationOptions}、{@link verifyAuthenticationResponse}
  */
 declare module './index.js' {
-
+    export * from './authentication.js';
 }
-export * from './authentication.js';

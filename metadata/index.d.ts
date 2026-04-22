@@ -57,6 +57,7 @@ declare module './settings.js' {
  * {@link verifyJWT}、 {@link verifyMDSBlob}、{@link BaseMetadataService}、{@link MetadataService}、
  * {@link BaseSettingsService}、{@link SettingsService}
  */
-declare module './index.js' { }
-export * from './metadata.js';
-export * from './settings.js';
+declare module './index.js' {
+    export * from './metadata.js';
+    export * from './settings.js';
+}

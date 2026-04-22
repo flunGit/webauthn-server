@@ -42,6 +42,7 @@ declare module './parse.js' {
  * - 查看定义:@see {@link TPM_ST}、{@link TPM_ALG}、{@link TPM_ECC_CURVE }、{@link TPM_MANUFACTURERS}、
  * {@link TPM_ECC_CURVE_COSE_CRV_MAP}、{@link parseCertInfo}、{@link parsePubArea}
  */
-declare module './index.js' { }
-export * from './constants.js';
-export * from './parse.js';
+declare module './index.js' {
+    export * from './constants.js';
+    export * from './parse.js';
+}

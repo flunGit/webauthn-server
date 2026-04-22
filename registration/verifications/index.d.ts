@@ -92,10 +92,11 @@ declare module './verifyAttestationTPM.js' {
  * {@link verifyAttestationApple}、{@link verifyAttestationFIDOU2F}、{@link verifyAttestationPacked}、
  * {@link verifyAttestationTPM}
  */
-declare module './index.js' { }
-export * from './verifyAttestationAndroidKey.js';
-export * from './verifyAttestationAndroidSafetyNet.js';
-export * from './verifyAttestationApple.js';
-export * from './verifyAttestationFIDOU2F.js';
-export * from './verifyAttestationPacked.js';
-export * from './verifyAttestationTPM.js';
+declare module './index.js' {
+    export * from './verifyAttestationAndroidKey.js';
+    export * from './verifyAttestationAndroidSafetyNet.js';
+    export * from './verifyAttestationApple.js';
+    export * from './verifyAttestationFIDOU2F.js';
+    export * from './verifyAttestationPacked.js';
+    export * from './verifyAttestationTPM.js';
+}

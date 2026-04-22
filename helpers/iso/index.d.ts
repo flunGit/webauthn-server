@@ -236,16 +236,17 @@ declare module './verifyRSA.js' {
  * - isoUint8Array文件函数:{@link fromHex}、{@link utf8Tobytes}、{@link asciiToBytes}、{@link toHex}、{@link toDataView}、
  *  {@link bytesToUtf8}、{@link areEqual}、{@link concat}
  */
-declare module './index.js' { }
-export * from './getWebCrypto.js';
-export * from './importKey.js';
-export * from './isoBase64URL.js';
-export * from './isoCBOR.js';
-export * from './isoUint8Array.js';
-export * from './mapCoseAlgToWebCryptoAlg.js';
-export * from './mapCoseAlgToWebCryptoKeyAlgName.js';
-export * from './output.js';
-export * from './unwrapEC2Signature.js';
-export * from './verifyEC2.js';
-export * from './verifyOKP.js';
-export * from './verifyRSA.js';
+declare module './index.js' {
+    export * from './getWebCrypto.js';
+    export * from './importKey.js';
+    export * from './isoBase64URL.js';
+    export * from './isoCBOR.js';
+    export * from './isoUint8Array.js';
+    export * from './mapCoseAlgToWebCryptoAlg.js';
+    export * from './mapCoseAlgToWebCryptoKeyAlgName.js';
+    export * from './output.js';
+    export * from './unwrapEC2Signature.js';
+    export * from './verifyEC2.js';
+    export * from './verifyOKP.js';
+    export * from './verifyRSA.js';
+}

@@ -11,5 +11,6 @@ import {
  * ```
  * - 查看定义:@see {@link supportedCOSEAlgorithmIdentifiers}、{@link generateRegistrationOptions}、{@link verifyRegistrationResponse}
  */
-declare module './index.js' { }
-export * from './registration.js';
+declare module './index.js' {
+    export * from './registration.js';
+}
