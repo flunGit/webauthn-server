@@ -1,17 +1,4 @@
 let webCrypto = undefined;
-
-/**
- * 当无法在当前运行时环境中定位到 Crypto API 实例时抛出的错误;
- * - 查看定义:@see {@link MissingWebCrypto}
- * @extends Error
- */
-class MissingWebCrypto extends Error {
-    constructor() {
-        const message = '无法定位 Crypto API 的实例';
-        super(message), this.name = 'MissingWebCrypto';
-    }
-}
-
 /**
  * 内部使用的辅助对象,主要用于测试时模拟和重置缓存;
  * - 查看定义:{@link _getWebCryptoInternals}
@@ -25,6 +12,18 @@ const _getWebCryptoInternals = {
     stubThisGlobalThisCrypto: () => globalThis.crypto,
     setCachedCrypto: newCrypto => webCrypto = newCrypto // 便于重置文件顶部的 `webCrypto` 变量
 };
+
+/**
+ * 当无法在当前运行时环境中定位到 Crypto API 实例时抛出的错误;
+ * - 查看定义:@see {@link MissingWebCrypto}
+ * @extends Error
+ */
+class MissingWebCrypto extends Error {
+    constructor() {
+        const message = '无法定位 Crypto API 的实例';
+        super(message), this.name = 'MissingWebCrypto';
+    }
+}
 
 /**
  * 尝试从当前运行时获取 Crypto API 的实例,支持 Node.js（v20+）以及实现了 Web API 的其他环境（如 Deno、Bun）;
@@ -52,4 +51,4 @@ const getWebCrypto = () => {
     return toResolve;
 };
 
-export { _getWebCryptoInternals, getWebCrypto, MissingWebCrypto };
+export { _getWebCryptoInternals, MissingWebCrypto, getWebCrypto };

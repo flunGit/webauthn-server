@@ -1,9 +1,21 @@
 import { Certificate } from '@peculiar/asn1-x509';
 import type { Uint8Array_ } from '../types/index.js';
+import { _getWebCryptoInternals, MissingWebCrypto, getWebCrypto } from './iso/getWebCrypto.js';
+import { importKey } from './iso/importKey.js';
 import {
-    digest, getRandomValues, verify, verifyEC2, verifyOKP, verifyRSA, fromBuffer, utf8Tob64url, toBuffer, toBase64, b64urlToUtf8,
-    isBase64, isBase64URL, trimPadding, fromHex, utf8Tobytes, asciiToBytes, toHex, toDataView, bytesToUtf8, areEqual, concat
-} from './iso/index.js';
+    fromBuffer, utf8Tob64url, toBuffer, toBase64, b64urlToUtf8, isBase64, isBase64URL, trimPadding
+} from './iso/isoBase64URL.js';
+import { decodeFirst, encode } from './iso/isoCBOR.js';
+import {
+    fromHex, utf8Tobytes, asciiToBytes, toHex, toDataView, bytesToUtf8, areEqual, concat
+} from './iso/isoUint8Array.js';
+import { digest, getRandomValues, verify } from './iso/output.js';
+import { mapCoseAlgToWebCryptoAlg } from './iso/mapCoseAlgToWebCryptoAlg.js';
+import { mapCoseAlgToWebCryptoKeyAlgName } from './iso/mapCoseAlgToWebCryptoKeyAlgName.js';
+import { unwrapEC2Signature } from './iso/unwrapEC2Signature.js';
+import { verifyEC2 } from './iso/verifyEC2.js';
+import { verifyOKP } from './iso/verifyOKP.js';
+import { verifyRSA } from './iso/verifyRSA.js';
 import { convertAAGUIDToString } from './convertAAGUIDToString.js';
 import { convertCertBufferToPEM } from './convertCertBufferToPEM.js';
 import { convertCOSEtoPKCS } from './convertCOSEtoPKCS.js';
@@ -31,6 +43,265 @@ import { toHash } from './toHash.js';
 import { validateCertificatePath, InvalidSubjectAndIssuer } from './validateCertificatePath.js';
 import { validateExtFIDOGenCEAAGUID } from './validateExtFIDOGenCEAAGUID.js';
 import { _verifySignatureInternals, verifySignature } from './verifySignature.js';
+
+// ================================= getWebCrypto.js =================================
+/**
+ * ```js
+ * // 文件导出内容:
+ *
+ * // 常量
+ * const _getWebCryptoInternals; // 内部使用的辅助对象,主要用于测试时模拟和重置缓存;
+ *
+ * // 类
+ * class MissingWebCrypto{};     // 当无法在当前运行时环境中定位到 Crypto API 实例时抛出的错误;
+ *
+ * // 函数
+ * getWebCrypto();               // 尝试从当前运行时获取Crypto API的实例,支持Node(v20+)及现代浏览器环境;
+ * ```
+ * ---
+ * - 查看定义:@see {@link getWebCrypto}、{@link MissingWebCrypto}、{@link _getWebCryptoInternals}
+ */
+declare module './iso/getWebCrypto.js' {
+    export * from './getWebCrypto.js';
+}
+
+// ================================= importKey.js =================================
+/**
+ * ```js
+ * // 文件导出内容
+ * importKey(); // 导入一个用于签名验证的 JSON Web Key (JWK) 格式密钥
+ * ```
+ * - 查看定义:@see {@link importKey}
+ */
+declare module './iso/importKey.js' {
+    export * from './importKey.js';
+}
+
+// ================================= isoBase64URL.js =================================
+/**
+ * ```js
+ * // 文件导出内容(函数):
+ * fromBuffer();   // 将给定的 ArrayBuffer编码为 Base64URL
+ * utf8Tob64url(); // 将 UTF-8字符串编码为 base64url
+ * toBuffer();     // 将 Base64URL编码的字符串解码为 ArrayBuffer
+ * toBase64();     // 将 Base64URL字符串转换为标准 base64
+ * b64urlToUtf8(); // 将 base64url字符串解码为其原始的 UTF-8
+ * isBase64();     // 检查是否为 base64编码
+ * isBase64URL();  // 检查是否为 base64url编码
+ * trimPadding();  // 移除 base64url 编码字符串中可选的填充字符
+ * ```
+ * ---
+ * - 查看定义:@see {@link fromBuffer}、{@link utf8Tob64url}、{@link toBuffer}、{@link toBase64}、
+ *  {@link b64urlToUtf8}、{@link isBase64}、{@link isBase64URL}、{@link trimPadding}
+ */
+declare module './iso/isoBase64URL.js' {
+    export * from './isoBase64URL.js';
+}
+
+// ================================= isoCBOR.js =================================
+/**
+ * ```js
+ * // 文件导出内容(函数):
+ * decodeFirst(); // 解码 CBOR 数据的第一个项
+ * encode();      // 将数据编码为 CBOR
+ * ```
+ * ---
+ * - 查看定义:@see {@link decodeFirst}、{@link encode}
+ */
+declare module './iso/isoCBOR.js' {
+    export * from './isoCBOR.js';
+}
+
+// ================================= isoUint8Array.js =================================
+/**
+ * ```js
+ * // 文件导出内容(函数):
+ * fromHex();      // 从十六进制字符串创建 Uint8Array
+ * utf8Tobytes();  // 将 UTF-8 字符串编码为 Uint8Array
+ * asciiToBytes(); // 将 ASCII 字符串转换为 Uint8Array
+ * toHex();        // 转换为十六进制字符串
+ * toDataView();   // 转换为 DataView 对象
+ * bytesToUtf8();  // 将 Uint8Array 解码为 UTF-8 字符串
+ * areEqual();     // 判断两个 Uint8Array 是否相等
+ * concat();       // 合并多个 Uint8Array
+ * ```
+ * ---
+ * - 查看定义:@see {@link fromHex}、{@link utf8Tobytes}、{@link asciiToBytes}、{@link toHex}、{@link toDataView}、
+ *  {@link bytesToUtf8}、{@link areEqual}、{@link concat}
+ */
+declare module './iso/isoUint8Array.js' {
+    export * from './isoUint8Array.js';
+}
+
+
+// ================================= mapCoseAlgToWebCryptoAlg.js =================================
+/**
+ * ```js
+ * // 文件导出内容
+ * mapCoseAlgToWebCryptoAlg(); // 将 COSE 算法标识符转换为 WebCrypto API 所期望的对应字符串值
+ * ```
+ * - 查看定义:@see {@link mapCoseAlgToWebCryptoAlg}
+ */
+declare module './iso/mapCoseAlgToWebCryptoAlg.js' {
+    export * from './mapCoseAlgToWebCryptoAlg.js';
+}
+
+// ================================= mapCoseAlgToWebCryptoKeyAlgName.js =================================
+/**
+ * ```js
+ * // 文件导出内容
+ * mapCoseAlgToWebCryptoKeyAlgName(); // 将 COSE 算法标识符(alg ID)转换为WebCrypto API所期望的对应密钥算法字符串值
+ * ```
+ * - 查看定义:@see {@link mapCoseAlgToWebCryptoKeyAlgName}
+ */
+declare module './iso/mapCoseAlgToWebCryptoKeyAlgName.js' {
+    export * from './mapCoseAlgToWebCryptoKeyAlgName.js';
+}
+
+// ================================= output.js =================================
+/**
+ * ```js
+ * // 文件导出内容:
+ * digest();          // 生成所提供数据的摘要;
+ * getRandomValues(); // 使用与数组长度相等的随机字节填充传入的字节数组;
+ * verify();          // 使用公钥验证签名,支持 EC2 和 RSA 公钥;
+ * ```
+ * - 查看定义:@see {@link digest}、{@link getRandomValues}、{@link verify}
+ */
+declare module './iso/output.js' {
+    export * from './output.js';
+}
+
+// ================================= structs.js =================================
+/**
+ * ```js
+  * // 文件导出内容
+ * type SubtleCryptoAlg; type SubtleCryptoCrv; type SubtleCryptoKeyAlgName;
+ * ```
+ * - 查看定义:@see {@link SubtleCryptoAlg}、{@link SubtleCryptoCrv}、{@link SubtleCryptoKeyAlgName}
+ */
+declare module './iso/structs.js' {
+    export type SubtleCryptoAlg = 'SHA-1' | 'SHA-256' | 'SHA-384' | 'SHA-512';
+    export type SubtleCryptoCrv = 'P-256' | 'P-384' | 'P-521' | 'Ed25519';
+    export type SubtleCryptoKeyAlgName = 'ECDSA' | 'Ed25519' | 'RSASSA-PKCS1-v1_5' | 'RSA-PSS';
+}
+
+// ================================= unwrapEC2Signature.js =================================
+/**
+ * ```js
+ * // 文件导出内容
+ * unwrapEC2Signature(); // 从EC2签名的 ASN.1 结构中提取出 r 和 s;
+ * ```
+ * - 查看定义:@see {@link unwrapEC2Signature}
+ */
+declare module './iso/unwrapEC2Signature.js' {
+    export * from './unwrapEC2Signature.js';
+}
+
+// ================================= verifyEC2.js =================================
+/**
+ * ```js
+ * // 文件导出内容
+ * verifyEC2(); // 使用 EC2 公钥验证签名
+ * ```
+ * - 查看定义:@see {@link verifyEC2}
+ */
+declare module './iso/verifyEC2.js' {
+    export * from './verifyEC2.js';
+}
+
+// ================================= verifyOKP.js =================================
+/**
+ * ```js
+ * // 文件导出内容
+ * verifyOKP(); // 验证 OKP 类型的 COSE 签名
+ * ```
+ * - 查看定义:@see {@link verifyOKP}
+ */
+declare module './iso/verifyOKP.js' {
+    export * from './verifyOKP.js';
+}
+
+// ================================= verifyRSA.js =================================
+/**
+ * ```js
+ * // 文件导出内容
+ * verifyRSA(); // 使用 RSA 公钥验证签名
+ * ```
+ * - 查看定义:@see {@link verifyRSA}
+ */
+declare module './iso/verifyRSA.js' {
+    export * from './verifyRSA.js';
+}
+
+// ================================= iso模块整体导出 =================================
+/**
+ * ```js
+ * // 导出元素说明（按导入顺序排列）：
+ *
+ * // 常量
+ * const _getWebCryptoInternals             // 内部测试辅助对象，用于模拟和重置缓存
+ *
+ * // 类
+ * class MissingWebCrypto {}               // 当无法在当前运行时环境中定位到 Crypto API 实例时抛出的错误
+ *
+ * // 函数
+ * getWebCrypto()                          // 尝试从当前运行时获取 Crypto API 实例，支持 Node (v20+) 及现代浏览器
+ * importKey()                             // 导入用于签名验证的 JSON Web Key (JWK) 格式密钥
+ * fromBuffer()                            // 将 ArrayBuffer 编码为 Base64URL
+ * utf8Tob64url()                          // 将 UTF-8 字符串编码为 Base64URL
+ * toBuffer()                              // 将 Base64URL 字符串解码为 ArrayBuffer
+ * toBase64()                              // 将 Base64URL 字符串转换为标准 Base64
+ * b64urlToUtf8()                          // 将 Base64URL 字符串解码为原始 UTF-8 字符串
+ * isBase64()                              // 检查字符串是否为 Base64 编码
+ * isBase64URL()                           // 检查字符串是否为 Base64URL 编码
+ * trimPadding()                           // 移除 Base64URL 编码字符串中可选的填充字符
+ * decodeFirst()                           // 解码 CBOR 数据的第一个项
+ * encode()                                // 将数据编码为 CBOR
+ * fromHex()                               // 从十六进制字符串创建 Uint8Array
+ * utf8Tobytes()                           // 将 UTF-8 字符串编码为 Uint8Array
+ * asciiToBytes()                          // 将 ASCII 字符串转换为 Uint8Array
+ * toHex()                                 // 转换为十六进制字符串
+ * toDataView()                            // 转换为 DataView 对象
+ * bytesToUtf8()                           // 将 Uint8Array 解码为 UTF-8 字符串
+ * areEqual()                              // 判断两个 Uint8Array 是否相等
+ * concat()                                // 合并多个 Uint8Array
+ * digest()                                // 生成所提供数据的摘要
+ * getRandomValues()                       // 用随机字节填充传入的字节数组
+ * verify()                                // 使用公钥验证签名（支持 EC2 和 RSA）
+ * mapCoseAlgToWebCryptoAlg()              // 将 COSE 算法标识符转换为 WebCrypto API 所期望的字符串值
+ * mapCoseAlgToWebCryptoKeyAlgName()       // 将 COSE 算法标识符转换为 WebCrypto API 所期望的密钥算法字符串
+ * unwrapEC2Signature()                    // 从 EC2 签名的 ASN.1 结构中提取 r 和 s
+ * verifyEC2()                             // 使用 EC2 公钥验证签名
+ * verifyOKP()                             // 验证 OKP 类型的 COSE 签名
+ * verifyRSA()                             // 使用 RSA 公钥验证签名
+ * ```
+ *
+ * ---
+ *
+ * - 查看定义:@see
+ * - 常量: {@link _getWebCryptoInternals}
+ * - 类: {@link MissingWebCrypto}
+ * - 函数:{@link getWebCrypto} 、{@link importKey} 、{@link fromBuffer} 、{@link utf8Tob64url} 、{@link toBuffer} 、{@link toBase64} 、
+ *{@link b64urlToUtf8} 、{@link isBase64} 、{@link isBase64URL} 、{@link trimPadding} 、{@link decodeFirst} 、{@link encode} 、
+ *{@link fromHex} 、{@link utf8Tobytes} 、{@link asciiToBytes} 、{@link toHex} 、{@link toDataView} 、{@link bytesToUtf8} 、
+ *{@link areEqual} 、{@link concat} 、{@link digest} 、{@link getRandomValues} 、{@link verify} 、{@link mapCoseAlgToWebCryptoAlg} 、
+ *{@link mapCoseAlgToWebCryptoKeyAlgName} 、{@link unwrapEC2Signature} 、{@link verifyEC2} 、{@link verifyOKP} 、{@link verifyRSA}
+ */
+declare module './iso/index.js' {
+    export * from './iso/getWebCrypto.js';
+    export * from './iso/importKey.js';
+    export * from './iso/isoBase64URL.js';
+    export * from './iso/isoCBOR.js';
+    export * from './iso/isoUint8Array.js';
+    export * from './iso/mapCoseAlgToWebCryptoAlg.js';
+    export * from './iso/mapCoseAlgToWebCryptoKeyAlgName.js';
+    export * from './iso/output.js';
+    export * from './iso/unwrapEC2Signature.js';
+    export * from './iso/verifyEC2.js';
+    export * from './iso/verifyOKP.js';
+    export * from './iso/verifyRSA.js';
+}
 
 // ================================= convertAAGUIDToString.js =================================
 /**
@@ -499,6 +770,8 @@ declare module './verifySignature.js' {
  * bytesToUtf8();                // 将 Uint8Array 解码为 UTF-8 字符串
  * areEqual();                   // 判断两个 Uint8Array 是否相等
  * concat();                     // 合并多个 Uint8Array
+ * mapCoseAlgToWebCryptoAlg();        // 将 COSE 算法标识符转换为 WebCrypto API 所期望的对应字符串值
+ * mapCoseAlgToWebCryptoKeyAlgName(); // 将 COSE 算法标识符(alg ID)转换为WebCrypto API所期望的对应密钥算法字符串值
  *
  * // 转换函数
  * convertAAGUIDToString();      // 将 authData 中的 aaguid 缓冲区转换为 UUID 字符串
@@ -547,9 +820,9 @@ declare module './verifySignature.js' {
  * ---
  * - 查看定义@see :
  * - iso目录工具:{@link digest}、{@link getRandomValues}、{@link verify }、{@link verifyEC2 }、{@link verifyOKP}、{@link verifyRSA}、
-* {@link fromBuffer}、{@link utf8Tob64url}、{@link toBuffer}、{@link toBase64}、{@link b64urlToUtf8}、{@link isBase64}、
- * {@link isBase64URL}、{@link trimPadding}、{@link fromHex}、{@link utf8Tobytes}、{@link asciiToBytes}、{@link toHex}、
- *  {@link toDataView}、{@link bytesToUtf8}、 {@link areEqual}、{@link concat}
+ * {@link fromBuffer}、{@link utf8Tob64url}、{@link toBuffer}、{@link toBase64}、{@link b64urlToUtf8}、{@link isBase64}、{@link isBase64URL}、
+ * {@link trimPadding}、{@link decodeFirst}、{@link encode}、{@link fromHex}、{@link utf8Tobytes}、{@link asciiToBytes}、{@link toHex}、
+ * {@link toDataView}、{@link bytesToUtf8}、 {@link areEqual}、{@link concat}、{@link mapCoseAlgToWebCryptoAlg}、{@link mapCoseAlgToWebCryptoKeyAlgName}
  * - 转换函数:{@link convertAAGUIDToString}、{@link convertCertBufferToPEM}、{@link convertCOSEtoPKCS}、
  *  {@link convertPEMToBytes}、{@link convertX509PublicKeyToCOSE}
  * - COSE 公钥 {@link COSEKEYS}、{@link COSEKTY}、{@link COSECRV}、{@link COSEALG}、{@link isCOSEPublicKeyOKP}、
