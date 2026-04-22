@@ -564,7 +564,7 @@ declare module './verifySignature.js' {
  * - 工具与辅助：{@link fetch}、{@link generateChallenge}、{@link generateUserID}、{@link matchExpectedRPID}、
  * {@link getLogger}、{@link UnexpectedRPIDHash}
  */
-declare module './index' { }
+declare module './index.js' { }
 export * from './iso/index.js';
 export * from './convertAAGUIDToString.js';
 export * from './convertCertBufferToPEM.js';
