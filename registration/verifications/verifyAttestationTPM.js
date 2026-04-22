@@ -3,9 +3,8 @@ import {
     Certificate, id_ce_extKeyUsage, id_ce_subjectAltName, SubjectAlternativeName, ExtendedKeyUsage
 } from '@peculiar/asn1-x509';
 import {
-    decodeCredentialPublicKey, toHash, convertCertBufferToPEM, validateCertificatePath, getCertificateInfo,
-    verifySignature, areEqual, concat, validateExtFIDOGenCEAAGUID, COSEKEYS, COSEALG, isCOSEAlg, isCOSEPublicKeyRSA,
-    isCOSEPublicKeyEC2
+    areEqual, concat, convertCertBufferToPEM, COSEKEYS, COSEALG, isCOSEAlg, isCOSEPublicKeyRSA, isCOSEPublicKeyEC2,
+    decodeCredentialPublicKey, getCertificateInfo, toHash, validateCertificatePath, validateExtFIDOGenCEAAGUID, verifySignature
 } from '../../helpers/index.js';
 import { verifyAttestationWithMetadata, MetadataService } from '../../metadata/metadata.js';
 import { TPM_ECC_CURVE_COSE_CRV_MAP, TPM_MANUFACTURERS, parseCertInfo, parsePubArea } from './tpm/index.js';

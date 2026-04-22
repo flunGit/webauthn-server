@@ -26,7 +26,7 @@ class MissingWebCrypto extends Error {
 }
 
 /**
- * 尝试从当前运行时获取 Crypto API 的实例,支持 Node.js（v20+）以及实现了 Web API 的其他环境（如 Deno、Bun）;
+ * 尝试从当前运行环境获取 Crypto API 的实例,支持 Node.js（v20+）以及实现了 Web API 的其他环境（如 Deno、Bun）;
  * - 查看定义:@see {@link getWebCrypto}
  * @returns {Promise<Crypto>} 解析为 Crypto 对象（可通过 `.subtle` 访问 SubtleCrypto 接口）;
  * @throws {MissingWebCrypto} 当无法定位 Crypto API 时,Promise 将被拒绝并携带该错误;

@@ -1,6 +1,6 @@
 import {
-    isCOSEAlg, convertCertBufferToPEM, validateCertificatePath, getCertificateInfo, validateExtFIDOGenCEAAGUID,
-    verifySignature, concat
+    concat, convertCertBufferToPEM, isCOSEAlg, getCertificateInfo, validateCertificatePath, validateExtFIDOGenCEAAGUID,
+    verifySignature
 } from '../../helpers/index.js';
 import { verifyAttestationWithMetadata, MetadataService } from '../../metadata/metadata.js';
 

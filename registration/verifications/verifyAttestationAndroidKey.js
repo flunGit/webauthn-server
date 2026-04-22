@@ -2,7 +2,7 @@ import { AsnParser } from '@peculiar/asn1-schema';
 import { Certificate } from '@peculiar/asn1-x509';
 import { id_ce_keyDescription, KeyDescription } from '@peculiar/asn1-android';
 import {
-    convertCertBufferToPEM, validateCertificatePath, verifySignature, convertCOSEtoPKCS, areEqual, concat, isCOSEAlg
+    areEqual, concat, convertCertBufferToPEM, convertCOSEtoPKCS, isCOSEAlg, validateCertificatePath, verifySignature
 } from '../../helpers/index.js';
 import { verifyAttestationWithMetadata, MetadataService } from '../../metadata/metadata.js';
 

@@ -1,6 +1,6 @@
 import {
-    toHash, verifySignature, getCertificateInfo, validateCertificatePath, convertCertBufferToPEM, bytesToUtf8, concat,
-    utf8Tobytes, b64urlToUtf8, fromBuffer, toBuffer
+    fromBuffer, toBuffer, b64urlToUtf8, utf8Tobytes, bytesToUtf8, concat, convertCertBufferToPEM, getCertificateInfo, toHash,
+    validateCertificatePath, verifySignature
 } from '../../helpers/index.js';
 import { verifyAttestationWithMetadata, MetadataService } from '../../metadata/metadata.js';
 

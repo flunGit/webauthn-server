@@ -1,4 +1,4 @@
-import { convertCOSEtoPKCS, convertCertBufferToPEM, validateCertificatePath, verifySignature, concat, toHex, COSEALG }
+import { concat, convertCOSEtoPKCS, convertCertBufferToPEM, COSEALG, toHex, validateCertificatePath, verifySignature }
     from '../../helpers/index.js';
 
 /**

@@ -1,6 +1,6 @@
 import { AsnParser } from '@peculiar/asn1-schema';
 import { Certificate } from '@peculiar/asn1-x509';
-import { validateCertificatePath, convertCertBufferToPEM, toHash, convertCOSEtoPKCS, concat, areEqual } from '../../helpers/index.js';
+import { concat, areEqual, convertCertBufferToPEM, convertCOSEtoPKCS, toHash, validateCertificatePath } from '../../helpers/index.js';
 
 /**
  * 验证 Apple 类型的证明（attestation）
