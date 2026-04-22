@@ -9,4 +9,4 @@
 >> 4. toUTF8String->bytesToUtf8	    (将 Uint8Array 转换为 UTF-8 字符串);
 >> 5. fromASCIIString->asciiToBytes	(将 ASCII 字符串转换为 Uint8Array);
 - 项目目录结构进行大幅调整,内部细节略,如需了解请自行查看;
-- 对 .d.ts 文件进行了更细致优化,现在使用时鼠标焦点会提示当前项导出的细节内容(比如模块,函数等);
+- 对 .d.ts 文件进行了更细致优化,现在使用导出项时鼠标焦点会提示当前项导出的更多细节内容(比如模块,函数等);
