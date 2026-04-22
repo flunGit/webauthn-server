@@ -9,7 +9,9 @@
 
 ## 目录
 
+- [目录](#目录)
 - [安装](#安装)
+  - [Node.js 22.12.0 及以上版本](#nodejs-22120-及以上版本)
 - [主要功能](#主要功能)
 - [快速开始](#快速开始)
   - [后端集成示例](#后端集成示例)
@@ -28,6 +30,7 @@
 - [支持的认证格式](#支持的认证格式)
 - [错误处理](#错误处理)
 - [许可证](#许可证)
+- [相关链接](#相关链接)
 
 ---
 
@@ -366,5 +369,3 @@ ISC © [flun](https://github.com/flunGit)
 - [npm 包页面](https://www.npmjs.com/package/flun-webauthn-server)
 - [前端浏览器库 flun-webauthn-browser](https://www.npmjs.com/package/flun-webauthn-browser)
 ```
-
-该 README 完整覆盖了 `flun-webauthn-server` 的核心功能、API 说明、使用示例以及辅助工具模块，并准确反映了 `index.d.ts` 和 `helpers/index.d.ts` 中的导出内容。
