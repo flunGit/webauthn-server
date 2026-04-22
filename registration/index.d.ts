@@ -36,7 +36,7 @@ declare module './verifications/tpm/parse.js' {
     export * from './verifications/tpm/parse.js';
 }
 
-// ================================= verifications/tpm导出入口 =================================
+// ================================= verifications/tpm子模块导出 =================================
 /**
  * ```js
  * // 模块导出内容:
@@ -128,7 +128,7 @@ declare module './verifications/verifyAttestationTPM.js' {
     export * from './verifications/verifyAttestationTPM.js';
 }
 
-// ================================= verifications导出入口 =================================
+// ================================= verifications模块导出 =================================
 /**
  * ```js
  * // 模块导出内容:
