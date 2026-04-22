@@ -31,7 +31,6 @@ import { toHash } from './toHash.js';
 import { validateCertificatePath, InvalidSubjectAndIssuer } from './validateCertificatePath.js';
 import { validateExtFIDOGenCEAAGUID } from './validateExtFIDOGenCEAAGUID.js';
 import { _verifySignatureInternals, verifySignature } from './verifySignature.js';
-import { verifyMDSBlob } from '../metadata/index.js';
 
 // ================================= convertAAGUIDToString.js =================================
 /**
