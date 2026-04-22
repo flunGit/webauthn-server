@@ -11,6 +11,23 @@
   ],
   "type": "module",
   "types": "index.d.ts",
+  "typesVersions": {
+    "*": {
+      ".": [
+        "./index.d.ts",
+        "./authentication/index.d.ts",
+        "./metadata/index.d.ts",
+        "./metadata/defaultRootCerts/index.d.ts",
+        "./registration/index.d.ts",
+        "./registration/verifications/index.d.ts",
+        "./registration/verifications/tpm/index.d.ts"
+      ],
+      "helpers": [
+        "./helpers/index.d.ts",
+        "./helpers/iso/index.d.ts"
+      ]
+    }
+  },
   "main": "index.js",
   "module": "./index.js",
   "exports": {
