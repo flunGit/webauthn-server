@@ -16,7 +16,7 @@ import {
  * // 文件导出内容(TPM结构标签,算法标识符,椭圆曲线,制造商 ID 到厂商名称的映射表,公钥区域曲线 ID 映射)
  * const TPM_ST, TPM_ALG, TPM_ECC_CURVE, TPM_MANUFACTURERS, TPM_ECC_CURVE_COSE_CRV_MAP;
  * ```
- * - 查看定义:@see {@link TPM_ST}、{@link TPM_ALG}、{@link TPM_ECC_CURVE }、{@link TPM_MANUFACTURERS}、
+ * >查看定义:@see {@link TPM_ST}、{@link TPM_ALG}、{@link TPM_ECC_CURVE }、{@link TPM_MANUFACTURERS}、
  * {@link TPM_ECC_CURVE_COSE_CRV_MAP}
  */
 declare module './verifications/tpm/constants.js' {
@@ -30,7 +30,7 @@ declare module './verifications/tpm/constants.js' {
  * parseCertInfo(); // 将 TPM 证明的 certInfo 解析为可读的片段
  * parsePubArea();  // 解析 TPM 认证信息中的 pubArea 缓冲区
  * ```
- * - 查看定义:@see {@link parseCertInfo}、{@link parsePubArea}
+ * >查看定义:@see {@link parseCertInfo}、{@link parsePubArea}
  */
 declare module './verifications/tpm/parse.js' {
     export * from './verifications/tpm/parse.js';
@@ -48,7 +48,7 @@ declare module './verifications/tpm/parse.js' {
  * parseCertInfo(); // 将 TPM 证明的 certInfo 解析为可读的片段
  * parsePubArea();  // 解析 TPM 认证信息中的 pubArea 缓冲区
  * ```
- * - 查看定义:@see {@link TPM_ST}、{@link TPM_ALG}、{@link TPM_ECC_CURVE }、{@link TPM_MANUFACTURERS}、
+ * >查看定义:@see {@link TPM_ST}、{@link TPM_ALG}、{@link TPM_ECC_CURVE }、{@link TPM_MANUFACTURERS}、
  * {@link TPM_ECC_CURVE_COSE_CRV_MAP}、{@link parseCertInfo}、{@link parsePubArea}
  */
 declare module './verifications/tpm/index.js' {
@@ -62,7 +62,7 @@ declare module './verifications/tpm/index.js' {
  * // 文件导出内容
  * verifyAttestationAndroidKey(); // 验证格式为 'android-key' 的 attestation 响应
  * ```
- * - 查看定义:@see {@link verifyAttestationAndroidKey}
+ * >查看定义:@see {@link verifyAttestationAndroidKey}
  */
 declare module './verifications/verifyAttestationAndroidKey.js' {
     export * from './verifications/verifyAttestationAndroidKey.js';
@@ -74,7 +74,7 @@ declare module './verifications/verifyAttestationAndroidKey.js' {
  * // 文件导出内容
  * verifyAttestationAndroidSafetyNet(); // 验证格式为 'android-safetynet' 的证明响应
  * ```
- * - 查看定义:@see {@link verifyAttestationAndroidSafetyNet}
+ * >查看定义:@see {@link verifyAttestationAndroidSafetyNet}
  */
 declare module './verifications/verifyAttestationAndroidSafetyNet.js' {
     export * from './verifications/verifyAttestationAndroidSafetyNet.js';
@@ -86,7 +86,7 @@ declare module './verifications/verifyAttestationAndroidSafetyNet.js' {
  * // 文件导出内容
  * verifyAttestationApple(); // 验证 Apple 类型的证明响应
  * ```
- * - 查看定义:@see {@link verifyAttestationApple}
+ * >查看定义:@see {@link verifyAttestationApple}
  */
 declare module './verifications/verifyAttestationApple.js' {
     export * from './verifications/verifyAttestationApple.js';
@@ -98,7 +98,7 @@ declare module './verifications/verifyAttestationApple.js' {
  * // 文件导出内容
  * verifyAttestationFIDOU2F(); // 使用 'fido-u2f' 格式验证认证（Attestation）响应
  * ```
- * - 查看定义:@see {@link verifyAttestationFIDOU2F}
+ * >查看定义:@see {@link verifyAttestationFIDOU2F}
  */
 declare module './verifications/verifyAttestationFIDOU2F.js' {
     export * from './verifications/verifyAttestationFIDOU2F.js';
@@ -110,7 +110,7 @@ declare module './verifications/verifyAttestationFIDOU2F.js' {
  * // 文件导出内容
  * verifyAttestationPacked(); // 验证格式为 'packed' 的 attestation 响应
  * ```
- * - 查看定义:@see {@link verifyAttestationPacked}
+ * >查看定义:@see {@link verifyAttestationPacked}
  */
 declare module './verifications/verifyAttestationPacked.js' {
     export * from './verifications/verifyAttestationPacked.js';
@@ -122,7 +122,7 @@ declare module './verifications/verifyAttestationPacked.js' {
  * // 文件导出内容
  * verifyAttestationTPM(); // 验证TPM认证器返回的attestation陈述,确保其符合 FIDO2 规范
  * ```
- * - 查看定义:@see {@link verifyAttestationTPM}
+ * >查看定义:@see {@link verifyAttestationTPM}
  */
 declare module './verifications/verifyAttestationTPM.js' {
     export * from './verifications/verifyAttestationTPM.js';
@@ -139,7 +139,7 @@ declare module './verifications/verifyAttestationTPM.js' {
  * verifyAttestationPacked();           // 验证格式为 'packed' 的 attestation 响应
  * verifyAttestationTPM(); // 验证TPM认证器返回的attestation陈述,确保其符合 FIDO2 规范
  * ```
- * - 查看定义:@see {@link verifyAttestationAndroidKey}、{@link verifyAttestationAndroidSafetyNet}、
+ * >查看定义:@see {@link verifyAttestationAndroidKey}、{@link verifyAttestationAndroidSafetyNet}、
  * {@link verifyAttestationApple}、{@link verifyAttestationFIDOU2F}、{@link verifyAttestationPacked}、
  * {@link verifyAttestationTPM}
  */
@@ -161,7 +161,7 @@ declare module './verifications/index.js' {
  * verifyRegistrationResponse();               // 验证用户是否合法地完成了注册流程
  * const supportedCOSEAlgorithmIdentifiers=[]; // 支持的加密算法标识符
  * ```
- * - 查看定义:@see {@link supportedCOSEAlgorithmIdentifiers}、{@link generateRegistrationOptions}、{@link verifyRegistrationResponse}
+ * >查看定义:@see {@link supportedCOSEAlgorithmIdentifiers}、{@link generateRegistrationOptions}、{@link verifyRegistrationResponse}
  */
 declare module './index.js' {
     export * from './registration.js';

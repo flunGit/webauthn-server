@@ -135,7 +135,7 @@
  * ```
  *
  * ### 前端代码（HTML + JavaScript）
- * 在 HTML 中引入 `flun-webauthn-browser` 库，使用全局对象 `flunWebAuthnBrowser` 提供的 `startRegistration` 和 `startAuthentication` 方法。
+ * 在 HTML 中引入 `flun-webauthn-browser` 库,使用全局对象 `flunWebAuthnBrowser` 提供的 `startRegistration` 和 `startAuthentication` 方法;
  *
  * ```html
  * <!DOCTYPE html>
@@ -221,28 +221,26 @@
  * ```
  *
  * **关键说明**
- * - 前端通过 `<script src="https://unpkg.com/flun-webauthn-browser/dist/index.js"></script>` 引入，全局对象为 `flunWebAuthnBrowser`。
- * - 调用 `startRegistration` 和 `startAuthentication` 时，必须传入 `{ optionsJSON: options }` 格式的参数对象。
+ * - 前端通过 `<script src="https://unpkg.com/flun-webauthn-browser/dist/index.js"></script>` 引入,全局对象为 `flunWebAuthnBrowser`。
+ * - 调用 `startRegistration` 和 `startAuthentication` 时，必须传入 `{ optionsJSON: options }` 格式的参数对象;
  * - 后端生成的 `options` 对象（来自 `generateRegistrationOptions` 或 `generateAuthenticationOptions`）直接作为 `optionsJSON` 的值。
- * - 生产环境中请使用 HTTPS（WebAuthn 要求安全上下文），并妥善存储挑战值和用户凭证。
+ * - 生产环境中请使用 HTTPS（WebAuthn 要求安全上下文），并妥善存储挑战值和用户凭证;
  *
  * **前端工具函数**
  *
- * `flunWebAuthnBrowser` 全局对象还提供了以下辅助函数，可用于特性检测、手动取消流程、编解码等操作：
- *
- * | 函数名 | 说明 |
- * |--------|------|
- * | `browserSupportsWebAuthn()` | 检测当前浏览器是否支持 WebAuthn |
- * | `browserSupportsWebAuthnAutofill()` | 检测浏览器是否支持 WebAuthn 条件式自动填充（需要 `PublicKeyCredential.isConditionalMediationAvailable`） |
- * | `platformAuthenticatorIsAvailable()` | 检测平台身份验证器（如 Windows Hello、指纹传感器）是否可用 |
- * | `startRegistration(options)` | 发起注册流程，参数 `{ optionsJSON, useAutoRegister? }` |
- * | `startAuthentication(options)` | 发起认证流程，参数 `{ optionsJSON, useBrowserAutofill?, verifyBrowserAutofillInput? }` |
- * | `WebAuthnAbortService.cancelCeremony()` | 手动取消正在进行的注册/认证流程 |
- * | `WebAuthnError` | 自定义错误类，包含 `code` 属性，用于区分不同类型的 WebAuthn 错误 |
- * | `base64URLStringToBuffer(base64url)` | 将 Base64URL 字符串转换为 `ArrayBuffer` |
- * | `bufferToBase64URLString(buffer)` | 将 `ArrayBuffer` 转换为 Base64URL 字符串 |
- *
- * **使用示例**：
+ * `flunWebAuthnBrowser` 全局对象还提供了以下辅助函数,可用于特性检测、手动取消流程、编解码等操作：
+ * ```js
+ * browserSupportsWebAuthn();             // 检测当前浏览器是否支持 WebAuthn
+ * browserSupportsWebAuthnAutofill();     // 检测浏览器是否支持 WebAuthn 条件式自动填充（需要 `PublicKeyCredential.isConditionalMediationAvailable`） |
+ * platformAuthenticatorIsAvailable();    // 检测平台身份验证器（如 Windows Hello、指纹传感器）是否可用
+ * startRegistration(options);            // 发起注册流程，参数 `{ optionsJSON, useAutoRegister? }`
+ * startAuthentication(options);          // 发起认证流程，参数 `{ optionsJSON, useBrowserAutofill?, verifyBrowserAutofillInput? }`
+ * WebAuthnAbortService.cancelCeremony(); // 手动取消正在进行的注册/认证流程
+ * class WebAuthnError{};                 // 自定义错误类，包含 `code` 属性，用于区分不同类型的 WebAuthn 错误
+ * base64URLStringToBuffer(base64url);    // 将 Base64URL 字符串转换为 `ArrayBuffer`
+ * bufferToBase64URLString(buffer);       // 将 `ArrayBuffer` 转换为 Base64URL 字符串
+ * ```
+ * 使用示例：
  * ```js
  * // 检测支持性
  * if (flunWebAuthnBrowser.browserSupportsWebAuthn()) {

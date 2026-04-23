@@ -18,7 +18,7 @@ import { BaseSettingsService, SettingsService } from './settings.js';
  * const Google_Hardware_Attestation_Root_3 ='',Google_Hardware_Attestation_Root_4 ='';
  * const GlobalSign_Root_CA='',GlobalSign_Root_CA_R3='', Apple_WebAuthn_Root_CA='';
  * ```
- * - 查看定义:@see {@link Google_Hardware_Attestation_Root_1}、{@link Google_Hardware_Attestation_Root_2}、
+ * >查看定义:@see {@link Google_Hardware_Attestation_Root_1}、{@link Google_Hardware_Attestation_Root_2}、
  * {@link Google_Hardware_Attestation_Root_3}、{@link Google_Hardware_Attestation_Root_4}、{@link GlobalSign_Root_CA}、
  * {@link GlobalSign_Root_CA_R3}、{@link Apple_WebAuthn_Root_CA}
  */
@@ -40,7 +40,7 @@ declare module './defaultRootCerts/index.js' {
  * class BaseMetadataService{};                    // 下载和解析 BLOB,并支持按需请求和缓存各个元数据声明;
  * const MetadataService= new BaseMetadataService; // 用于协调与 FIDO 元数据交互的基础服务;
  * ```
- * - 查看定义:{@link AlgSign}、{@link parseJWT}、 {@link algSignToCOSEInfoMap}、{@link verifyAttestationWithMetadata}、
+ * >查看定义:@see {@link AlgSign}、{@link parseJWT}、 {@link algSignToCOSEInfoMap}、{@link verifyAttestationWithMetadata}、
  * {@link verifyJWT}、 {@link verifyMDSBlob}、{@link BaseMetadataService}、{@link MetadataService}
  */
 declare module './metadata.js' {
@@ -54,7 +54,7 @@ declare module './metadata.js' {
  * class BaseSettingsService{};                    // 用于管理各类 attestation 语句格式的根证书;
  * const SettingsService= new BaseSettingsService; // 用于为所有支持的证明声明格式指定可接受的根证书;
  * ```
- * - 查看定义:@see {@link BaseSettingsService}、{@link SettingsService}
+ * >查看定义:@see {@link BaseSettingsService}、{@link SettingsService}
  */
 declare module './settings.js' {
     export * from './settings.js';
@@ -76,7 +76,7 @@ declare module './settings.js' {
  * class BaseSettingsService{};                    // 用于管理各类 attestation 语句格式的根证书;
  * const SettingsService= new BaseSettingsService; // 用于为所有支持的证明声明格式指定可接受的根证书;
  * ```
- * - 查看定义:{@link AlgSign}、{@link parseJWT}、 {@link algSignToCOSEInfoMap}、{@link verifyAttestationWithMetadata}、
+ * >查看定义:@see {@link AlgSign}、{@link parseJWT}、 {@link algSignToCOSEInfoMap}、{@link verifyAttestationWithMetadata}、
  * {@link verifyJWT}、 {@link verifyMDSBlob}、{@link BaseMetadataService}、{@link MetadataService}、
  * {@link BaseSettingsService}、{@link SettingsService}
  */
