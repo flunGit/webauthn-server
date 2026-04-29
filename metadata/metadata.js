@@ -171,12 +171,11 @@ const verifyAttestationWithMetadata = async ({ statement, credentialPublicKey, x
         /**
          * 根据 MDS 算法生成有用的错误输出
          * 示例：
-         * ```
+         * @example
          * [
          *   'rsassa_pss_sha256_raw' (COSE 信息: { kty: 3, alg: -37 }),
          *   'secp256k1_ecdsa_sha256_raw' (COSE 信息: { kty: 2, alg: -47, crv: 8 })
          * ]
-         * ```
          */
         const debugMDSAlgs = authenticationAlgorithms.map(
             algSign => `'${algSign}' (COSE 信息: ${stringifyCOSEInfo(algSignToCOSEInfoMap[algSign])})`,
