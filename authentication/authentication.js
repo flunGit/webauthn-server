@@ -52,7 +52,7 @@ const generateAuthenticationOptions = async options => {
  * 验证用户是否合法完成了认证流程
  * - 查看定义:@see {@link verifyAuthenticationResponse}
  * @param {Object} options - 配置选项
- * @param {Object} options.response - 由 **flun-webauthn-browser** 的 `startAuthentication()` 返回的响应
+ * @param {Object} options.response - 由 **@flun/webauthn-browser** 的 `startAuthentication()` 返回的响应
  * @param {string} options.response.id - 凭证 ID（base64url 字符串）
  * @param {string} options.response.rawId - 原始凭证 ID（应与 `id` 相同）
  * @param {'public-key'} options.response.type - 凭证类型，必须为 `"public-key"`

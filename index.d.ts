@@ -16,7 +16,7 @@
  *
  * **完整前后端集成示例（开箱即用）**
  *
- * 以下示例包含前端 HTML/JS 代码和后端 Node.js (Express) 代码，使用 `flun-webauthn-browser` 简化前端调用;
+ * 以下示例包含前端 HTML/JS 代码和后端 Node.js (Express) 代码，使用 `@flun/webauthn-browser` 简化前端调用;
  *
  * ### 后端代码（Node.js + Express）
  * ```js
@@ -24,7 +24,7 @@
  * import {
  *   generateRegistrationOptions, verifyRegistrationResponse,
  *   generateAuthenticationOptions, verifyAuthenticationResponse
- * } from 'flun-webauthn-server';
+ * } from '@flun/webauthn-server';
  *
  * const app = express();
  * app.use(express.json());
@@ -135,14 +135,14 @@
  * ```
  *
  * ### 前端代码（HTML + JavaScript）
- * 在 HTML 中引入 `flun-webauthn-browser` 库,使用全局对象 `flunWebAuthnBrowser` 提供的 `startRegistration` 和 `startAuthentication` 方法;
+ * 在 HTML 中引入 `@flun/webauthn-browser` 库,使用全局对象 `flunWebAuthnBrowser` 提供的 `startRegistration` 和 `startAuthentication` 方法;
  *
  * ```html
  * <!DOCTYPE html>
  * <html>
  * <head>
  *   <title>WebAuthn Demo</title>
- *   <script src="https://unpkg.com/flun-webauthn-browser/dist/index.js"></script>
+ *   <script src="https://unpkg.com/@flun/webauthn-browser/dist/index.js"></script>
  * </head>
  * <body>
  *   <h2>注册</h2>
@@ -169,7 +169,7 @@
  *       });
  *       const options = await regOptionsRes.json();
  *
- *       // 2. 调用浏览器 WebAuthn API（由 flun-webauthn-browser 封装）
+ *       // 2. 调用浏览器 WebAuthn API（由 @flun/webauthn-browser 封装）
  *       //    注意：必须使用 { optionsJSON: options } 格式
  *       const response = await flunWebAuthnBrowser.startRegistration({ optionsJSON: options });
  *
@@ -221,7 +221,7 @@
  * ```
  *
  * **关键说明**
- * - 前端通过 `<script src="https://unpkg.com/flun-webauthn-browser/dist/index.js"></script>` 引入,全局对象为 `flunWebAuthnBrowser`。
+ * - 前端通过 `<script src="https://unpkg.com/@flun/webauthn-browser/dist/index.js"></script>` 引入,全局对象为 `flunWebAuthnBrowser`。
  * - 调用 `startRegistration` 和 `startAuthentication` 时，必须传入 `{ optionsJSON: options }` 格式的参数对象;
  * - 后端生成的 `options` 对象（来自 `generateRegistrationOptions` 或 `generateAuthenticationOptions`）直接作为 `optionsJSON` 的值。
  * - 生产环境中请使用 HTTPS（WebAuthn 要求安全上下文），并妥善存储挑战值和用户凭证;

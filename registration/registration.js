@@ -189,7 +189,7 @@ const generateRegistrationOptions = async options => {
  * - 查看定义:@see {@link verifyRegistrationResponse}
  *
  * @param {Object} options - 验证选项
- * @param {Object} options.response - `flun-webauthn-browser` 的 `startAuthentication()` 返回的响应对象
+ * @param {Object} options.response - `@flun/webauthn-browser` 的 `startAuthentication()` 返回的响应对象
  * @param {Object} options.response.response - 包含证明数据的响应对象
  * @param {string} options.response.id - 凭证 ID (base64url)
  * @param {string} options.response.rawId - 原始凭证 ID (base64url)

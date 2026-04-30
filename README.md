@@ -1,9 +1,9 @@
-# flun-webauthn-server <!-- omit in toc -->
+# @flun/webauthn-server <!-- omit in toc -->
 
 ![WebAuthn](https://img.shields.io/badge/WebAuthn-Simplified-blueviolet?style=for-the-badge&logo=WebAuthn)
-[![npm (scoped)](https://img.shields.io/npm/v/flun-webauthn-server?style=for-the-badge&logo=npm)](https://www.npmjs.com/package/flun-webauthn-server)
+[![npm (scoped)](https://img.shields.io/npm/v/@flun/webauthn-server?style=for-the-badge&logo=npm)](https://www.npmjs.com/package/@flun/webauthn-server)
 
-**flun-webauthn-server** 是一个专为 Node.js 环境设计的 WebAuthn（含 Passkeys）服务端工具库，采用 TypeScript 编写，提供对证书、密钥及 CBOR 编码的完整处理能力。它简化了 FIDO2/Passkey 身份验证后端的构建过程，支持当前所有主流的 WebAuthn 认证格式。
+**@flun/webauthn-server** 是一个专为 Node.js 环境设计的 WebAuthn（含 Passkeys）服务端工具库，采用 TypeScript 编写，提供对证书、密钥及 CBOR 编码的完整处理能力。它简化了 FIDO2/Passkey 身份验证后端的构建过程，支持当前所有主流的 WebAuthn 认证格式。
 
 > **模块规范**：本包使用 ESM 模块编写。要求 Node.js ≥ 22.12.0，若使用低版本 Node 则需通过 `import` 语法导入（不建议在低于 22.12.0 的环境中使用 `require()`）。
 
@@ -39,7 +39,7 @@
 ### Node.js 22.12.0 及以上版本
 
 ```sh
-npm install flun-webauthn-server
+npm install @flun/webauthn-server
 ```
 
 > **注意**：本库依赖 Node.js 内置的 `crypto`、`fetch` 等模块，请确保运行环境为 Node.js ≥ 22.12.0。
@@ -61,7 +61,7 @@ npm install flun-webauthn-server
   提供证书路径验证、吊销检查、X.509 解析等工具。
 
 - ✅ **丰富的辅助工具**
-  通过 `flun-webauthn-server/helpers` 子路径导出大量底层工具：Base64URL 编解码、COSE ↔ PKCS 转换、authData 解析、签名验证等。
+  通过 `@flun/webauthn-server/helpers` 子路径导出大量底层工具：Base64URL 编解码、COSE ↔ PKCS 转换、authData 解析、签名验证等。
 
 ---
 
@@ -74,11 +74,8 @@ npm install flun-webauthn-server
 ```js
 import express from 'express';
 import {
-  generateRegistrationOptions,
-  verifyRegistrationResponse,
-  generateAuthenticationOptions,
-  verifyAuthenticationResponse
-} from 'flun-webauthn-server';
+  generateRegistrationOptions, verifyRegistrationResponse, generateAuthenticationOptions, verifyAuthenticationResponse
+} from '@flun/webauthn-server';
 
 const app = express();
 app.use(express.json());
@@ -188,10 +185,10 @@ app.listen(3001, () => console.log('Backend running on port 3001'));
 
 ### 前端配合说明
 
-前端需使用配套的浏览器库 `flun-webauthn-browser`，可通过 CDN 或 npm 引入。
+前端需使用配套的浏览器库 `@flun/webauthn-browser`，可通过 CDN 或 npm 引入。
 
 ```html
-<script src="https://unpkg.com/flun-webauthn-browser/dist/index.js"></script>
+<script src="https://unpkg.com/@flun/webauthn-browser/dist/index.js"></script>
 ```
 
 调用示例：
@@ -245,7 +242,7 @@ await fetch('/api/login/complete', {
 
 ### 辅助工具函数（`helpers` 模块）
 
-可通过 `flun-webauthn-server/helpers` 导入所有底层工具。
+可通过 `@flun/webauthn-server/helpers` 导入所有底层工具。
 
 #### 编解码与转换
 
@@ -365,6 +362,6 @@ ISC © [flun](https://github.com/flunGit)
 
 ## 相关链接
 
-- [GitHub 仓库](https://github.com/flunGit/flun-webauthn-server)
-- [npm 包页面](https://www.npmjs.com/package/flun-webauthn-server)
-- [前端浏览器库 flun-webauthn-browser](https://www.npmjs.com/package/flun-webauthn-browser)
+- [GitHub 仓库](https://github.com/flunGit/@flun/webauthn-server)
+- [npm 包页面](https://www.npmjs.com/package/@flun/webauthn-server)
+- [前端浏览器库 @flun/webauthn-browser](https://www.npmjs.com/package/@flun/webauthn-browser)

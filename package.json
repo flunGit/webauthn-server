@@ -1,5 +1,5 @@
 {
-  "name": "flun-webauthn-server",
+  "name": "@flun/webauthn-server",
   "version": "2.0.6",
   "description": "这是一个专为 Node.js 环境设计的 WebAuthn（含 Passkeys）服务端工具库,提供简洁的 TypeScript 实现,并内置对证书、密钥及 CBOR 编码的完整处理能力,适用于构建 FIDO2/Passkey 身份验证后端",
   "keywords": [
@@ -30,13 +30,16 @@
     "README.md"
   ],
   "author": "flun <cn@flun.top>",
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/flunGit/flun-webauthn-server.git"
+    "url": "git+https://github.com/flunGit/webauthn-server.git"
   },
-  "homepage": "https://www.npmjs.com/package/flun-webauthn-server#readme",
+  "homepage": "https://www.npmjs.com/package/@flun/webauthn-server#readme",
   "bugs": {
-    "url": "https://github.com/flunGit/flun-webauthn-server/issues"
+    "url": "https://github.com/flunGit/webauthn-server/issues"
   },
   "license": "ISC",
   "dependencies": {
